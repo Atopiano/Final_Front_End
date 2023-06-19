@@ -12,7 +12,7 @@ const Main = () => {
             <div className="image-container">
                 <div className="text-container">
                     <h3 className="text1">
-                        <strong>IT tech stack</strong> 기반 zl존 git siru추천 서비스입니다
+                        <strong>IT tech stack</strong> 기반 추천 서비스입니다
                     </h3>
                     <h3 className="text2">
                         나의 <strong>tech stack</strong>에 맞는 채용공고를 추천 받아보세요<strong>!</strong>
