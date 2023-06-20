@@ -14,8 +14,8 @@ const StackBox = ({ stack, handleStackSelection }) => {
           className="stack-box"
           onClick={handleBoxClick}
       >
-          <img className="stack-img" src={stack.img_src} alt={stack.stack_name} />
-          <span className="stack-title">{stack.stack_name}</span>
+          <img className="stack-img" src={stack.url} alt={stack.title} />
+          <span className="stack-title">{stack.title}</span>
       </div>
   );
 };
