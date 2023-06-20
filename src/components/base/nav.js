@@ -15,7 +15,7 @@ function NavComponent() {
     return (
         <header>
             <div className="navbar-fixed">
-                <Navbar collapseOnSelect expand="lg" bg="light" variant="dark" className="navbar bg-white fixed-top">
+                <Navbar collapseOnSelect expand="lg" bg="light" variant="dark" className="navbar bg-white">
                     <Container className="d-flex justify-content-between align-items-center">
                         <Nav className="mr-auto d-flex align-items-center">
                             <Nav.Link as={Link} to="/stack" className="my-link1" style={{ marginRight: '15px' }}>AI 추천</Nav.Link>

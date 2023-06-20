@@ -51,7 +51,7 @@
     color: #bb44e4;
 }
 
-.button-container .btn {
+.button-container .custom-button {
     width: 120px;
     text-align: center;
     font-size: 18px;
@@ -62,7 +62,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.button-container .btn:hover {
+.button-container .custom-button :hover{
     background-color: #bb44e4;
     color: white;
     border: none;
