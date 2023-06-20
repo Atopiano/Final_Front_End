@@ -27,7 +27,12 @@ function Stack() {
       )));
     } else {
       setSelectedStacks([...selectedStacks, stack]);
+      setTimeout(() => {
+        const selectedStackBox = document.querySelector('.selected-stack-box');
+        selectedStackBox.scrollLeft = selectedStackBox.scrollWidth;
+      }, 0);
     }
+    
   };
 
   useEffect(() => {
