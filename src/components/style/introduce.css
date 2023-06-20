@@ -1,0 +1,32 @@
+.introduce-container {
+    box-sizing: border-box;
+    width: 665px;
+    height: 560px;
+    background: #FFFFFF;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .default-container {
+    background-size: cover;
+    background-position: center;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-top: 20px;
+  }
+
+.ex {
+    text-align: center;
+}
+
+.p ,strong{ 
+    color: blue;
+}
+
