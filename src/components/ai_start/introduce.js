@@ -20,6 +20,14 @@ function Introduce() {
     }
   };
 
+ // 결과버튼 클릭 시 localstorage에 자소서 저장
+ const handleSaveButtonClick = () => {
+  localStorage.setItem('introduction', value);
+ 
+  // 모델호출 or 입력전달 
+};
+
+
   return (
     <>
       <Header />
@@ -27,7 +35,7 @@ function Introduce() {
         <div className="introduce-container">
           <div className="introduce-content" style={{ height: '560px' }}>
             <div className="ex">
-              <p><strong style={{ color: 'blue' }}>*선택(권장)</strong></p>
+              <p style={{ marginBottom: '0px' }}><strong style={{ color: 'blue' }}>*선택(권장)</strong></p>
               <h3 style={{ textAlign: 'center', fontWeight: 'bold' }}>자기소개서를 입력해 주세요</h3>
               <p style={{ textAlign: 'center', fontSize: '15px', fontWeight: 'bold' }}>
                 (협업 경험, 대회 및 공모전, 개인 경험 등)
@@ -37,7 +45,7 @@ function Introduce() {
               </p>
               <FloatingLabel
                 controlId="floatingTextarea2"
-                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center'}}
+                style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
               >
                 <Form.Control
                   as="textarea"
@@ -67,7 +75,7 @@ function Introduce() {
                 <Button className="previous-button" variant="light" as={Link} to="/stack">
                   이전
                 </Button>
-                <Button className="result-button" variant="light" as={Link} to="/result">
+                <Button className="result-button" variant="light" as={Link} to="/result" onChange={handleSaveButtonClick}>
                   결과보러가기
                 </Button>
               </div>
