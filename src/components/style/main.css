@@ -62,7 +62,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.button-container .custom-button :hover{
+.button-container .custom-button:hover{
     background-color: #bb44e4;
     color: white;
     border: none;
