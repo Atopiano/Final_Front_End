@@ -2,12 +2,28 @@
     background-image: url(../../components/img/main.jpg);
     background-size: cover;
     background-position: center;
-    width: 100vw;
-    height: 100vh;
+    width: 100%; /* 이 부분을 변경했습니다 */
+    height: 90vh;
     display: flex;
-    justify-content: flex-start;
     align-items: center;
+    position: relative;
+    z-index: 0;
 }
+
+.default-container {
+    background-size: cover;
+    background-position: center;
+    width: 100%; /* 이 부분을 변경했습니다 */
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    z-index: 0;
+    overflow: hidden;
+    box-sizing: border-box; /* 이 부분을 추가했습니다 */
+}
+
 
 .text-container {
     display: grid;
