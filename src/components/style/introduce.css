@@ -10,17 +10,6 @@
     justify-content: center;
     align-items: center;
   }
-  
-  .default-container {
-    background-size: cover;
-    background-position: center;
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-    margin-top: 20px;
-  }
 
 .ex {
     text-align: center;
