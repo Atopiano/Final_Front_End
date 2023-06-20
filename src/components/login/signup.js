@@ -64,10 +64,10 @@ function Signup() {
 
     // 서버 데이터 형식이랑 일치하는지 확인해야함
     const data = {
-      "name": userName,
+      "phoneNumber": userNumber,
       "email": userEmail,
       "password": userPassword,
-      "number": userNumber
+      "nickName": userName
     };
 
     
