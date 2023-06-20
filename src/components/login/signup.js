@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState, useNavigate, navigate } from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios';
@@ -72,7 +72,7 @@ function Signup() {
 
     
     axios
-      .post("/api/signup", data)
+      .post("http://localhost:8080/api/signup", data)
       .then((response) => {
         console.log(response.data);
         alert("Happy Coding Day!");
@@ -112,7 +112,7 @@ function Signup() {
 
         <Form.Group className="Mobile_up" controlId="formBasicNumber">
           <Form.Label>휴대전화번호</Form.Label>
-          <Form.Control type="number" placeholder="MoblieNumber" onChange={(e) => setNumber(e.target.value)} />
+          <Form.Control type="number" placeholder="010-1234-5678" onChange={(e) => setNumber(e.target.value)} />
         </Form.Group>
 
         <Button variant="primary" type="submit" onSubmit={submitHandler}>
