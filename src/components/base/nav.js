@@ -19,7 +19,7 @@ function NavComponent() {
                     <Container className="d-flex justify-content-between align-items-center">
                         <Nav className="mr-auto d-flex align-items-center">
                             <Nav.Link as={Link} to="/stack" className="my-link1" style={{ marginRight: '15px' }}>AI 추천</Nav.Link>
-                            <Nav.Link as={Link} to="/notice" className="my-link1" style={{ marginRight: '10px', marginLeft: '0px' }}>채용공고</Nav.Link>
+                            <Nav.Link as={Link} to="/recruit" className="my-link1" style={{ marginRight: '10px', marginLeft: '0px' }}>채용공고</Nav.Link>
                         </Nav>
                         <div className="navbar-logo">
                             <Navbar.Brand as={Link} to="/">

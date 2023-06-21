@@ -1,0 +1,21 @@
+.job-card {
+  width: 374px;
+  height: 187px;
+  border: 3px solid black;
+  box-sizing: border-box;
+  position: relative;
+  /* 필요한 추가 스타일 속성을 추가하세요 */
+}
+
+.custom-card {
+  border: 3px solid black;
+}
+
+.job-card .card-title {
+  font-size: 18px; /* 원하는 폰트 크기로 변경해주세요 */
+}
+
+.job-card .card-text {
+  font-size: 14px; /* 원하는 폰트 크기로 변경해주세요 */
+}
+

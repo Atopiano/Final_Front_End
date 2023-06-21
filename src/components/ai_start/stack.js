@@ -8,6 +8,7 @@ import Footer from '../base/footer';
 import StackList from '../base/stacklist';
 import StackBox from '../base/stackbox';
 
+
 function Stack() {
   const [selectedStacks, setSelectedStacks] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -62,7 +63,7 @@ function Stack() {
         <div className="default-container">
           <div className="stack-container">
             <br />
-            <br />
+            <p style={{ marginBottom: '0px' }}><strong style={{ color: 'red' }}>*필수</strong></p>
             <h3 className="stack-heading">보유하신 기술 스택을 입력해주세요.</h3>
             <input
                 type="text"

@@ -2,7 +2,7 @@ import React from "react";
 import './App.css';
 import Main from './components/page/main';
 import Home from './components/page/home';
-import Notice from './components/ai_notice/notice';
+import Notice from './components/ai_notice/recruit';
 import Signup from './components/login/signup';
 import Signin from './components/login/signin';
 import Stack from './components/ai_start/stack';
@@ -23,7 +23,7 @@ function App() {
           <Route path="/introduce" element={<Introduce />} />
           <Route path="/result" element={<Result />} />
           <Route path="/recommend" element={<Recommend />} />
-          <Route path="/notice" element={<Notice />} />
+          <Route path="/recruit" element={<Notice />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
         </Routes>
