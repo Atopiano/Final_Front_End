@@ -4,7 +4,7 @@ import Main from './components/page/main';
 import Home from './components/page/home';
 import Notice from './components/ai_notice/notice';
 import Signup from './components/login/signup';
-import Login from './components/login/login';
+import Signin from './components/login/signin';
 import Stack from './components/ai_start/stack';
 import Introduce from './components/ai_start/introduce';
 import Result from './components/ai_start/result';
@@ -25,7 +25,7 @@ function App() {
           <Route path="/recommend" element={<Recommend />} />
           <Route path="/notice" element={<Notice />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<Signin />} />
         </Routes>
       </BrowserRouter>
     </div>

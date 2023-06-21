@@ -35,7 +35,7 @@ function NavComponent() {
                             ) : (  
                                 <>
                                     <Nav.Link as={Link} to="/signup" className="my-link2" style={{ marginRight: '13px' }}>회원가입</Nav.Link>
-                                    <Nav.Link as={Link} to="/login" className="my-link2" style={{ marginLeft: '15px' }}>로그인</Nav.Link>
+                                    <Nav.Link as={Link} to="/signin" className="my-link2" style={{ marginLeft: '15px' }}>로그인</Nav.Link>
                                 </>
                             )}
                         </Nav>

@@ -112,7 +112,7 @@ function Signup() {
 
   return (
     <div>
-      <h1>회원가입페이지</h1>
+      <h1>회원가입페이지 폼수정예정이랍니다^^</h1>
 
       <Form onSubmit={submitHandler}>
         <Form.Group className="user_up" controlId="formBasicUser">
