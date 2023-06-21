@@ -51,7 +51,6 @@ function Introduce() {
                   as="textarea"
                   placeholder="Introduce yourself"
                   style={{
-                    height: '300px',
                     resize: 'none',
                     backgroundColor: 'rgba(187, 68, 228, 0.16)',
                     width: '566.07px',

@@ -14,6 +14,9 @@ function Signup() {
   const [userPassword, setPassword] = useState('');
   const [userRePassword, setRePassword] = useState('');
   const [userNumber, setNumber] = useState('');
+  //에러 메세지
+  const [passwordError, setPasswordError] = useState('');
+  const [numberError, setNumberError] = useState('');
 
 
   // Email 유효성검사
@@ -24,14 +27,36 @@ function Signup() {
 
   // Password 유효성검사
   const validatePassword = (password) => {
-    const re = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$/;
+    const re = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     return re.test(password);
   };
 
   //  number 유효성검사 (대한민국 휴대전화 번호 기준)
   const validateMobile = (number) => {
-    const re = /^01([0|1|6|7|8|9]?)-?([0-9]{3,4})-?([0-9]{4})$/;
+    const re = /^01([0-9]{1})([0-9]{3,4})([0-9]{4})$/;
     return re.test(number);
+  };
+
+  // password error msg
+  const handlePasswordChange = (password) => {
+    setPassword(password);
+
+    if (!validatePassword(password)) {
+      setPasswordError('비밀번호는 최소 8자 이상이어야 하며, 영문 소문자, 숫자, 특수 문자(@$!%*?&)를 포함해야 합니다.');
+    } else {
+      setPasswordError('');
+    }
+  };
+
+  // number error msg
+  const handleNumberChange = (number) => {
+    setNumber(number);
+
+    if (!validateMobile(number)) {
+      setNumberError('유효하지 않은 휴대폰 번호입니다.');
+    } else {
+      setNumberError('');
+    }
   };
 
   // 제출 시 새로고침X -> data수집 후 서버로 전송
@@ -70,7 +95,7 @@ function Signup() {
       "nickName": userName
     };
 
-    
+    // API받아오기
     axios
       .post("http://localhost:8080/api/signup", data)
       .then((response) => {
@@ -102,7 +127,8 @@ function Signup() {
 
         <Form.Group className="Password_up" controlId="formBasicPassword">
           <Form.Label>비밀번호</Form.Label>
-          <Form.Control type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
+          <Form.Control type="password" placeholder="Password" onChange={(e) => handlePasswordChange(e.target.value)} />
+          {passwordError && <Form.Text className="text-danger">{passwordError}</Form.Text>}
         </Form.Group>
 
         <Form.Group className="Password_up" controlId="formBasicRePassword">
@@ -112,12 +138,13 @@ function Signup() {
 
         <Form.Group className="Mobile_up" controlId="formBasicNumber">
           <Form.Label>휴대전화번호</Form.Label>
-          <Form.Control type="number" placeholder="010-1234-5678" onChange={(e) => setNumber(e.target.value)} />
+          <Form.Control type="number" placeholder="010-1234-5678" onChange={(e) => handleNumberChange(e.target.value)} />
+          {numberError && <Form.Text className="text-danger">{numberError}</Form.Text>}
         </Form.Group>
 
-        <Button variant="primary" type="submit" onSubmit={submitHandler}>
+        <Button variant="primary" type="submit">
           계정생성
-        </Button> {/* 추가할거->누르면 회원가입 완료+/main페이지로 */}
+        </Button>
       </Form>
     </div>
   );
