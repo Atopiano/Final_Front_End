@@ -1,0 +1,21 @@
+
+.updown {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+  }
+  
+  .updown::-webkit-outer-spin-button,
+  .updown::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  
+  .name_up,
+  .id_up,
+  .password_up,
+  .number_up {
+    width: 290px;
+    height: 38px;
+    margin-bottom: 20px;
+  }
+  
