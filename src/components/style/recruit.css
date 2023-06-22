@@ -1,3 +1,5 @@
+/* recruit.css */
+
 .recruit-container {
   width: 100%;
   height: 90vh;
@@ -20,13 +22,14 @@
   flex-grow: 1;
   display: grid;
   margin-top: 40px;
-  gap: 10px; /* 원하는 간격으로 설정해주세요 */
+  gap: 10px;
   margin-right: 40px;
   grid-auto-rows: 1fr;
 }
 
 .pagination span a.active {
   font-weight: bold;
+  color: #bb44e4;
 }
 
 .pagination {
@@ -40,13 +43,44 @@
 .pagination button {
   margin-right: 10px;
   margin-left: 10px;
+  background-color: #000000;
+  color: #ffffff;
+  border: none;
+  border-radius: 10px;
+  box-shadow: none;
+  padding: 8px 12px;
+  font-weight: bold;
+}
+
+.pagination button:hover {
+  background-color: #bb44e4;
+  color: #ffffff;
+}
+
+.pagination button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background-color: #cccccc;
+  color: #ffffff;
+}
+
+.pagination-link {
+  display: inline-block;
+  width: 2em;
+  text-align: center;
+  text-decoration: none;
+  color: #000000;
+}
+
+.pagination-link:hover {
+  color: #9e74d6;
 }
 
 .search-container {
   display: flex;
   align-items: center;
   margin-top: 30px;
-  margin-left: auto; /* 검색 컨테이너를 오른쪽으로 이동 */
+  margin-left: auto;
   margin-right: 90px;
 }
 
@@ -65,16 +99,8 @@
   height: 36px;
   background: #000000;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 10px;
+  border-radius: 15px;
   color: #ffffff;
-}
-
-.pagination-link {
-  display: inline-block;
-  width: 2em;
-  text-align: center;
-  text-decoration: none;
-  /* 밑줄 제거 */
 }
 
 .search-result-message {
@@ -87,3 +113,5 @@
   visibility: visible;
   margin-top: 100px;
 }
+
+/* ...기타 스타일... */

@@ -6,8 +6,6 @@ import Sidebar from './sidebar';
 import JobCard from './jobcard';
 import '../../components/style/recruit.css';
 import allRecruits from '../../json_data/recruit.json';
-import { Button } from 'react-bootstrap';
-import 'bootstrap/dist/css/bootstrap.min.css';
 
 const gridTemplateColumns = 'repeat(2, 1fr)';
 
@@ -181,9 +179,13 @@ function Recruit() {
 
     return (
       <div className="pagination">
-        <Button variant="primary" disabled={currentPage === 1} onClick={handlePreviousPage}>
+        <button
+          className="pagination-button"
+          disabled={currentPage === 1}
+          onClick={handlePreviousPage}
+        >
           이전
-        </Button>
+        </button>
         <span>
           {visiblePageNumbers.map((pageNumber) => (
             <Link
@@ -196,9 +198,13 @@ function Recruit() {
             </Link>
           ))}
         </span>
-        <Button variant="primary" disabled={currentPage === totalPages} onClick={handleNextPage}>
+        <button
+          className="pagination-button"
+          disabled={currentPage === totalPages}
+          onClick={handleNextPage}
+        >
           다음
-        </Button>
+        </button>
       </div>
     );
   };
@@ -217,7 +223,6 @@ function Recruit() {
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
             />
-            {/* <button onClick={handleSearch}>검색</button> */}
           </div>
           <Sidebar
             allPositions={Array.from(new Set(allRecruits.map((recruit) => recruit.position)))}

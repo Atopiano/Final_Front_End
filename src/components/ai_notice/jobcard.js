@@ -6,10 +6,11 @@ import '../../components/style/jobcard.css';
 function JobCard({ title, position, inner_company, address, stack, site, career, main_business, preferences, qualification }) {
   const [isLiked, setIsLiked] = useState(false);
   const [lgShow, setLgShow] = useState(false);
+  const [isTitleHovered, setIsTitleHovered] = useState(false);
 
   function formatStack(stack) {
     const stackItems = stack.split(',');
-    const formattedStackItems = stackItems.map(item => item.toLowerCase()); // 스택 항목을 소문자로 변환
+    const formattedStackItems = stackItems.map(item => item.toLowerCase());
 
     return formattedStackItems;
   }
@@ -23,19 +24,23 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
       .catch((error) => {
         console.error('URL 복사 실패:', error);
       });
-  };
+  }
 
   const handleTitleClick = () => {
     setLgShow(true);
-  };
+  }
 
   const handleSiteClick = () => {
     window.open(site, '_blank');
-  };
+  }
 
   const handleCloseModal = () => {
     setLgShow(false);
-  };
+  }
+
+  const handleTitleHover = () => {
+    setIsTitleHovered(!isTitleHovered);
+  }
 
   return (
     <Card className="job-card custom-card">
@@ -50,37 +55,42 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
           <br />
           {address}
           <br />
-          <RecruitStackImg stack={formatStack(stack)} /> {/* 수정된 스택 전달 */}
+          <RecruitStackImg stack={formatStack(stack)} />
         </Card.Text>
       </Card.Body>
       <Card.Footer>
-        <img
-          className={`heart-icon ${isLiked ? 'liked' : ''}`}
-          src={isLiked ? 'filled-like.svg' : 'empty-like.svg'}
-          alt="하트 아이콘"
-          onClick={() => setIsLiked(!isLiked)}
-        />
-        <img
-          className="share-icon"
-          src="share.svg"
-          alt="공유 아이콘"
-          onClick={handleCopyUrl}
-        />
-        <Button
-          className="apply-button"
-          variant="primary"
-          onClick={handleSiteClick}
-        >
-          지원하기
-        </Button>
+        <div className="apply-button">
+          <span
+            className={`apply-text ${isTitleHovered ? 'hovered' : ''}`}
+            onClick={handleSiteClick}
+            onMouseEnter={handleTitleHover}
+            onMouseLeave={handleTitleHover}
+          >
+            지원하기
+          </span>
+        </div>
+        <div className="action-buttons">
+          <img
+            className={`heart-icon ${isLiked ? 'liked' : ''}`}
+            src={isLiked ? 'filled-like.svg' : 'empty-like.svg'}
+            alt="하트 아이콘"
+            onClick={() => setIsLiked(!isLiked)}
+          />
+          <img
+            className="share-icon"
+            src="share.svg"
+            alt="공유 아이콘"
+            onClick={handleCopyUrl}
+          />
+        </div>
       </Card.Footer>
 
       <Modal
         size="lg"
         show={lgShow}
-        onHide={() => setLgShow(false)}
+        onHide={handleCloseModal}
         aria-labelledby="example-modal-sizes-title-lg"
-      >        
+      >
         <Modal.Header closeButton>
           <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>
         </Modal.Header>
@@ -101,7 +111,9 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
             <strong>주소:</strong> {address}
           </p>
           <p>
-            <strong>주요 업무:</strong><br/> {main_business?.split('\n').map((line, index) => (
+            <strong>주요 업무:</strong>
+            <br />
+            {main_business?.split('\n').map((line, index) => (
               <React.Fragment key={index}>
                 {line}
                 <br />
@@ -109,10 +121,12 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
             ))}
           </p>
           <p>
-            <strong>기술 스택:</strong> {formatStack(stack).join(', ')} {/* 수정된 스택 출력 */}
+            <strong>기술 스택:</strong> {formatStack(stack).join(', ')}
           </p>
           <p>
-            <strong>선호 사항:</strong><br/> {preferences?.split('\n').map((line, index) => (
+            <strong>선호 사항:</strong>
+            <br />
+            {preferences?.split('\n').map((line, index) => (
               <React.Fragment key={index}>
                 {line}
                 <br />
@@ -120,7 +134,9 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
             ))}
           </p>
           <p>
-            <strong>자격 요건:</strong><br/> {qualification?.split('\n').map((line, index) => (
+            <strong>자격 요건:</strong>
+            <br />
+            {qualification?.split('\n').map((line, index) => (
               <React.Fragment key={index}>
                 {line}
                 <br />
@@ -132,7 +148,6 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
           {/* 모달의 푸터 내용 */}
         </Modal.Footer>
       </Modal>
-
     </Card>
   );
 }

@@ -8,9 +8,11 @@
   justify-content: space-between;
 }
 
-.custom-card {
-  border: 3px solid black;
+.inner-company {
+  font-size: 18px;
+  font-weight: bold;
 }
+
 
 .job-card .card-header {
   font-size: 18px;
@@ -24,13 +26,34 @@
 }
 
 .job-card .card-text .position {
-  font-size: 15.4px; /* 10% increase from the original size */
+  font-size: 15.4px;
   color: #bb44e4;
 }
 
 .job-card .card-footer {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.apply-button {
+  display: flex;
+  align-items: center;
+}
+
+.apply-text {
+  color: black;
+  font-weight: bold;
+  transition: transform 0.2s;
+  cursor: pointer;
+}
+
+.apply-text.hovered {
+  transform: scale(1.1);
+}
+
+.action-buttons {
+  display: flex;
   align-items: center;
 }
 
@@ -38,21 +61,12 @@
 .share-icon {
   width: 20px;
   height: 20px;
-  margin-right: 10px;
+  margin-left: 10px;
   cursor: pointer;
-  transition: transform 0.3s; /* 변경된 부분: 변환 효과에 대한 전환 설정 */
+  transition: transform 0.3s;
 }
 
 .heart-icon:hover,
 .share-icon:hover {
-  transform: scale(1.2); /* 변경된 부분: 마우스 호버 시 크기를 확대 */
-}
-
-.apply-button {
-  margin-left: auto;
-}
-
-.inner-company {
-  font-size: 18px;
-  font-weight: bold;
+  transform: scale(1.2);
 }

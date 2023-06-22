@@ -15,6 +15,7 @@ function RecruitStackImg({ stack }) {
           className="stack-image"
           width="30"
           height="30"
+          title={recruit.title}
         />
       ))}
     </div>
