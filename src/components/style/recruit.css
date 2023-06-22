@@ -5,8 +5,8 @@
 }
 
 .sidebar-container {
-  flex-basis: 600px; 
-  padding-left: 100px;
+  flex-basis: 420px; 
+  padding-left: 80px;
 }
 
 .content-container {
@@ -18,9 +18,11 @@
 
 .grid-container {
   flex-grow: 1;
-  display: grid;  
+  display: grid;
+  margin-top: 20px;
   gap: 10px; /* 원하는 간격으로 설정해주세요 */
-  /* 원하는 grid-template-columns와 다른 스타일을 설정합니다. */
+  margin-right: 40px;   
+  grid-auto-rows: 1fr;
 }
 
 .pagination span a.active {
@@ -32,6 +34,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 40px;
 }
 
 .pagination button {
@@ -42,8 +45,8 @@
 .search-container {
   display: flex;
   align-items: center;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-right: 60px;
 }
 
 .search-container input {

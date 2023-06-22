@@ -3,7 +3,6 @@ import { Card, Button } from 'react-bootstrap';
 import '../../components/style/jobcard.css';
 
 function JobCard({ title, position, address, stack, site }) {
-  // stack을 표시할 때 다섯 번째 쉼표부터는 "..."으로 보여주고, 남은 쉼표 개수를 "+숫자"로 표시하는 함수
   function formatStack(stack) {
     const stackItems = stack.split(',');
     const commaCount = stackItems.length;
@@ -22,18 +21,21 @@ function JobCard({ title, position, address, stack, site }) {
 
   return (
     <Card className="job-card custom-card">
+      <Card.Header as="h2">{title}</Card.Header>
       <Card.Body>
-        <Card.Title>{title}</Card.Title>
         <Card.Text>
           {position}<br />
           {address}<br />
-          {formattedStack}
+          스택: {formattedStack} {/* 수정된 부분 */}
         </Card.Text>
-        <Button variant="primary" href={site} target="_blank" rel="noopener noreferrer">지원하기</Button>
       </Card.Body>
+      <Card.Footer>
+        <Button className="apply-button" variant="primary" href={site} target="_blank" rel="noopener noreferrer">
+          지원하기
+        </Button>
+      </Card.Footer>
     </Card>
-  );  
+  );
 }
 
 export default JobCard;
-
