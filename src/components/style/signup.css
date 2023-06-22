@@ -1,21 +1,40 @@
+.form-box {
+  position: absolute;
+  width: 358px;
+  height: 602px;
+  background: rgba(187, 68, 228, 0.16);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+.name_up,
+.id_up,
+.password_up,
+.number_up {
+  width: 320px;
+  height: 38px;
+  margin-bottom: 20px;
+}
 
 .updown {
-    -webkit-appearance: none;
-    -moz-appearance: textfield;
-  }
-  
-  .updown::-webkit-outer-spin-button,
-  .updown::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-  
-  .name_up,
-  .id_up,
-  .password_up,
-  .number_up {
-    width: 290px;
-    height: 38px;
-    margin-bottom: 20px;
-  }
-  
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
+  appearance: none;
+}
+
+.updown::-webkit-outer-spin-button,
+.updown::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.nn,
+.ii,
+.pp,
+.updown {
+  background: rgba(255, 255, 255, 0.89);
+  border: 2px solid #FFFFFF;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 40px;
+}

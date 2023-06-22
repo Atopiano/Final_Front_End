@@ -5,11 +5,12 @@ import '../../components/style/signin.css';
 import axios from 'axios';
 
 function Signin() {
-  //회원가입 완료시 -> (/home)
+  //로그인 완료시 -> (/home)
   const navigate = useNavigate();
   //사용자 입력받는곳
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
+  // error msg
   const [loginError, setLoginError] = useState('');
 
   // Email 유효성 검사
