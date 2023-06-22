@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import axios from 'axios';
 import '../../components/style/signup.css';
@@ -40,7 +40,7 @@ function Signup() {
     setPassword(password);
 
     if (!validatePassword(password)) {
-      setPasswordError('최소 8자 이상, 소문자, 숫자, 특수 문자(@$!%*?&#)를 포함해야 함');
+      setPasswordError('최소 8자 이상, 소문자, 숫자, 특수 문자(@$!%*?&#)');
     } else {
       setPasswordError('');
     }
@@ -126,14 +126,14 @@ function Signup() {
           <br />
           <Form.Group className="p_up" controlId="Password">
             <FloatingLabel label="Password" className="password_up">
-              <Form.Control type="password"  className="pp" placeholder="Password" onChange={(e) => handlePasswordChange(e.target.value)} />
+              <Form.Control type="password" className="pp" placeholder="Password" onChange={(e) => handlePasswordChange(e.target.value)} />
             </FloatingLabel>
             {passwordError && <Form.Text className="text-danger">{passwordError}</Form.Text>}
           </Form.Group>
           <br />
           <Form.Group className="p_up" controlId="RePassword">
             <FloatingLabel label="Re-Password" className="password_up">
-              <Form.Control type="password"  className="pp" placeholder="RePassword" onChange={(e) => setRePassword(e.target.value)} />
+              <Form.Control type="password" className="pp" placeholder="RePassword" onChange={(e) => setRePassword(e.target.value)} />
             </FloatingLabel>
           </Form.Group>
           <br />
@@ -144,9 +144,15 @@ function Signup() {
             {numberError && <Form.Text className="text-danger password-error">{numberError}</Form.Text>}
           </Form.Group>
           <br />
-          <Button variant="primary" type="submit">
+          <Button variant="primary" type="submit" className='b_up'>
             계정생성
           </Button>
+          <Link to="/signin">
+            <Button variant="primary" type="submit" className='b2_up'>
+              SNS계정으로 로그인하러 가기
+            </Button>
+          </Link>
+
         </Form>
       </div>
     </div>

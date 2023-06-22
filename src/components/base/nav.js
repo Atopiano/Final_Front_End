@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import '../../components/style/nav.css';
@@ -10,7 +10,20 @@ import logo from '../../components/img/ohmystack_logo1.jpg';
 function NavComponent() {
 
     // isLoggedIn state 추가
-    const [isLoggedIn, setIsLoggedIn] = useState(false);  
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+    // 로그인 여부 확인
+    useEffect(() => {
+        const token = localStorage.getItem("Authorization");
+        setIsLoggedIn(!!token);
+    }, []);
+
+    // 로그아웃 처리 함수
+    const handleLogout = () => {
+        // 로컬스토리지에서 토큰 제거
+        localStorage.removeItem("Authorization");
+        setIsLoggedIn(false);
+    };
 
     return (
         <header>
@@ -30,9 +43,9 @@ function NavComponent() {
                             {isLoggedIn ? (
                                 <>
                                     <Nav.Link as={Link} to="/profile" className="my-link2" style={{ marginRight: '13px' }}>마이페이지</Nav.Link>
-                                    <Nav.Link as={Link} to="/" className="my-link2" style={{ marginLeft: '15px' }} onClick={() => setIsLoggedIn(false)}>로그아웃</Nav.Link>
+                                    <Nav.Link as={Link} to="/" className="my-link2" style={{ marginLeft: '15px' }}  onClick={handleLogout}>로그아웃</Nav.Link>
                                 </>
-                            ) : (  
+                            ) : (
                                 <>
                                     <Nav.Link as={Link} to="/signup" className="my-link2" style={{ marginRight: '13px' }}>회원가입</Nav.Link>
                                     <Nav.Link as={Link} to="/signin" className="my-link2" style={{ marginLeft: '15px' }}>로그인</Nav.Link>

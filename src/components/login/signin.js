@@ -21,7 +21,7 @@ function Signin() {
 
   // Password 유효성검사
   const validatePassword = (password) => {
-    const re = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&#]{8,}$/;
+    const re = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
     return re.test(password);
   };
 
@@ -67,7 +67,7 @@ function Signin() {
       })
       .catch((error) => {
         console.log(error);
-        setLoginError('이메일이나 비밀번호를 잘못 입력했습니다. 입력한 내용을 다시 확인해주세요');
+        setLoginError('입력한 내용을 다시 확인해주세요');
       });
   };
 
@@ -75,17 +75,26 @@ function Signin() {
     <div>
       <h1>로그인페이지 여기도 폼수정예정이랍니다^^</h1>
       <br />
-      <FloatingLabel controlId="Signin" label="Email" className="sign_in" style={{ width: '290px', height: '38px', borderRadius: '20px' }}>
-        <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setUserId(e.target.value)} />
-      </FloatingLabel>
+      <div style={{ position: 'relative' }}>
+        <FloatingLabel controlId="Signin" label="Email" className="sign_in" style={{ width: '290px', height: '38px', borderRadius: '20px' }}>
+          <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setUserId(e.target.value)} />
+        </FloatingLabel>
+        <br />
+        <FloatingLabel controlId="Password" label="Password" className="password_in" style={{ width: '290px', height: '38px', borderRadius: '20px' }}>
+          <Form.Control type="password" placeholder="Password" onChange={(e) => setUserPassword(e.target.value)} />
+        </FloatingLabel>
+      </div>
       <br />
-      <FloatingLabel controlId="Password" label="Password" className="password_in" style={{ width: '290px', height: '38px', borderRadius: '20px' }}>
-        <Form.Control type="password" placeholder="Password" onChange={(e) => setUserPassword(e.target.value)} />
-      </FloatingLabel>
+      {loginError && <p className="text-danger"
+        style={{
+          position: 'absolute',
+          bottom: '-20px',
+          left: '0',
+          right: '0',
+          textAlign: 'center',
+        }}>{loginError}</p>}
 
-      {loginError && <p className="text-danger">{loginError}</p>}
-
-      <Button className="signin-button" style={{marginTop: "30px"}} onClick={loginHandler}>로그인</Button>
+      <Button className="signin-button" style={{ marginTop: "30px" }} onClick={loginHandler}>로그인</Button>
     </div>
   );
 }
