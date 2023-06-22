@@ -52,4 +52,27 @@
   margin-bottom: 25px;
 }
 
-  
+.recommand-button {
+  display: block;
+  width: 200px;
+  height: 50px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 25px;
+  text-align: center;
+  line-height: 50px;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  position: absolute;
+  bottom: 20px;
+  right: 20px; /* 위치를 오른쪽 하단으로 변경 */
+  margin-right: 360px;
+  margin-bottom: 30px;
+}
+
+.next-button:hover{
+  background-color: #bb44e4;
+  color: white;
+  border: none;
+}

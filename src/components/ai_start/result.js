@@ -4,6 +4,7 @@ import allRecruits from '../../json_data/recruit.json';
 import Header from '../../components/base/header';
 import Footer from '../base/footer';
 import '../../components/style/result.css';
+import { Link } from 'react-router-dom';
 
 export default class Result extends PureComponent {
   calculateJobRanking = (data) => {
@@ -165,6 +166,7 @@ export default class Result extends PureComponent {
                 </div>
               ))}
             </div>
+            <Link to="/recommand" className="recommand-button">추천 공고 목록</Link>  
           </div>
         </div>
         <Footer />
