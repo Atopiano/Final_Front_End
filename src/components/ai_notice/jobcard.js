@@ -3,18 +3,20 @@ import { Card, Button, Modal } from 'react-bootstrap';
 import RecruitStackImg from './recruit_stack_img';
 import '../../components/style/jobcard.css';
 
-function JobCard({ title, position, inner_company, address, stack, site }) {
+function JobCard({ title, position, inner_company, address, stack, site, career, main_business, preferences, qualification }) {
   const [isLiked, setIsLiked] = useState(false);
-  const [showModal, setShowModal] = useState(false);
+  const [lgShow, setLgShow] = useState(false);
 
   function formatStack(stack) {
     const stackItems = stack.split(',');
-  
-    return stackItems;
+    const formattedStackItems = stackItems.map(item => item.toLowerCase()); // 스택 항목을 소문자로 변환
+
+    return formattedStackItems;
   }
 
   const handleCopyUrl = () => {
-    navigator.clipboard.writeText(site)
+    navigator.clipboard
+      .writeText(site)
       .then(() => {
         alert('URL이 클립보드에 복사되었습니다!');
       })
@@ -24,22 +26,31 @@ function JobCard({ title, position, inner_company, address, stack, site }) {
   };
 
   const handleTitleClick = () => {
-    setShowModal(true);
+    setLgShow(true);
+  };
+
+  const handleSiteClick = () => {
+    window.open(site, '_blank');
   };
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setLgShow(false);
   };
 
   return (
     <Card className="job-card custom-card">
-      <Card.Header as="h2" onClick={handleTitleClick}>{title}</Card.Header>
+      <Card.Header as="h2" onClick={handleTitleClick}>
+        {title}
+      </Card.Header>
       <Card.Body>
         <Card.Text className="position-company">
-          <span className="inner-company">{inner_company}</span><br />
-          <span className="position">{position}</span><br />
-          {address}<br />
-          <RecruitStackImg stack={stack} />
+          <span className="inner-company">{inner_company}</span>
+          <br />
+          <span className="position">{position}</span>
+          <br />
+          {address}
+          <br />
+          <RecruitStackImg stack={formatStack(stack)} /> {/* 수정된 스택 전달 */}
         </Card.Text>
       </Card.Body>
       <Card.Footer>
@@ -58,25 +69,70 @@ function JobCard({ title, position, inner_company, address, stack, site }) {
         <Button
           className="apply-button"
           variant="primary"
-          href={site}
-          target="_blank"
-          rel="noopener noreferrer"
+          onClick={handleSiteClick}
         >
           지원하기
         </Button>
       </Card.Footer>
 
-      <Modal show={showModal} onHide={handleCloseModal} dialogClassName="custom-modal">
+      <Modal
+        size="lg"
+        show={lgShow}
+        onHide={() => setLgShow(false)}
+        aria-labelledby="example-modal-sizes-title-lg"
+      >        
         <Modal.Header closeButton>
-          <Modal.Title>{title}</Modal.Title>
+          <Modal.Title id="example-modal-sizes-title-lg">{title}</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {/* 모달 내용 */}
+          <p>
+            <strong>회사:</strong> {inner_company}
+          </p>
+          <p>
+            <strong>직책:</strong> {position}
+          </p>
+          <p>
+            <strong>사이트:</strong> <a href={site} target="_blank" rel="noopener noreferrer" onClick={handleSiteClick}>{site}</a>
+          </p>
+          <p>
+            <strong>경력:</strong> {career}
+          </p>
+          <p>
+            <strong>주소:</strong> {address}
+          </p>
+          <p>
+            <strong>주요 업무:</strong><br/> {main_business?.split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </p>
+          <p>
+            <strong>기술 스택:</strong> {formatStack(stack).join(', ')} {/* 수정된 스택 출력 */}
+          </p>
+          <p>
+            <strong>선호 사항:</strong><br/> {preferences?.split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </p>
+          <p>
+            <strong>자격 요건:</strong><br/> {qualification?.split('\n').map((line, index) => (
+              <React.Fragment key={index}>
+                {line}
+                <br />
+              </React.Fragment>
+            ))}
+          </p>
         </Modal.Body>
         <Modal.Footer>
           {/* 모달의 푸터 내용 */}
         </Modal.Footer>
       </Modal>
+
     </Card>
   );
 }

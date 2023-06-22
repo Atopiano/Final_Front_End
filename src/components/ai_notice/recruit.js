@@ -151,6 +151,10 @@ function Recruit() {
         address={recruit.address}
         stack={recruit.stack}
         site={recruit.site}
+        career={recruit.career}
+        main_business={recruit.main_business}
+        preferences={recruit.preferences}
+        qualification={recruit.qualification}
       />
     ));
   };
