@@ -24,6 +24,11 @@
   margin-bottom: 0;
 }
 
+.job-card .card-text .position {
+  font-size: 15.4px; /* 10% increase from the original size */
+  color: #bb44e4;
+}
+
 .job-card .card-footer {
   display: flex;
   justify-content: flex-start;
@@ -51,4 +56,11 @@
 .inner-company {
   font-size: 18px;
   font-weight: bold;
+}
+
+/* 모달창의 높이와 너비를 조정하는 CSS */
+.custom-modal {
+  max-width: 600px;
+  width: 100%;
+  height: 700px;
 }

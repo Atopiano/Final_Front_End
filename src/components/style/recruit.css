@@ -5,7 +5,7 @@
 }
 
 .sidebar-container {
-  flex-basis: 420px; 
+  flex-basis: 420px;
   padding-left: 80px;
 }
 
@@ -19,9 +19,9 @@
 .grid-container {
   flex-grow: 1;
   display: grid;
-  margin-top: 20px;
+  margin-top: 40px;
   gap: 10px; /* 원하는 간격으로 설정해주세요 */
-  margin-right: 40px;   
+  margin-right: 40px;
   grid-auto-rows: 1fr;
 }
 
@@ -46,7 +46,7 @@
   display: flex;
   align-items: center;
   margin-top: 30px;
-  margin-left: auto; /* Move the search container to the right */
+  margin-left: auto; /* 검색 컨테이너를 오른쪽으로 이동 */
   margin-right: 90px;
 }
 
@@ -55,7 +55,8 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-right: 10px;
-  width: 300px;
+  width: auto;
+  min-width: 260px;
 }
 
 .search-container button {
@@ -74,4 +75,15 @@
   text-align: center;
   text-decoration: none;
   /* 밑줄 제거 */
+}
+
+.search-result-message {
+  font-size: 120%;
+  visibility: hidden;
+  margin-top: 0;
+}
+
+.search-result-message.show {
+  visibility: visible;
+  margin-top: 100px;
 }

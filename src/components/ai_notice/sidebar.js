@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
+// import { FormCheck } from 'react-bootstrap'; 주석 처리 또는 제거
 import '../../components/style/sidebar.css';
 
 function Sidebar({ allPositions, handleFilterChange }) {
   const [selectedPositions, setSelectedPositions] = useState([]);
 
-  const handleCheckboxChange = (event) => {
-    const position = event.target.value;
-    const isChecked = event.target.checked;
+  const handleCheckboxChange = (position) => {
     let updatedPositions = [...selectedPositions];
 
-    if (isChecked) {
-      updatedPositions.push(position);
-    } else {
+    if (updatedPositions.includes(position)) {
       updatedPositions = updatedPositions.filter((selectedPosition) => selectedPosition !== position);
+    } else {
+      updatedPositions.push(position);
     }
 
     setSelectedPositions(updatedPositions);
@@ -21,15 +20,14 @@ function Sidebar({ allPositions, handleFilterChange }) {
 
   return (
     <div className="sidebar">
-      <h2 className="sidebar-title">직무</h2>
+      {/* <h2 className="sidebar-title">직무</h2> */}
       {allPositions.map((position) => (
         <div key={position} className="position-checkbox">
           <input
-            type="checkbox"
             id={position}
-            value={position}
-            onChange={handleCheckboxChange}
+            type="checkbox"
             checked={selectedPositions.includes(position)}
+            onChange={() => handleCheckboxChange(position)}
           />
           <label htmlFor={position}>{position}</label>
         </div>

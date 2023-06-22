@@ -16,7 +16,7 @@ function Recruit() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRecruits, setFilteredRecruits] = useState([]);
   const [inputPage, setInputPage] = useState('1');
-  const [searchResultMessage, setSearchResultMessage] = useState('');
+  const [searchResultMessage, setSearchResultMessage] = useState(false);
   const [selectedPositions, setSelectedPositions] = useState([]);
   const searchInputRef = useRef(null);
   const pageInputRef = useRef(null);
@@ -36,9 +36,9 @@ function Recruit() {
     setCurrentPage(1);
 
     if (newFilteredRecruits.length === 0) {
-      setSearchResultMessage('검색된 공고가 없습니다.');
+      setSearchResultMessage(true);
     } else {
-      setSearchResultMessage('');
+      setSearchResultMessage(false);
     }
   }, [searchQuery, selectedPositions]);
 
@@ -59,7 +59,7 @@ function Recruit() {
   };
 
   const handleSearch = () => {
-    setSearchResultMessage('');
+    setSearchResultMessage(false);
     const newFilteredRecruits = allRecruits.filter((recruit) => {
       const recruitTitle = recruit.title.toLowerCase();
       const recruitPosition = recruit.position.toLowerCase();
@@ -72,9 +72,9 @@ function Recruit() {
     setCurrentPage(1);
 
     if (newFilteredRecruits.length === 0) {
-      setSearchResultMessage('검색된 공고가 없습니다.');
+      setSearchResultMessage(true);
     } else {
-      setSearchResultMessage('');
+      setSearchResultMessage(false);
     }
   };
 
@@ -147,7 +147,7 @@ function Recruit() {
         key={recruit.id}
         title={recruit.title}
         position={recruit.position}
-        inner_company={recruit.inner_company} // 수정된 부분
+        inner_company={recruit.inner_company}
         address={recruit.address}
         stack={recruit.stack}
         site={recruit.site}
@@ -204,14 +204,7 @@ function Recruit() {
       <Header />
       <div className="recruit-container">
         <div className="sidebar-container">
-          <h1>채용 공고</h1>
-          <Sidebar
-            allPositions={Array.from(new Set(allRecruits.map((recruit) => recruit.position)))}
-            selectedPositions={selectedPositions}
-            handleFilterChange={handleFilterChange}
-          />
-        </div>
-        <div className="content-container">
+          <h1 style={{ marginTop: '20px', marginLeft: '50px' }}>채용 공고</h1>
           <div className="search-container">
             <input
               type="text"
@@ -222,7 +215,16 @@ function Recruit() {
             />
             {/* <button onClick={handleSearch}>검색</button> */}
           </div>
-          <div className="search-result-message">{searchResultMessage}</div>
+          <Sidebar
+            allPositions={Array.from(new Set(allRecruits.map((recruit) => recruit.position)))}
+            selectedPositions={selectedPositions}
+            handleFilterChange={handleFilterChange}
+          />
+        </div>
+        <div className="content-container">
+          <div className={`search-result-message ${searchResultMessage ? 'show' : ''}`}>
+            검색된 공고가 없습니다.
+          </div>
           <div className="grid-container" style={{ gridTemplateColumns }}>
             {renderJobCards()}
           </div>
