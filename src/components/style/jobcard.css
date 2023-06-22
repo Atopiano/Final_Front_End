@@ -28,3 +28,10 @@
   display: flex;
   justify-content: flex-end;
 }
+
+.heart-icon,
+.share-icon {
+  width: 20px;
+  height: 20px;
+  margin-left: 10px;
+}

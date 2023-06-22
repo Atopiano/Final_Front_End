@@ -30,9 +30,11 @@ function JobCard({ title, position, address, stack, site }) {
         </Card.Text>
       </Card.Body>
       <Card.Footer>
+        <img className="heart-icon" src="like.svg" alt="하트 아이콘" />
+        <img className="share-icon" src="share.svg" alt="공유 아이콘" />
         <Button className="apply-button" variant="primary" href={site} target="_blank" rel="noopener noreferrer">
           지원하기
-        </Button>
+        </Button>       
       </Card.Footer>
     </Card>
   );
