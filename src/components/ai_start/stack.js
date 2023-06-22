@@ -1,6 +1,6 @@
 import allRecruits from '../../json_data/total_stack.json';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
 import Header from '../base/header';
@@ -39,13 +39,13 @@ function Stack() {
   };
 
   useEffect(() => {
-    axios.get('/api/total_stack')
-      .then(response => {
-        setAllStacks(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching stack data:', error);
-      });
+    // axios.get('/api/total_stack')
+    //   .then(response => {
+    //     setAllStacks(response.data);
+    //   })
+    //   .catch(error => {
+    //     console.error('Error fetching stack data:', error);
+    //   });
 
     setAllStacks(allRecruits); // json 데이터로 대체
   }, []);

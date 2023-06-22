@@ -166,7 +166,7 @@ export default class Result extends PureComponent {
                 </div>
               ))}
             </div>
-            <Link to="/recommand" className="recommand-button">추천 공고 목록</Link>  
+            <Link to="/recommend" className="recommand-button">추천 공고 목록</Link>  
           </div>
         </div>
         <Footer />
