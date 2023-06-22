@@ -9,7 +9,7 @@ import allRecruits from '../../json_data/recruit.json';
 import { Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const gridTemplateColumns = 'repeat(3, 1fr)';
+const gridTemplateColumns = 'repeat(2, 1fr)';
 
 function Recruit() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -21,7 +21,7 @@ function Recruit() {
   const searchInputRef = useRef(null);
   const pageInputRef = useRef(null);
 
-  const itemsPerPage = 6;
+  const itemsPerPage = 4;
 
   useEffect(() => {
     const newFilteredRecruits = allRecruits.filter((recruit) => {
@@ -49,17 +49,16 @@ function Recruit() {
     }
   };
 
-   // totalPages를 최상위 레벨에 선언합니다.
-   const totalPages = Math.ceil(filteredRecruits.length / itemsPerPage);
+  const totalPages = Math.ceil(filteredRecruits.length / itemsPerPage);
 
-   const handleNextPage = () => {
-     if (currentPage < totalPages) {
-       setCurrentPage((prevPage) => prevPage + 1);
-       setInputPage((prevPage) => (parseInt(prevPage) + 1).toString());
-     }
-   };
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage((prevPage) => prevPage + 1);
+      setInputPage((prevPage) => (parseInt(prevPage) + 1).toString());
+    }
+  };
 
-   const handleSearch = () => {
+  const handleSearch = () => {
     setSearchResultMessage('');
     const newFilteredRecruits = allRecruits.filter((recruit) => {
       const recruitTitle = recruit.title.toLowerCase();
@@ -71,15 +70,13 @@ function Recruit() {
     });
     setFilteredRecruits(newFilteredRecruits);
     setCurrentPage(1);
-  
+
     if (newFilteredRecruits.length === 0) {
       setSearchResultMessage('검색된 공고가 없습니다.');
     } else {
       setSearchResultMessage('');
     }
   };
-  
-  
 
   const handlePageInputChange = (e) => {
     setInputPage(e.target.value);
@@ -130,7 +127,6 @@ function Recruit() {
   }, []);
 
   const handlePageChange = (pageNumber) => {
-    const totalPages = Math.ceil(filteredRecruits.length / itemsPerPage);
     if (pageNumber >= 1 && pageNumber <= totalPages) {
       setCurrentPage(pageNumber);
       setInputPage(pageNumber.toString());
@@ -151,6 +147,7 @@ function Recruit() {
         key={recruit.id}
         title={recruit.title}
         position={recruit.position}
+        inner_company={recruit.inner_company} // 수정된 부분
         address={recruit.address}
         stack={recruit.stack}
         site={recruit.site}
@@ -159,7 +156,6 @@ function Recruit() {
   };
 
   const renderPagination = () => {
-    const totalPages = Math.ceil(filteredRecruits.length / itemsPerPage);
     const pageNumbers = Array.from({ length: totalPages }, (_, index) => index + 1);
     const maxPageNumbersToShow = 9;
     const maxPageNumbersPerSide = 4;
@@ -196,15 +192,6 @@ function Recruit() {
             </Link>
           ))}
         </span>
-        {/* <input
-          type="number"
-          min="1"
-          max={totalPages}
-          value={inputPage}
-          onChange={handlePageInputChange}
-          onKeyPress={handlePageInputKeyPress}
-          ref={pageInputRef}
-        /> */}
         <Button variant="primary" disabled={currentPage === totalPages} onClick={handleNextPage}>
           다음
         </Button>
@@ -225,7 +212,7 @@ function Recruit() {
           />
         </div>
         <div className="content-container">
-          <div className="search-container" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+          <div className="search-container">
             <input
               type="text"
               placeholder="검색"

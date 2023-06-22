@@ -1,5 +1,5 @@
 .job-card {
-  width: 374px;
+  width: 550px;
   max-height: 250px;
   border: 3px solid black;
   box-sizing: border-box;
@@ -26,12 +26,29 @@
 
 .job-card .card-footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .heart-icon,
 .share-icon {
   width: 20px;
   height: 20px;
-  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.3s; /* 변경된 부분: 변환 효과에 대한 전환 설정 */
+}
+
+.heart-icon:hover,
+.share-icon:hover {
+  transform: scale(1.2); /* 변경된 부분: 마우스 호버 시 크기를 확대 */
+}
+
+.apply-button {
+  margin-left: auto;
+}
+
+.inner-company {
+  font-size: 18px;
+  font-weight: bold;
 }
