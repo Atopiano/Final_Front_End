@@ -3,7 +3,7 @@
   font-weight: bold;
   color: rgb(249, 153, 169);
   text-align: center;
-  margin-top: 80px;
+  margin-top: 100px;
   position: absolute;
   top: 0; /* 이 부분을 수정했습니다 */
   left: 50%; 
@@ -75,4 +75,17 @@
   background-color: #bb44e4;
   color: white;
   border: none;
+}
+
+.result-header {
+  font-size: 50px;
+  font-weight: bold;
+  color: #000000; /* For black color */
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  position: absolute;
+  top: 0;
+  left: 50%; 
+  transform: translateX(-50%); 
 }

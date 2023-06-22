@@ -7,6 +7,7 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
   const [isLiked, setIsLiked] = useState(false);
   const [lgShow, setLgShow] = useState(false);
   const [isTitleHovered, setIsTitleHovered] = useState(false);
+  const [isRecruitTitleHovered, setIsRecruitTitleHovered] = useState(false);
 
   function formatStack(stack) {
     const stackItems = stack.split(',');
@@ -42,10 +43,20 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
     setIsTitleHovered(!isTitleHovered);
   }
 
+  const handleRecruitTitleHover = () => {
+    setIsRecruitTitleHovered(!isRecruitTitleHovered);
+  }
+
   return (
     <Card className="job-card custom-card">
-      <Card.Header as="h2" onClick={handleTitleClick}>
-        {title}
+      <Card.Header
+        as="h2"            
+        onMouseLeave={handleRecruitTitleHover}
+        onMouseEnter={handleRecruitTitleHover}
+        onClick={handleTitleClick}
+        style={{ color: isRecruitTitleHovered ? 'lightgray' : 'inherit' }}
+      >
+          {title}
       </Card.Header>
       <Card.Body>
         <Card.Text className="position-company">

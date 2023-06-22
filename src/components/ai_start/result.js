@@ -119,6 +119,7 @@ export default class Result extends PureComponent {
         <Header />
         <div className="default-container">
           <div className="chart-container">
+          <div className="result-header">AI 추천 결과</div>
             <div className="chart-header">
               스택 기반 직무 추천 Top3
             </div>
