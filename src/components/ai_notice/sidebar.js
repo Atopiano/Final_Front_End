@@ -21,7 +21,7 @@ function Sidebar({ allPositions, handleFilterChange }) {
 
   return (
     <div className="sidebar">
-      <h2 className="sidebar-title">Position</h2>
+      <h2 className="sidebar-title">직무</h2>
       {allPositions.map((position) => (
         <div key={position} className="position-checkbox">
           <input

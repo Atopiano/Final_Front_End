@@ -37,7 +37,7 @@ function Stack() {
   };
 
   useEffect(() => {
-    axios.get('http://localhost:8080/api/total_stack')
+    axios.get('/api/total_stack')
         .then(response => {
           setAllStacks(response.data);
         })
