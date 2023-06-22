@@ -7,13 +7,14 @@ import '../../components/style/stack.css';
 import Footer from '../base/footer';
 import StackList from '../base/stacklist';
 import StackBox from '../base/stackbox';
+import allStacks from '../../json_data/total_stack.json';
 
 
 function Stack() {
   const [selectedStacks, setSelectedStacks] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [filteredStacks, setFilteredStacks] = useState([]);
-  const [allStacks, setAllStacks] = useState([]);
+  // const [allStacks, setAllStacks] = useState([]);
 
   const handleStackSelection = (stack) => {
     const isAlreadySelected = selectedStacks.some(
@@ -36,15 +37,15 @@ function Stack() {
     }
   };
 
-  useEffect(() => {
-    axios.get('/api/total_stack')
-        .then(response => {
-          setAllStacks(response.data);
-        })
-        .catch(error => {
-          console.error('Error fetching stack data:', error);
-        });
-  }, []);
+  // useEffect(() => {
+  //   axios.get('/api/total_stack')
+  //       .then(response => {
+  //         setAllStacks(response.data);
+  //       })
+  //       .catch(error => {
+  //         console.error('Error fetching stack data:', error);
+  //       });
+  // }, []);
 
   useEffect(() => {
     const newFilteredStacks = allStacks.filter((stack) =>
