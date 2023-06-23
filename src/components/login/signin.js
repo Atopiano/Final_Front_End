@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import '../../components/style/signin.css';
+import Header from '../../components/base/header';
 import axios from 'axios';
 
 function Signin() {
@@ -49,7 +50,7 @@ function Signin() {
 
     // API받아오기
     axios
-      .post('http://localhost:8080/loginProcess', data)
+      .post('/api/login', data)
       .then((response) => {
         console.log(response.data);
         const responseData = response.data; // 서버데이터 변수에 저장
@@ -72,31 +73,60 @@ function Signin() {
   };
 
   return (
-    <div>
-      <h1>로그인페이지 여기도 폼수정예정이랍니다^^</h1>
-      <br />
-      <div style={{ position: 'relative' }}>
-        <FloatingLabel controlId="Signin" label="Email" className="sign_in" style={{ width: '290px', height: '38px', borderRadius: '20px' }}>
-          <Form.Control type="email" placeholder="name@example.com" onChange={(e) => setUserId(e.target.value)} />
-        </FloatingLabel>
-        <br />
-        <FloatingLabel controlId="Password" label="Password" className="password_in" style={{ width: '290px', height: '38px', borderRadius: '20px' }}>
-          <Form.Control type="password" placeholder="Password" onChange={(e) => setUserPassword(e.target.value)} />
-        </FloatingLabel>
+    <div >
+      <Header />
+      <div className="log_in">
+        <div className="form-box">
+          <p style={{ fontSize: '30px', marginTop: '20px', marginBottom: '50px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>로그인</p>
+          <FloatingLabel controlId="Signin" label="Email" className="sign_in">
+            <Form.Control
+              className="box1"
+              type="email"
+              placeholder="name@example.com"
+              style={{
+                background: 'rgba(255, 255, 255, 0.89)',
+                border: '2px solid #FFFFFF',
+                boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                borderRadius: '40px',
+                width: '280px',
+                height: '50px',
+                marginBottom: '20px',
+                borderRadius: '40px'
+              }}
+              onChange={(e) => setUserId(e.target.value)} />
+          </FloatingLabel>
+          <Form.Group controlId="Password" className="password_in">
+            <FloatingLabel label="Password" className="ppsin">
+              <Form.Control
+                className="box2"
+                type="password"
+                placeholder="Password"
+                style={{
+                  background: 'rgba(255, 255, 255, 0.89)',
+                  border: '2px solid #FFFFFF',
+                  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                  borderRadius: '40px',
+                  width: '280px',
+                  height: '50px',
+                  marginBottom: '20px',
+                  borderRadius: '40px'
+                }}
+                onChange={(e) => setUserPassword(e.target.value)} />
+            </FloatingLabel>
+            {loginError && <Form.Text className="text-danger" style={{ textAlign: 'center' }}>{loginError}</Form.Text>}
+          </Form.Group>
+          <Button className="signin-button"
+            onClick={loginHandler}>로그인</Button>
+          <div className="links">
+            <a href="/searchid">아이디 찾기</a>
+            <a href="/searchpassword">비밀번호 찾기</a>
+            <a href="/signup">회원가입</a>
+          </div>
+        </div>
       </div>
-      <br />
-      {loginError && <p className="text-danger"
-        style={{
-          position: 'absolute',
-          bottom: '-20px',
-          left: '0',
-          right: '0',
-          textAlign: 'center',
-        }}>{loginError}</p>}
-
-      <Button className="signin-button" style={{ marginTop: "30px" }} onClick={loginHandler}>로그인</Button>
     </div>
   );
+
 }
 
 export default Signin;
