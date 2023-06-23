@@ -19,7 +19,9 @@ function Recommend() {
     const urlParams = new URLSearchParams(window.location.search);
     const positions = urlParams.get("positions");
     return positions ? positions.split(",") : [];
-  });  const searchInputRef = useRef(null);
+  });  
+  const [selectedCareer, setSelectedCareer] = useState("");  // 추가된 부분
+  const searchInputRef = useRef(null);
   const pageInputRef = useRef(null);
 
   const itemsPerPage = 4;
@@ -35,18 +37,20 @@ function Recommend() {
         (recruitTitle.includes(searchQuery.toLowerCase()) ||
           recruitAddress.includes(searchQuery.toLowerCase()) ||
           recruitInnerCompany.includes(searchQuery.toLowerCase())) &&
-        (selectedPositions.length === 0 || selectedPositions.includes(recruit.position))
+        (selectedPositions.length === 0 || selectedPositions.includes(recruit.position)) &&
+        (selectedCareer === "" || recruit.career === selectedCareer)  // 이 부분 추가
       );
     });
+  
     setFilteredRecruits(newFilteredRecruits);
     setCurrentPage(1);
-
+  
     if (newFilteredRecruits.length === 0) {
       setSearchResultMessage(true);
     } else {
       setSearchResultMessage(false);
     }
-  }, [searchQuery, selectedPositions]);
+  }, [searchQuery, selectedPositions, selectedCareer]); // selectedCareer 추가
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -164,7 +168,7 @@ function Recommend() {
         career={recruit.career}
         main_business={recruit.main_business}
         preferences={recruit.preferences}
-        qualification={recruit.qualification}
+        qualification={recruit.qualification}        
         index={startIndex + index} // index 값을 전달합니다
       />
     ));
@@ -227,15 +231,41 @@ function Recommend() {
       <Header />
       <div className="recruit-container">
         <div className="sidebar-container">
-          <h1 style={{ marginTop: '20px', marginLeft: '20px' }}>AI 추천 결과</h1>
-          <div className="search-container">
+        <h1 style={{ marginTop: '20px', marginLeft: '20px' }}>AI 추천 결과</h1>
+          <select value={selectedCareer} onChange={(e) => setSelectedCareer(e.target.value)}>
+            <option value="">경력 선택</option>
+            {Array.from(new Set(allRecruits.map((recruit) => recruit.career)))
+              .sort((a, b) => {
+                // 신입 이상을 맨 앞으로 이동시키기
+                if (a === "신입 이상") return -1;
+                if (b === "신입 이상") return 1;
+                
+                // 숫자 추출을 위한 정규식
+                const numRegex = /(\d+)/;
+                
+                // 경력 요구사항에서 숫자만 추출
+                const numA = a.match(numRegex);
+                const numB = b.match(numRegex);
+                
+                // 숫자가 없는 요구사항을 마지막으로 이동시키기
+                if (!numA) return 1;
+                if (!numB) return -1;
+                
+                // 숫자를 이용한 오름차순 정렬
+                return parseInt(numA[0]) - parseInt(numB[0]);
+              })
+              .map(career => (
+                <option key={career} value={career}>{career}</option>
+              ))}
+            </select>
+          <div className="search-container">            
             <input
               type="text"
               placeholder="검색"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
-            />
+            />            
           </div>
           <Sidebar
             allPositions={Array.from(new Set(allRecruits.map((recruit) => recruit.position)))}
