@@ -152,7 +152,7 @@ function Recommend() {
   const visibleRecruits = filteredRecruits.slice(startIndex, endIndex + 1);
 
   const renderJobCards = () => {
-    return visibleRecruits.map((recruit) => (
+    return visibleRecruits.map((recruit, index) => (
       <JobCard
         key={recruit.id}
         title={recruit.title}
@@ -165,6 +165,7 @@ function Recommend() {
         main_business={recruit.main_business}
         preferences={recruit.preferences}
         qualification={recruit.qualification}
+        index={startIndex + index} // index 값을 전달합니다
       />
     ));
   };

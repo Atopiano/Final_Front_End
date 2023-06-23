@@ -3,7 +3,7 @@ import { Card, Button, Modal } from 'react-bootstrap';
 import RecruitStackImg from './recruit_stack_img';
 import '../../components/style/jobcard.css';
 
-function JobCard({ title, position, inner_company, address, stack, site, career, main_business, preferences, qualification }) {
+function JobCard({ title, position, inner_company, address, stack, site, career, main_business, preferences, qualification, index }) {
   const [isLiked, setIsLiked] = useState(false);
   const [lgShow, setLgShow] = useState(false);
   const [isTitleHovered, setIsTitleHovered] = useState(false);
@@ -47,8 +47,26 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
     setIsRecruitTitleHovered(!isRecruitTitleHovered);
   }
 
+  const getCardClassName = () => {
+    if (index !== undefined) {
+      if (index <= 10) {
+        return 'job-card dia';
+      } else if (index <= 30) {
+        return 'job-card gold';
+      } else if (index <= 50) {
+        return 'job-card silver';
+      } else if (index <= 100) {
+        return 'job-card bronze';
+      } else {
+        return 'job-card black';
+      }
+    }
+  
+    return 'job-card custom-card'; // index가 존재하지 않거나 지정된 범위를 벗어나는 경우 기본 클래스를 반환합니다.
+  };
+
   return (
-    <Card className="job-card custom-card">
+    <Card className={getCardClassName()}>
       <Card.Header
         as="h2"            
         onMouseLeave={handleRecruitTitleHover}
