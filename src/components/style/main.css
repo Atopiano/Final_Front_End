@@ -21,7 +21,7 @@
     align-items: center;
     position: relative;
     z-index: 0;
-    overflow: hidden;
+    overflow:auto;
     box-sizing: border-box; /* 이 부분을 추가했습니다 */
 }
 
