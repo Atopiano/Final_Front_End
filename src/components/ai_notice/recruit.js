@@ -9,7 +9,7 @@ import allRecruits from '../../json_data/recruit.json';
 
 const gridTemplateColumns = 'repeat(2, 1fr)';
 
-function Recruit() {
+function Recommend() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRecruits, setFilteredRecruits] = useState([]);
@@ -20,13 +20,18 @@ function Recruit() {
   const pageInputRef = useRef(null);
 
   const itemsPerPage = 4;
+  const allRecruitsRef = useRef(allRecruits);
 
   useEffect(() => {
-    const newFilteredRecruits = allRecruits.filter((recruit) => {
+    const newFilteredRecruits = allRecruitsRef.current.filter((recruit) => {
       const recruitTitle = recruit.title.toLowerCase();
       const recruitPosition = recruit.position.toLowerCase();
+      const recruitAddress = recruit.address ? recruit.address.toLowerCase() : '';
+      const recruitInnerCompany = recruit.inner_company ? recruit.inner_company.toLowerCase() : '';
       return (
-        recruitTitle.includes(searchQuery.toLowerCase()) &&
+        (recruitTitle.includes(searchQuery.toLowerCase()) ||
+          recruitAddress.includes(searchQuery.toLowerCase()) ||
+          recruitInnerCompany.includes(searchQuery.toLowerCase())) &&
         (selectedPositions.length === 0 || selectedPositions.includes(recruit.position))
       );
     });
@@ -58,11 +63,15 @@ function Recruit() {
 
   const handleSearch = () => {
     setSearchResultMessage(false);
-    const newFilteredRecruits = allRecruits.filter((recruit) => {
+    const newFilteredRecruits = allRecruitsRef.current.filter((recruit) => {
       const recruitTitle = recruit.title.toLowerCase();
       const recruitPosition = recruit.position.toLowerCase();
+      const recruitAddress = recruit.address ? recruit.address.toLowerCase() : '';
+      const recruitInnerCompany = recruit.inner_company ? recruit.inner_company.toLowerCase() : '';
       return (
-        recruitTitle.includes(searchQuery.toLowerCase()) &&
+        (recruitTitle.includes(searchQuery.toLowerCase()) ||
+          recruitAddress === searchQuery.toLowerCase() ||
+          recruitInnerCompany.includes(searchQuery.toLowerCase())) &&
         (selectedPositions.length === 0 || selectedPositions.includes(recruit.position))
       );
     });
@@ -121,7 +130,7 @@ function Recruit() {
   }, []);
 
   useEffect(() => {
-    setFilteredRecruits(allRecruits);
+    setFilteredRecruits(allRecruitsRef.current);
   }, []);
 
   const handlePageChange = (pageNumber) => {
@@ -135,9 +144,9 @@ function Recruit() {
     setSelectedPositions(selectedPositions);
   };
 
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const endIndex = startIndex + itemsPerPage;
-  const visibleRecruits = filteredRecruits.slice(startIndex, endIndex);
+  const startIndex = Math.max((currentPage - 1) * itemsPerPage + 1, 0);
+  const endIndex = Math.min(startIndex + itemsPerPage - 1, filteredRecruits.length);
+  const visibleRecruits = filteredRecruits.slice(startIndex, endIndex + 1);
 
   const renderJobCards = () => {
     return visibleRecruits.map((recruit) => (
@@ -214,7 +223,7 @@ function Recruit() {
       <Header />
       <div className="recruit-container">
         <div className="sidebar-container">
-          <h1 style={{ marginTop: '20px', marginLeft: '50px' }}>채용 공고</h1>
+        <h1 style={{ marginTop: '20px', marginLeft: '50px' }}>채용 공고</h1>
           <div className="search-container">
             <input
               type="text"
