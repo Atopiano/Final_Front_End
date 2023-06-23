@@ -6,13 +6,13 @@ import { Link } from 'react-router-dom';
 import Header from '../../components/base/header';
 import Footer from '../base/footer';
 import '../../components/style/introduce.css';
+import Spinner from './spinner.svg';
 
 function Introduce() {
-  // 글자 수 제한
+  const [isLoading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const maxCharacters = 1500;
 
-  // 값 입력 시 max길이 정의
   const handleChange = (event) => {
     const inputValue = event.target.value;
     if (inputValue.length <= maxCharacters) {
@@ -20,28 +20,41 @@ function Introduce() {
     }
   };
 
- // 결과버튼 클릭 시 localstorage에 자소서 저장
- const handleSaveButtonClick = () => {
-  localStorage.setItem('introduction', value);
- 
-  // 모델호출 or 입력전달 
-};
+  const handleSaveButtonClick = () => {
+    setLoading(true);
 
+    setTimeout(() => {
+      localStorage.setItem('introduction', value);
+      setLoading(false);
+      window.location.href = '/result';
+    }, 3000);
+  };
 
   return (
     <>
       <Header />
-      <div className="default-container">
+      <div className={`default-container ${isLoading ? 'blur' : ''}`}>
+        {isLoading && (
+          <div className="loading-container">
+            <div className="loading-overlay"></div>
+            <div className="loading-content">
+              <img src={Spinner} alt="로딩중" />
+              <span style={{fontSize: '25px'}}>로딩 중입니다.</span>
+            </div>
+          </div>
+        )}
         <div className="introduce-container">
           <div className="introduce-content" style={{ height: '560px' }}>
             <div className="ex">
-              <p style={{ marginBottom: '0px' }}><strong style={{ color: 'blue' }}>*선택(권장)</strong></p>
+              <p style={{ marginBottom: '0px' }}>
+                <strong style={{ color: 'blue' }}>*선택(권장)</strong>
+              </p>
               <h3 style={{ textAlign: 'center', fontWeight: 'bold' }}>자기소개서를 입력해 주세요</h3>
               <p style={{ textAlign: 'center', fontSize: '15px', fontWeight: 'bold' }}>
                 (협업 경험, 대회 및 공모전, 개인 경험 등)
               </p>
               <p style={{ textAlign: 'center', fontSize: '15px' }}>
-                자기소개서를 입력하시면 추천정확도가 올라갑니다
+                자기소개서를 입력하시면 추천 정확도가 올라갑니다
               </p>
               <FloatingLabel
                 controlId="floatingTextarea2"
@@ -74,8 +87,13 @@ function Introduce() {
                 <Button className="previous-button" variant="light" as={Link} to="/stack">
                   이전
                 </Button>
-                <Button className="result-button" variant="light" as={Link} to="/result" onChange={handleSaveButtonClick}>
-                  결과보러가기
+                <Button
+                  className="result-button"
+                  variant="light"
+                  disabled={isLoading}
+                  onClick={handleSaveButtonClick}
+                >
+                  {isLoading ? '로딩 중...' : '결과 보러 가기'}
                 </Button>
               </div>
             </div>

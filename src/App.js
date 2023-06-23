@@ -9,6 +9,7 @@ import Stack from './components/ai_start/stack';
 import Introduce from './components/ai_start/introduce';
 import Result from './components/ai_start/result';
 import Recommend from './components/ai_start/recommend.js';
+import Ai from "./components/ai_start/ai";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -24,6 +25,7 @@ function App() {
           <Route path="/result" element={<Result />} />
           <Route path="/recommend" element={<Recommend />} />
           <Route path="/recruit" element={<Notice />} />
+          <Route path="/ai" element={<Ai />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
         </Routes>
