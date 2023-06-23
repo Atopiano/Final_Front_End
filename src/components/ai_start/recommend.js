@@ -5,7 +5,7 @@ import Footer from '../base/footer';
 import Sidebar from '../ai_notice/sidebar';
 import JobCard from '../ai_notice/jobcard';
 import '../../components/style/recruit.css';
-import allRecruits from '../../json_data/recruit.json';
+import allRecruits from '../../json_data/ai_recruit.json';
 
 const gridTemplateColumns = 'repeat(2, 1fr)';
 
@@ -15,8 +15,11 @@ function Recommend() {
   const [filteredRecruits, setFilteredRecruits] = useState([]);
   const [inputPage, setInputPage] = useState('1');
   const [searchResultMessage, setSearchResultMessage] = useState(false);
-  const [selectedPositions, setSelectedPositions] = useState([]);
-  const searchInputRef = useRef(null);
+  const [selectedPositions, setSelectedPositions] = useState(() => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const positions = urlParams.get("positions");
+    return positions ? positions.split(",") : [];
+  });  const searchInputRef = useRef(null);
   const pageInputRef = useRef(null);
 
   const itemsPerPage = 4;

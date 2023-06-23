@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, Label } from 'recharts';
-import allRecruits from '../../json_data/recruit.json';
+import allRecruits from '../../json_data/ai_recruit.json';
 import Header from '../../components/base/header';
 import Footer from '../base/footer';
 import '../../components/style/result.css';
@@ -167,7 +167,15 @@ export default class Result extends PureComponent {
                 </div>
               ))}
             </div>
-            <Link to="/recommend" className="recommand-button">추천 공고 목록</Link>  
+            <Link
+              to={{
+                pathname: "/recommend",
+                search: `?positions=${topJobs.slice(0, 3).join(",")}`,
+              }}
+              className="recommand-button"
+            >
+              추천 공고 목록
+            </Link>
           </div>
         </div>
         <Footer />

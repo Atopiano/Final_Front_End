@@ -9,7 +9,7 @@ import allRecruits from '../../json_data/recruit.json';
 
 const gridTemplateColumns = 'repeat(2, 1fr)';
 
-function Recommend() {
+function Recruit() {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRecruits, setFilteredRecruits] = useState([]);
