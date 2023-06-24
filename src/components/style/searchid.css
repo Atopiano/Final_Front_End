@@ -32,7 +32,8 @@
     justify-content: center;
 }
 
-.signin-button {
+.searchid-button,
+.gotolog {
     margin-top: 20px;
     border-radius: 40px;
     width: 280px;
@@ -47,29 +48,21 @@
     background-color: black;
 }
 
-.signin-button.signin-button:hover {
+.searchid-button.searchid-button:hover,
+.gotolog.gotolog:hover {
     background-color:  white;
     color: #bb44e3;
     border: none;
 }
 
-.links {
-  display: flex;
-  justify-content: center;
-  margin-top: 20px;
-
-}
-
-.links p{
-  text-align: center;
-  margin-right: 10px;
-  margin-top: 10px;
-  color: black;
-  font-size: 12.5px;
-  text-decoration: underline;
-}
-
-.links p:hover {
-  color: #bb44e3;
-  text-decoration: underline;
-}
+.input_Number {
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+    appearance: none;
+  }
+  
+  .input_Number::-webkit-outer-spin-button,
+  .input_Number::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }

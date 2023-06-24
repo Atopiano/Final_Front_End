@@ -33,9 +33,10 @@ function SearchId() {
             <div className="search_id">
                 <div className="search_id-box">
                     <p style={{ fontSize: '30px', marginTop: '20px', marginBottom: '40px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>이메일 찾기</p>
-                    <FloatingLabel controlId="searchid" label="Email" className="sid">
+                    <FloatingLabel controlId="searchid" label="PhoneNumber" className="sid">
                         <Form.Control
                             type="number"
+                            className="input_Number"
                             placeholder="010-1234-5678"
                             style={{
                                 background: 'rgba(255, 255, 255, 0.89)',
