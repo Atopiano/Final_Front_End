@@ -1,86 +1,132 @@
+.sign_up {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  overflow: hidden;
+}
+
+.email-verification-container,
+.code-verification-container {
+  display: flex;
+  align-items: center;
+}
+
 .form-box {
   display: flex;
   justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-direction: column;
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 358px;
-  height: 550px;
   background: rgba(187, 68, 228, 0.16);
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 40px;
   overflow: hidden;
-  margin: 20px 0;
+  padding: 40px;
+  margin-top: 30px;
+  height: 600px;
 }
 
-.form-box > .form-container > .floating-label {
-  margin-top: 20px;
-  margin-bottom: 20px;
+.id_up,
+.verification_up {
+  flex: 1;
+  margin-right: 10px;
 }
-
 
 .name_up,
 .id_up,
 .password_up,
 .repassword_up,
-.number_up {
-  width: 320px;
-  height: 25px;
-  margin-top: 50px;
-  margin-bottom: 20px;
+.number_up,
+.verification_up {
   font-size: 13px;
-  text-align: center;
+  text-align: auto;
   display: flex;
+  justify-content: auto;
+  width: 100%;
+  height: auto;
+  position: relative;
+  margin-bottom: 20px;
+  margin: 0 auto;
+}
+
+.ebtn_up,
+.vbtn_up {
+  border-radius: 40px;
+  width: 70px;
+  height: 40px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
   justify-content: center;
+  font-size: 13px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  border: none;
+  background-color: black;
+  margin-bottom: 20px;
 }
 
+.ebtn_up:hover,
+.ebtn_up:hover {
+  background-color: white;
+  color: #bb44e3;
+  border: none;
+}
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
+.b_up {
+  margin-top: 10px;
+  border-radius: 40px;
+  width: 280px;
+  height: 50px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: background-color 0.3s, color 0.3s;
+  border: none;
+  background-color: black;
+}
+
+.b_up:hover {
+  background-color: white;
+  color: #bb44e3;
+  border: none;
+}
+
+.text-danger.password-error {
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-size: 4px;
+  color: red;
+}
+
+.text-danger{
+  position: absolute;
+  bottom: -20px;
+  left: 0;
+  right: 0;
+  color: red;
+  font-size: 4px;
+  text-align: center;
+}
+
+.updown {
   -webkit-appearance: none;
-  margin: 0;
-}
-
-/* Firefox */
-input[type=number] {
   -moz-appearance: textfield;
   appearance: none;
 }
 
-
-.nn,
-.ii,
-.pp,
-.repp,
-.updown {
-  background: rgba(255, 255, 255, 0.89);
-  border: 2px solid #FFFFFF;
-  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-  border-radius: 40px;
+.updown::-webkit-outer-spin-button,
+.updown::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
-
-
-.pp,
-.nn {
-  margin-bottom: 20px;
-}
-
-.upbtn {
-  width: auto;
-}
-
-.error-message {
-  font-size: 12px;
-  color: red;
-  text-align: center;
-  margin-top: 33px;
-}
-
-.error-message.alert-danger {
-  position: absolute;
-  bottom: -20px;
-}
-

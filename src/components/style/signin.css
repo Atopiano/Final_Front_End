@@ -2,18 +2,25 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 30vh;
+      height: 80vh;
       overflow: hidden;
   }
 
 
-  .form-box {
+  .logform-box {
       display: flex;
+      justify-content: center;
       justify-content: flex-start;
       align-items: center;
+      flex-direction: column;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
       background: rgba(187, 68, 228, 0.16);
       box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
       border-radius: 40px;
+      overflow: hidden;
       padding: 40px;
   }
 
@@ -26,7 +33,7 @@
   }
 
   .signin-button {
-      margin-top: 10px;
+      margin-top: 20px;
       border-radius: 40px;
       width: 280px;
       height: 50px;
@@ -55,6 +62,7 @@
   .links a {
     text-align: center;
     margin-right: 10px;
+    margin-top: 10px;
     color: black;
     font-size: 12.5px;
   }

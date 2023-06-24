@@ -76,8 +76,8 @@ function Signin() {
     <div >
       <Header />
       <div className="log_in">
-        <div className="form-box">
-          <p style={{ fontSize: '30px', marginTop: '20px', marginBottom: '50px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>로그인</p>
+        <div className="logform-box">
+          <p style={{ fontSize: '30px', marginTop: '20px', marginBottom: '40px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>로그인</p>
           <FloatingLabel controlId="Signin" label="Email" className="sign_in">
             <Form.Control
               className="box1"
@@ -87,7 +87,6 @@ function Signin() {
                 background: 'rgba(255, 255, 255, 0.89)',
                 border: '2px solid #FFFFFF',
                 boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                borderRadius: '40px',
                 width: '280px',
                 height: '50px',
                 marginBottom: '20px',
@@ -105,10 +104,9 @@ function Signin() {
                   background: 'rgba(255, 255, 255, 0.89)',
                   border: '2px solid #FFFFFF',
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                  borderRadius: '40px',
                   width: '280px',
                   height: '50px',
-                  marginBottom: '20px',
+                  marginBottom: '30px',
                   borderRadius: '40px'
                 }}
                 onChange={(e) => setUserPassword(e.target.value)} />
