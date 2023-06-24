@@ -12,7 +12,7 @@ function Ai() {
         setRandomImageUrl(imageUrl);
       } catch (error) {
         console.error('Error fetching random image:', error);
-      }
+      } 
     };
 
     getRandomImage();

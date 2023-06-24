@@ -6,65 +6,63 @@ import Header from '../../components/base/header';
 import axios from 'axios';
 
 function Signin() {
-  //로그인 완료시 -> (/home)
   const navigate = useNavigate();
-  //사용자 입력받는곳
   const [userId, setUserId] = useState('');
   const [userPassword, setUserPassword] = useState('');
-  // error msg
   const [loginError, setLoginError] = useState('');
 
-  // Email 유효성 검사
   const validateEmail = (email) => {
     const re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     return re.test(email);
   };
 
-  // Password 유효성검사
   const validatePassword = (password) => {
     const re = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&#])[A-Za-z\d@$!%*?&#]{8,}$/;
     return re.test(password);
   };
 
-  // 제출 시 새로고침X -> data수집 후 서버로 전송
   const loginHandler = (e) => {
-    e.preventDefault();   // page 새로고침 X
+    e.preventDefault();
 
-    // Email 유효성 실패
-    if (!validateEmail(userId)) {
+    if (!userId) {
       alert("이메일을 입력해주세요");
       return;
     }
 
-    // Password 유효성 실패
-    if (!validatePassword(userPassword)) {
+    if (!userPassword) {
       alert("비밀번호를 입력해주세요");
       return;
     }
 
-    // 서버 데이터 형식이랑 일치하는지 확인해야함
+    if (!validateEmail(userId)) {
+      alert("유효한 이메일을 입력해주세요");
+      return;
+    }
+
+    if (!validatePassword(userPassword)) {
+      alert("유효한 비밀번호를 입력해주세요");
+      return;
+    }
+
     const data = {
-      "email": userId,
-      "password": userPassword,
+      email: userId,
+      password: userPassword,
     };
 
-    // API받아오기
     axios
-      .post('/api/login', data)
+      .post('http://52.78.242.29:8080/api/login', data)
       .then((response) => {
         console.log(response.data);
-        const responseData = response.data; // 서버데이터 변수에 저장
+        const responseData = response.data;
 
-        // Authorization값 가져와서 토큰에 저장 (로그인 후 인증토큰발급)
         let inToken = response.headers.get("Authorization");
-        // 토큰값 로컬스토리지에 담아 다른 브라우저에서 사용할 수 있음
         localStorage.setItem("Authorization", inToken);
 
         alert("로그인 되었습니다!");
 
         navigate('/main', {
           state: responseData
-        })
+        });
       })
       .catch((error) => {
         console.log(error);
@@ -73,7 +71,7 @@ function Signin() {
   };
 
   return (
-    <div >
+    <div>
       <Header />
       <div className="log_in">
         <div className="logform-box">
@@ -92,7 +90,9 @@ function Signin() {
                 marginBottom: '20px',
                 borderRadius: '40px'
               }}
-              onChange={(e) => setUserId(e.target.value)} />
+              value={userId}
+              onChange={(e) => setUserId(e.target.value)}
+            />
           </FloatingLabel>
           <Form.Group controlId="Password" className="password_in">
             <FloatingLabel label="Password" className="ppsin">
@@ -109,12 +109,13 @@ function Signin() {
                   marginBottom: '30px',
                   borderRadius: '40px'
                 }}
-                onChange={(e) => setUserPassword(e.target.value)} />
+                value={userPassword}
+                onChange={(e) => setUserPassword(e.target.value)}
+              />
             </FloatingLabel>
             {loginError && <Form.Text className="text-danger" style={{ textAlign: 'center' }}>{loginError}</Form.Text>}
           </Form.Group>
-          <Button className="signin-button"
-            onClick={loginHandler}>로그인</Button>
+          <Button type="submit" className="signin-button" onClick={loginHandler}>로그인</Button>
           <div className="links">
             <Link to="/searchid"><p>이메일 찾기</p></Link>
             <Link to="/searchpassword"><p>비밀번호 찾기</p></Link>
@@ -124,7 +125,6 @@ function Signin() {
       </div>
     </div>
   );
-
 }
 
 export default Signin;

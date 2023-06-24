@@ -31,27 +31,15 @@
   height: 600px;
 }
 
-.id_up,
-.verification_up {
-  flex: 1;
-  margin-right: 10px;
-}
-
-.name_up,
-.id_up,
-.password_up,
-.repassword_up,
-.number_up,
-.verification_up {
-  font-size: 13px;
-  text-align: auto;
-  display: flex;
-  justify-content: auto;
-  width: 100%;
-  height: auto;
-  position: relative;
-  margin-bottom: 20px;
-  margin: 0 auto;
+.name_up label::before,
+.id_up label::before,
+.password_up label::before,
+.repassword_up label::before,
+.number_up label::before,
+.verification_up label::before {
+  content: attr(data-error);
+  color: red;
+  font-size: 12px;
 }
 
 .ebtn_up,
@@ -99,25 +87,15 @@
   border: none;
 }
 
-.text-danger.password-error {
-  position: absolute;
-  bottom: -20px;
-  left: 0;
-  right: 0;
-  text-align: center;
-  font-size: 4px;
-  color: red;
-}
-
-.text-danger{
+/* .text-danger {
   position: absolute;
   bottom: -20px;
   left: 0;
   right: 0;
   color: red;
-  font-size: 4px;
+  font-size: 12px;
   text-align: center;
-}
+} */
 
 .updown {
   -webkit-appearance: none;

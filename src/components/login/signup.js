@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { Button, FloatingLabel, Form, Alert, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import Header from '../../components/base/header';
 import '../../components/style/signup.css';
@@ -8,7 +8,9 @@ import '../../components/style/signup.css';
 function Signup() {
   const navigate = useNavigate();
   const [userName, setUserName] = useState('');
+  const [userNameError, setUserNameError] = useState('');
   const [userEmail, setUserEmail] = useState('');
+  const [userEmailError, setUserEmailError] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [userRePassword, setUserRePassword] = useState('');
   const [userNumber, setUserNumber] = useState('');
@@ -17,26 +19,47 @@ function Signup() {
   const [signupError, setSignupError] = useState('');
   const [verificationCode, setVerificationCode] = useState('');
   const [verificationSent, setVerificationSent] = useState(false);
+  const [showVerificationCode, setShowVerificationCode] = useState(false);
+  const [verificationLoading, setVerificationLoading] = useState(false);
+  const [submitLoading, setSubmitLoading] = useState(false);
 
-  // 이메일 주소 유효성 검사
   const validateEmail = (email) => {
     const re = /^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$/;
     return re.test(email);
   };
 
-  // 비밀번호 유효성 검사
   const validatePassword = (password) => {
     const re = /^(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&#]{8,}$/;
     return re.test(password);
   };
 
-  // 휴대폰 번호 유효성 검사
   const validateMobile = (number) => {
     const re = /^01([0-9]{1})([0-9]{3,4})([0-9]{4})$/;
     return re.test(number);
   };
 
-  // 비밀번호 변경 시 호출되는 함수
+  const handleUserNameChange = (name) => {
+    setUserName(name);
+
+    if (name.trim() === '') {
+      setUserNameError('이름을 입력해주세요.');
+    } else {
+      setUserNameError('');
+    }
+  };
+
+  const handleEmailChange = (email) => {
+    setUserEmail(email);
+
+    if (email.trim() === '') {
+      setUserEmailError('이메일을 입력해주세요.');
+    } else if (!validateEmail(email)) {
+      setUserEmailError('유효한 이메일을 입력해주세요.');
+    } else {
+      setUserEmailError('');
+    }
+  };
+
   const handlePasswordChange = (password) => {
     setUserPassword(password);
 
@@ -47,7 +70,6 @@ function Signup() {
     }
   };
 
-  // 휴대폰 번호 변경 시 호출되는 함수
   const handleNumberChange = (number) => {
     setUserNumber(number);
 
@@ -58,39 +80,52 @@ function Signup() {
     }
   };
 
-  // 이메일 주소 인증 요청
   const sendVerificationCode = async () => {
+    if (userEmail.trim() === '') {
+      setUserEmailError('이메일을 입력해주세요.');
+      return;
+    } else if (!validateEmail(userEmail)) {
+      setUserEmailError('유효한 이메일을 입력해주세요.');
+      return;
+    }
+
     try {
-      const response = await axios.post('/api/verify-email', {
+      setVerificationLoading(true);
+      setVerificationSent(false);
+      setSignupError('');
+      setShowVerificationCode(false);
+
+      const response = await axios.post('http://52.78.242.29:8080/api/verify-email', {
         email: userEmail
       });
 
       console.log(response.data);
+      setVerificationLoading(false);
       setVerificationSent(true);
-      setSignupError('');
+      setShowVerificationCode(true);
     } catch (error) {
       console.log(error);
+      setVerificationLoading(false);
       setSignupError('이메일 인증 요청에 실패했습니다.');
     }
   };
 
-  // 이메일 인증 번호 확인
   const verifyEmailCode = () => {
-    axios.post('/api/verify-email-code', {
-      email: userEmail,
-      code: verificationCode
-    })
-      .then(response => {
+    axios
+      .post('http://52.78.242.29:8080/api/verify-email-code', {
+        email: userEmail,
+        code: verificationCode
+      })
+      .then((response) => {
         console.log(response.data);
         alert('인증이 완료되었습니다.');
       })
-      .catch(error => {
+      .catch((error) => {
         console.log(error);
         setSignupError('인증에 실패했습니다.');
       });
   };
 
-  // 회원가입 양식 제출 시 호출되는 함수
   const submitHandler = async (e) => {
     e.preventDefault();
 
@@ -115,7 +150,8 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post('/api/signup', {
+      setSubmitLoading(true);
+      const response = await axios.post('http://52.78.242.29:8080/api/signup', {
         phoneNumber: userNumber,
         email: userEmail,
         password: userPassword,
@@ -123,10 +159,12 @@ function Signup() {
       });
 
       console.log(response.data);
+      setSubmitLoading(false);
       alert('Happy Coding Day!');
       navigate('/');
     } catch (error) {
       console.log(error);
+      setSubmitLoading(false);
       setSignupError('죄송합니다. 회원가입에 실패했습니다.');
     }
   };
@@ -153,10 +191,12 @@ function Signup() {
                     marginBottom: '20px',
                     borderRadius: '40px'
                   }}
-                  onChange={(e) => setUserName(e.target.value)}
+                  onChange={(e) => handleUserNameChange(e.target.value)}
                 />
+                {userNameError && <Form.Text className="text-danger">{userNameError}</Form.Text>}
               </FloatingLabel>
             </Form.Group>
+            {userEmailError && <p className="text-danger">{userEmailError}</p>}
             <Form.Group className="i_up" controlId="Id">
               <div className="email-verification-container">
                 <FloatingLabel label="Email" className="id_up">
@@ -173,42 +213,49 @@ function Signup() {
                       marginBottom: '20px',
                       borderRadius: '40px'
                     }}
-                    onChange={(e) => setUserEmail(e.target.value)}
+                    onChange={(e) => handleEmailChange(e.target.value)}
                   />
                 </FloatingLabel>
-                {!verificationSent && (
+                {verificationLoading ? (
+                  <div className="verification-spinner-container">
+                    <Spinner animation="border" role="status" variant="primary" className="verification-spinner">
+                      <span className="visually-hidden">로딩 중...</span>
+                    </Spinner>
+                    <p>로딩 중...</p>
+                  </div>
+                ) : !verificationSent && (
                   <Button variant="primary" onClick={sendVerificationCode} className='ebtn_up'>
                     인증
                   </Button>
                 )}
               </div>
             </Form.Group>
-            <Form.Group className="v_up" controlId="VerificationCode">
-              <div className="code-verification-container">
-                <FloatingLabel label="Email Code" className="verification_up">
-                  <Form.Control
-                    type="text"
-                    className="vv"
-                    placeholder="인증번호 입력"
-                    style={{
-                      background: 'rgba(255, 255, 255, 0.89)',
-                      border: '2px solid #FFFFFF',
-                      boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                      width: '195px',
-                      height: '50px',
-                      marginBottom: '20px',
-                      borderRadius: '40px'
-                    }}
-                    onChange={(e) => setVerificationCode(e.target.value)}
-                  />
-                </FloatingLabel>
-                {verificationSent && (
+            {showVerificationCode && (
+              <Form.Group className="v_up" controlId="VerificationCode">
+                <div className="code-verification-container">
+                  <FloatingLabel label="Email Code" className="verification_up">
+                    <Form.Control
+                      type="text"
+                      className="vv"
+                      placeholder="인증번호 입력"
+                      style={{
+                        background: 'rgba(255, 255, 255, 0.89)',
+                        border: '2px solid #FFFFFF',
+                        boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                        width: '195px',
+                        height: '50px',
+                        marginBottom: '20px',
+                        borderRadius: '40px'
+                      }}
+                      onChange={(e) => setVerificationCode(e.target.value)}
+                    />
+                  </FloatingLabel>
                   <Button variant="primary" onClick={verifyEmailCode} className='vbtn_up'>
                     인증확인
                   </Button>
-                )}
-              </div>
-            </Form.Group>
+                </div>
+              </Form.Group>
+            )}
             <Form.Group className="p_up" controlId="Password">
               <FloatingLabel label="Password" className="password_up">
                 <Form.Control
@@ -226,8 +273,8 @@ function Signup() {
                   }}
                   onChange={(e) => handlePasswordChange(e.target.value)}
                 />
+                {passwordError && <Form.Text className="text-danger">{passwordError}</Form.Text>}
               </FloatingLabel>
-              {passwordError && <Form.Text className="text-danger">{passwordError}</Form.Text>}
             </Form.Group>
             <Form.Group className="rep_up" controlId="RePassword">
               <FloatingLabel label="Re-Password" className="repassword_up">
@@ -265,18 +312,24 @@ function Signup() {
                   }}
                   onChange={(e) => handleNumberChange(e.target.value)}
                 />
+                {numberError && <Form.Text className="text-danger">{numberError}</Form.Text>}
               </FloatingLabel>
-              {numberError && <Form.Text className="text-danger password-error">{numberError}</Form.Text>}
-              {signupError && <p className="text-danger">{signupError}</p>}
             </Form.Group>
-            <Button variant="primary" type="submit" className='b_up'>
-              계정생성
+            {signupError && <Alert variant="danger">{signupError}</Alert>}
+            <Button variant="primary" type="submit" className='b_up' disabled={submitLoading}>
+              {submitLoading ? (
+                <>
+                  <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
+                  <span className="visually-hidden">로딩 중...</span>
+                </>
+              ) : (
+                '계정생성'
+              )}
             </Button>
           </Form>
         </div>
       </div>
     </div>
-
   );
 }
 
