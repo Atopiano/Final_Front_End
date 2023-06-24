@@ -69,7 +69,7 @@ function Stack() {
           <p style={{ marginBottom: '0px' }}>
             <strong style={{ color: 'red' }}>*필수</strong>
           </p>
-          <h3 className="stack-heading">ㅋ보유하신 기술 스택을 입력해주세요.</h3>
+          <h3 className="stack-heading">보유하신 기술 스택을 입력해주세요.</h3>
           <input
             type="text"
             className="input-box"
