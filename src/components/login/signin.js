@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Button, FloatingLabel, Form } from 'react-bootstrap';
 import '../../components/style/signin.css';
 import Header from '../../components/base/header';
@@ -116,9 +116,9 @@ function Signin() {
           <Button className="signin-button"
             onClick={loginHandler}>로그인</Button>
           <div className="links">
-            <a href="/searchid">아이디 찾기</a>
-            <a href="/searchpassword">비밀번호 찾기</a>
-            <a href="/signup">회원가입</a>
+            <Link to="/searchid"><p>이메일 찾기</p></Link>
+            <Link to="/searchpassword"><p>비밀번호 찾기</p></Link>
+            <Link to="/signup"><p>회원가입</p></Link>
           </div>
         </div>
       </div>

@@ -57,17 +57,19 @@
     display: flex;
     justify-content: center;
     margin-top: 20px;
+
   }
   
-  .links a {
+  .links p{
     text-align: center;
     margin-right: 10px;
     margin-top: 10px;
     color: black;
     font-size: 12.5px;
+    text-decoration: underline;
   }
   
-  .links a:hover {
+  .links p:hover {
     color: #bb44e3;
     text-decoration: underline;
   }

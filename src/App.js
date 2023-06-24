@@ -5,6 +5,8 @@ import Home from './components/page/home';
 import Notice from './components/ai_notice/recruit';
 import Signup from './components/login/signup';
 import Signin from './components/login/signin';
+import SearchId from './components/login/searchid';
+import SearchPassword from './components/login/searchpassword';
 import Stack from './components/ai_start/stack';
 import Introduce from './components/ai_start/introduce';
 import Result from './components/ai_start/result';
@@ -28,6 +30,8 @@ function App() {
           <Route path="/ai" element={<Ai />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/signin" element={<Signin />} />
+          <Route path="/searchid" element={<SearchId />} />
+          <Route path="/searchpassword" element={<SearchPassword />} />
         </Routes>
       </BrowserRouter>
     </div>
