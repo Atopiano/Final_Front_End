@@ -28,7 +28,7 @@
   overflow: hidden;
   padding: 40px;
   margin-top: 30px;
-  height: 600px;
+  min-height: 600px;
 }
 
 .name_up label::before,

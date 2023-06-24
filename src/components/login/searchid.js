@@ -9,17 +9,26 @@ function SearchId() {
     const navigate = useNavigate();
     const [userNumber, setUserNumber] = useState('');
     const [userEmail, setUserEmail] = useState('');
-
+    const [isLoading, setIsLoading] = useState(false);
 
     const emailSearchHandler = () => {
+        setIsLoading(true);
+    
+        const apiUrl = 'http://52.78.242.29:8080/api/find-Email';
+        const requestData = {
+            phoneNumber: userNumber
+        };
+
         axios
-            .get(`/api/find-Email?PhoneNumber=${userNumber}`)
+            .post(apiUrl, requestData)
             .then((response) => {
-                const email = response.data.email;
+                const email = response.data;
                 setUserEmail(email);
+                setIsLoading(false);
             })
             .catch((error) => {
                 console.error(error);
+                setIsLoading(false);
             });
     };
 
@@ -35,7 +44,7 @@ function SearchId() {
                     <p style={{ fontSize: '30px', marginTop: '20px', marginBottom: '40px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>이메일 찾기</p>
                     <FloatingLabel controlId="searchid" label="PhoneNumber" className="sid">
                         <Form.Control
-                            type="number"
+                            type="tel"
                             className="input_Number"
                             placeholder="010-1234-5678"
                             style={{
@@ -48,9 +57,12 @@ function SearchId() {
                                 borderRadius: '40px'
                             }}
                             value={userNumber}
-                            onChange={(e) => setUserNumber(e.target.value)} />
+                            onChange={(e) => setUserNumber(e.target.value)}
+                        />
                     </FloatingLabel>
-                    <Button className="searchid-button" onClick={emailSearchHandler}>이메일 찾기</Button>
+                    <Button className="searchid-button" onClick={emailSearchHandler} disabled={isLoading}>
+                        {isLoading ? '로딩 중...' : '이메일 찾기'}
+                    </Button>
                     {userEmail && (
                         <div>
                             <FloatingLabel controlId="EmailResult" className="email-result">
