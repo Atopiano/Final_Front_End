@@ -194,7 +194,7 @@ function Signup() {
                       background: 'rgba(255, 255, 255, 0.89)',
                       border: '2px solid #FFFFFF',
                       boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                      width: '185px',
+                      width: '195px',
                       height: '50px',
                       marginBottom: '20px',
                       borderRadius: '40px'
