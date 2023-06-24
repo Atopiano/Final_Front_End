@@ -95,7 +95,7 @@ function Signup() {
       setSignupError('');
       setShowVerificationCode(false);
 
-      const response = await axios.post('http://52.78.242.29:8080/api/verify-email', {
+      const response = await axios.post('https://api.ohmystack.co/api/verify-email', {
         email: userEmail
       });
 
@@ -112,7 +112,7 @@ function Signup() {
 
   const verifyEmailCode = () => {
     axios
-      .post('http://52.78.242.29:8080/api/verify-email-code', {
+      .post('https://api.ohmystack.co/api/verify-email-code', {
         email: userEmail,
         code: verificationCode
       })
@@ -151,7 +151,7 @@ function Signup() {
 
     try {
       setSubmitLoading(true);
-      const response = await axios.post('http://52.78.242.29:8080/api/signup', {
+      const response = await axios.post('https://api.ohmystack.co/api/signup', {
         phoneNumber: userNumber,
         email: userEmail,
         password: userPassword,

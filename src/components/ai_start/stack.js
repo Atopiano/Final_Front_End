@@ -38,7 +38,7 @@ function Stack() {
   };
 
   useEffect(() => {
-    const apiUrl = 'http://52.78.242.29:8080/api/total_stack';
+    const apiUrl = 'https://api.ohmystack.co/api/total_stack';
 
     axios.get(apiUrl)
       .then(response => {

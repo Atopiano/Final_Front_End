@@ -14,7 +14,7 @@ function SearchId() {
     const emailSearchHandler = () => {
         setIsLoading(true);
     
-        const apiUrl = `http://52.78.242.29:8080/api/find-Email?phoneNumber=${userNumber}`;
+        const apiUrl = `https://api.ohmystack.co/api/find-Email?phoneNumber=${userNumber}`;
 
         axios
             .get(apiUrl)

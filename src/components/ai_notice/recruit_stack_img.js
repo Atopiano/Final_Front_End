@@ -1,9 +1,27 @@
-import React from 'react';
-import allRecruits from '../../json_data/total_stack.json';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import '../../components/style/recruit_stack_img.css';
 
 function RecruitStackImg({ stack }) {
-  const matchedRecruits = allRecruits.filter((recruit) => stack.includes(recruit.title));
+  const [matchedRecruits, setMatchedRecruits] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const apiUrl = 'https://api.ohmystack.co/api/total_stack';
+        const response = await axios.get(apiUrl);
+        const allRecruits = response.data;
+        const filteredRecruits = allRecruits.filter((recruit) =>
+          stack.includes(recruit.title)
+        );
+        setMatchedRecruits(filteredRecruits);
+      } catch (error) {
+        console.log('Error fetching stack data:', error);
+      }
+    };
+
+    fetchData();
+  }, [stack]);
 
   return (
     <div className="recruit-stack-img">
