@@ -14,13 +14,10 @@ function SearchId() {
     const emailSearchHandler = () => {
         setIsLoading(true);
     
-        const apiUrl = 'http://52.78.242.29:8080/api/find-Email';
-        const requestData = {
-            phoneNumber: userNumber
-        };
+        const apiUrl = `http://52.78.242.29:8080/api/find-Email?phoneNumber=${userNumber}`;
 
         axios
-            .post(apiUrl, requestData)
+            .get(apiUrl)
             .then((response) => {
                 const email = response.data;
                 setUserEmail(email);

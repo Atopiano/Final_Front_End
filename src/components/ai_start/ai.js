@@ -11,9 +11,9 @@ function Ai() {
 
   const handleSearch = () => {
     axios
-      .get('http://52.78.242.29:8080/api/find-Email', { phoneNumber })
+      .get(`http://52.78.242.29:8080/api/find-Email?phoneNumber=${phoneNumber}`)
       .then((response) => {
-        setEmail(response.data.email);
+        setEmail(response.data);
       })
       .catch((error) => {
         console.error('Error:', error);
@@ -32,6 +32,6 @@ function Ai() {
       <p>이메일: {email}</p>
     </div>
   );
-};
+}
 
 export default Ai;
