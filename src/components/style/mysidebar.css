@@ -1,0 +1,21 @@
+.mysidebar {
+  background-color: #ffffff;
+  border: 1px solid #bb44e4;
+  border-radius: 20px;
+  width: 300px;
+  height: 500px;
+  padding: 25px;
+  margin-left: 100px;
+}
+
+.menu {
+  cursor: pointer;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.submenu div {
+  margin-bottom: 10px;
+  font-size: 90%; /* Decreased font size for submenu items */
+  padding-left: 20px; /* Added indentation for submenu items */
+}

@@ -42,7 +42,7 @@ function NavComponent() {
                         <Nav className="ml-auto d-flex align-items-center">
                             {isLoggedIn ? (
                                 <>
-                                    <Nav.Link as={Link} to="/profile" className="my-link2" style={{ marginRight: '13px' }}>마이페이지</Nav.Link>
+                                    <Nav.Link as={Link} to="/mypage/mystak" className="my-link2" style={{ marginRight: '13px' }}>마이페이지</Nav.Link>
                                     <Nav.Link as={Link} to="/" className="my-link2" style={{ marginLeft: '15px' }}  onClick={handleLogout}>로그아웃</Nav.Link>
                                 </>
                             ) : (

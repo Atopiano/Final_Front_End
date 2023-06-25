@@ -12,6 +12,8 @@ import Introduce from './components/ai_start/introduce';
 import Result from './components/ai_start/result';
 import Recommend from './components/ai_start/recommend.js';
 import Ai from "./components/ai_start/ai";
+import Mystack from "./components/mypage/mystack";
+import IntroduceList from "./components/mypage/introduce_list";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -32,6 +34,8 @@ function App() {
           <Route path="/signin" element={<Signin />} />
           <Route path="/searchid" element={<SearchId />} />
           <Route path="/searchpassword" element={<SearchPassword />} />
+          <Route path="/mypage/mystack" element={<Mystack />} />
+          <Route path="/mypage/introduce_list" element={<Mystack />} />
         </Routes>
       </BrowserRouter>
     </div>
