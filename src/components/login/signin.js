@@ -50,24 +50,30 @@ function Signin() {
     };
 
     axios
-    .post('https://api.ohmystack.co/api/login', data)
-    .then((response) => {
-      console.log(response.data);
-      const responseData = response.data;
-      let inToken = responseData.token; // 서버 응답에서 토큰을 가져옴
-      console.log(responseData.token)
-      localStorage.setItem("Authorization", inToken);
-  
-      alert("로그인 되었습니다!");
-  
-      navigate('/', {
-        state: responseData
+      .post('https://api.ohmystack.co/api/login', data)
+      .then((response) => {
+        console.log(response.data);
+        const responseData = response.data;
+        let inToken = responseData.token; // 서버 응답에서 토큰을 가져옴
+        console.log(responseData.token);
+        localStorage.setItem("Authorization", inToken);
+
+        alert("로그인 되었습니다!");
+
+        navigate('/', {
+          state: responseData,
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoginError('입력한 내용을 다시 확인해주세요');
       });
-    })
-    .catch((error) => {
-      console.log(error);
-      setLoginError('입력한 내용을 다시 확인해주세요');
-    });
+  };
+
+  const handleKeyPress = (e) => {
+    if (e.key === 'Enter') {
+      loginHandler(e);
+    }
   };
 
   return (
@@ -75,7 +81,20 @@ function Signin() {
       <Header />
       <div className="log_in">
         <div className="logform-box">
-          <p style={{ fontSize: '30px', marginTop: '20px', marginBottom: '40px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>로그인</p>
+          <p
+            style={{
+              fontSize: '30px',
+              marginTop: '20px',
+              marginBottom: '40px',
+              marginRight: '155px',
+              display: 'flex',
+              justifyContent: 'flex-start',
+              fontWeight: 'bold',
+              textAlign: 'left',
+            }}
+          >
+            로그인
+          </p>
           <FloatingLabel controlId="Signin" label="Email" className="sign_in">
             <Form.Control
               className="box1"
@@ -88,10 +107,11 @@ function Signin() {
                 width: '280px',
                 height: '50px',
                 marginBottom: '20px',
-                borderRadius: '40px'
+                borderRadius: '40px',
               }}
               value={userId}
               onChange={(e) => setUserId(e.target.value)}
+              onKeyPress={handleKeyPress}
             />
           </FloatingLabel>
           <Form.Group controlId="Password" className="password_in">
@@ -107,19 +127,28 @@ function Signin() {
                   width: '280px',
                   height: '50px',
                   marginBottom: '30px',
-                  borderRadius: '40px'
+                  borderRadius: '40px',
                 }}
                 value={userPassword}
                 onChange={(e) => setUserPassword(e.target.value)}
+                onKeyPress={handleKeyPress}
               />
             </FloatingLabel>
             {loginError && <Form.Text className="text-danger" style={{ textAlign: 'center' }}>{loginError}</Form.Text>}
           </Form.Group>
-          <Button type="submit" className="signin-button" onClick={loginHandler}>로그인</Button>
+          <Button type="submit" className="signin-button" onClick={loginHandler}>
+            로그인
+          </Button>
           <div className="links">
-            <Link to="/searchid"><p>이메일 찾기</p></Link>
-            <Link to="/searchpassword"><p>비밀번호 찾기</p></Link>
-            <Link to="/signup"><p>회원가입</p></Link>
+            <Link to="/searchid">
+              <p>이메일 찾기</p>
+            </Link>
+            <Link to="/searchpassword">
+              <p>비밀번호 찾기</p>
+            </Link>
+            <Link to="/signup">
+              <p>회원가입</p>
+            </Link>
           </div>
         </div>
       </div>
