@@ -50,24 +50,24 @@ function Signin() {
     };
 
     axios
-      .post('https://api.ohmystack.co/api/login', data)
-      .then((response) => {
-        console.log(response.data);
-        const responseData = response.data;
-
-        let inToken = response.headers.get("Authorization");
-        localStorage.setItem("Authorization", inToken);
-
-        alert("로그인 되었습니다!");
-
-        navigate('/', {
-          state: responseData
-        });
-      })
-      .catch((error) => {
-        console.log(error);
-        setLoginError('입력한 내용을 다시 확인해주세요');
+    .post('https://api.ohmystack.co/api/login', data)
+    .then((response) => {
+      console.log(response.data);
+      const responseData = response.data;
+      let inToken = responseData.token; // 서버 응답에서 토큰을 가져옴
+      console.log(responseData.token)
+      localStorage.setItem("Authorization", inToken);
+  
+      alert("로그인 되었습니다!");
+  
+      navigate('/', {
+        state: responseData
       });
+    })
+    .catch((error) => {
+      console.log(error);
+      setLoginError('입력한 내용을 다시 확인해주세요');
+    });
   };
 
   return (
