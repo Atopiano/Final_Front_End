@@ -23,7 +23,15 @@
 .grid-container {
   flex-grow: 1;
   display: grid;
+  gap: 10px;
+  margin-right: 40px;
+  grid-auto-rows: 1fr;
   margin-top: 40px;
+}
+
+.legend-grid-container {
+  flex-grow: 1;
+  display: grid;
   gap: 10px;
   margin-right: 40px;
   grid-auto-rows: 1fr;
