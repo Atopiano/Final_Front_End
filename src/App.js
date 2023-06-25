@@ -13,7 +13,12 @@ import Result from './components/ai_start/result';
 import Recommend from './components/ai_start/recommend.js';
 import Ai from "./components/ai_start/ai";
 import Mystack from "./components/mypage/mystack";
-import IntroduceList from "./components/mypage/introduce_list";
+import ChangePassword from "./components/mypage/changepassword";
+import EditProfile from "./components/mypage/editprofile";
+import MyIntroductions from "./components/mypage/myintroductions";
+import MyLiked from "./components/mypage/myliked";
+import MyProfile from "./components/mypage/myprofile";
+import WriteIntroduction from "./components/mypage/writeintroduction";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -35,7 +40,12 @@ function App() {
           <Route path="/searchid" element={<SearchId />} />
           <Route path="/searchpassword" element={<SearchPassword />} />
           <Route path="/mypage/mystack" element={<Mystack />} />
-          <Route path="/mypage/introduce_list" element={<Mystack />} />
+          <Route path="/mypage/changepassword" element={<ChangePassword />} />
+          <Route path="/mypage/editprofile" element={<EditProfile />} />
+          <Route path="/mypage/myintroductions" element={<MyIntroductions />} />
+          <Route path="/mypage/myliked" element={<MyLiked />} />
+          <Route path="/mypage/myprofile" element={<MyProfile />} />
+          <Route path="/mypage/writeintroduction" element={<WriteIntroduction />} />
         </Routes>
       </BrowserRouter>
     </div>

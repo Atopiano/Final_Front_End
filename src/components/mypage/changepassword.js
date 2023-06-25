@@ -5,14 +5,14 @@ import MySidebar from './mysidebar';
 import '../../components/style/mystack.css';
 
 
-function Mystack() {
+function ChangePassword() {
   return (
     <>
       <Header />
       <div className="default-container">
         <MySidebar />
         <div className="content">
-          <h1>나의 기술 스택</h1>
+          <h1>비밀번호 변경</h1>
         </div>
       </div>
       <Footer />
@@ -20,4 +20,4 @@ function Mystack() {
   );
 }
 
-export default Mystack;
+export default ChangePassword;

@@ -5,14 +5,14 @@ import MySidebar from './mysidebar';
 import '../../components/style/mystack.css';
 
 
-function Mystack() {
+function EditProfile() {
   return (
     <>
       <Header />
       <div className="default-container">
         <MySidebar />
         <div className="content">
-          <h1>나의 기술 스택</h1>
+          <h1>회원 정보 수정</h1>
         </div>
       </div>
       <Footer />
@@ -20,4 +20,4 @@ function Mystack() {
   );
 }
 
-export default Mystack;
+export default EditProfile;
