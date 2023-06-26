@@ -160,6 +160,7 @@ function Recommend() {
     return visibleRecruits.map((recruit, index) => (
       <JobCard
         key={recruit.id}
+        id={recruit.id}
         title={recruit.title}
         position={recruit.position}
         inner_company={recruit.inner_company}
