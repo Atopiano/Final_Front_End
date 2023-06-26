@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams, useNavigate } from 'react-router-dom';  // useNavigate를 추가로 import합니다.
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../base/header';
 import Footer from '../base/footer';
 import MySidebar from './mysidebar';
@@ -10,7 +10,7 @@ function IntroductionDetail() {
   const [introduction, setIntroduction] = useState(null);
   const accessToken = localStorage.getItem('Authorization');
   const { id } = useParams();
-  const navigate = useNavigate();  // navigate 함수를 가져옵니다.
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
@@ -31,6 +31,19 @@ function IntroductionDetail() {
 
   const handleEditClick = () => {
     navigate(`/mypage/myintroductions/edit/${id}`);
+  };
+
+  const handleDeleteClick = async () => {
+    try {
+      await axios.delete(`https://api.ohmystack.co/api/user/introduce/${id}`, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      });
+      navigate('/mypage/myintroductions');
+    } catch (error) {
+      console.error('Error deleting introduction:', error);
+    }
   };
 
   if (!introduction) {
@@ -54,7 +67,8 @@ function IntroductionDetail() {
             <div className="box">
               <p>작성일: {introduction.created_at}</p>
             </div>
-            <button onClick={handleEditClick}>수정</button>  // 수정 버튼을 추가합니다.
+            <button onClick={handleEditClick}>수정</button>
+            <button onClick={handleDeleteClick}>삭제</button>  // 삭제 버튼을 추가합니다.
           </div>
         </div>
       </div>

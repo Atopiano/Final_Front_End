@@ -8,12 +8,15 @@ import '../../components/style/myintroductions.css';
 
 function MyIntroductions() {
   const [introductions, setIntroductions] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const introductionsPerPage = 2;
   const accessToken = localStorage.getItem('Authorization');
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [currentPage]);
 
   const fetchData = async () => {
     try {
@@ -23,7 +26,7 @@ function MyIntroductions() {
         },
       };
 
-      const response = await axios.get('https://api.ohmystack.co/api/user/all-introduces', config);
+      const response = await axios.get(`https://api.ohmystack.co/api/user/all-introduces?page=${currentPage}`, config);
       setIntroductions(response.data);
     } catch (error) {
       console.error('Error fetching introductions:', error);
@@ -32,6 +35,10 @@ function MyIntroductions() {
 
   const handleIntroductionClick = (id) => {
     navigate(`/mypage/myintroductions/detail/${id}`);
+  };
+
+  const handleWriteClick = () => {
+    navigate('/mypage/writeintroduction');
   };
 
   const handleRepresentClick = async (id) => {
@@ -43,10 +50,22 @@ function MyIntroductions() {
       };
 
       const response = await axios.put(`https://api.ohmystack.co/api/user/represent/${id}`, null, config);
-      console.log(response.data); // Log the response if needed
-      fetchData(); // Fetch updated introductions data
+      console.log(response.data);
+      fetchData();
     } catch (error) {
       console.error('Error updating representation:', error);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
     }
   };
 
@@ -57,6 +76,7 @@ function MyIntroductions() {
         <MySidebar />
         <div className="content">
           <h1>자기소개서 목록</h1>
+          <button onClick={handleWriteClick}>작성하기</button>
           <div className="introduction-container">
             {introductions.map((introduction) => (
               <div
@@ -71,6 +91,15 @@ function MyIntroductions() {
                 </button>
               </div>
             ))}
+          </div>
+          <div className="pagination">
+            <button onClick={handlePreviousPage} disabled={currentPage === 1}>
+              이전 페이지
+            </button>
+            <span>{currentPage}</span>
+            <button onClick={handleNextPage} disabled={currentPage === totalPages}>
+              다음 페이지
+            </button>
           </div>
         </div>
       </div>

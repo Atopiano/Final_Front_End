@@ -21,6 +21,7 @@ import MyProfile from "./components/mypage/myprofile";
 import WriteIntroduction from "./components/mypage/writeintroduction";
 import EditMyStacks from "./components/mypage/editmystacks";
 import IntroductionDetail from "./components/mypage/myintroductions_detail";
+import IntroductionEdit from "./components/mypage/introductionedit";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
