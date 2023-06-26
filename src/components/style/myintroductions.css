@@ -1,6 +1,15 @@
+.default-container {
+  display: flex;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
 .introduction-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  display: flex;
+  flex-direction: column;
   gap: 20px;
 }
 
@@ -8,4 +17,23 @@
   background-color: #f4f4f4;
   padding: 20px;
   border-radius: 4px;
+  margin-bottom: 20px;
+}
+
+.introduction-box h2 {
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.introduction-box h2:hover {
+  color: #bb44e4;
+}
+
+.introduction-box h2:active {
+  color: #bb44e4;
+}
+
+.introduction-box.represent {
+  background-color: rgba(187, 68, 228, 0.16);
+  border: 2px solid #bb44e4;
 }

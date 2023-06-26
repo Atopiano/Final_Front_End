@@ -20,6 +20,7 @@ import MyLiked from "./components/mypage/myliked";
 import MyProfile from "./components/mypage/myprofile";
 import WriteIntroduction from "./components/mypage/writeintroduction";
 import EditMyStacks from "./components/mypage/editmystacks";
+import IntroductionDetail from "./components/mypage/myintroductions_detail";
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 
@@ -48,6 +49,8 @@ function App() {
           <Route path="/mypage/myprofile" element={<MyProfile />} />
           <Route path="/mypage/writeintroduction" element={<WriteIntroduction />} />
           <Route path="/mypage/editmystacks" element={<EditMyStacks  />} />
+          <Route path="/mypage/myintroductions/detail/:id" element={<IntroductionDetail />} />
+          <Route path="/mypage/myintroductions/edit/:id" element={<IntroductionEdit />} />
         </Routes>
       </BrowserRouter>
     </div>
