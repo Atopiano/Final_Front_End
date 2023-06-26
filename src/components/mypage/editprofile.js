@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../base/header';
 import Footer from '../base/footer';
 import MySidebar from './mysidebar';
@@ -8,10 +9,36 @@ import '../../components/style/mystack.css';
 function EditProfile() {
   const [nickName, setNickName] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [academicAbility, setAcademicAbility] = useState('선택안함');
-  const [department, setDepartment] = useState('');
+  const [academicAbility, setAcademicAbility] = useState(1);
+  const [department, setDepartment] = useState(1);
   const [credit, setCredit] = useState('');
   const [userAddress, setUserAddress] = useState('');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const token = localStorage.getItem('Authorization');
+        const response = await axios.get('https://api.ohmystack.co/api/user/userinfo', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+
+        const userInfo = response.data.body;
+        setNickName(userInfo.nickName);
+        setPhoneNumber(userInfo.phoneNumber);
+        setAcademicAbility(userInfo.academicAbility.id);
+        setDepartment(userInfo.department.id);
+        setCredit(userInfo.credit);
+        setUserAddress(userInfo.userAddress);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
@@ -36,6 +63,10 @@ function EditProfile() {
       })
       .then((response) => {
         console.log(JSON.stringify(response.data));
+        // 수정 완료 후 변경된 정보 알림
+        alert('수정이 완료되었습니다.');
+        // 나의 회원 정보 페이지로 이동
+        navigate('/mypage/myprofile');
       })
       .catch((error) => {
         console.log(error);
@@ -50,15 +81,22 @@ function EditProfile() {
     }).open();
   };
 
+  const academicAbilityOptions = [
+    { id: 1, title: '선택안함' },
+    { id: 2, title: '고졸' },
+    { id: 3, title: '대졸' },
+    { id: 4, title: '석사' },
+  ];
+
   const departmentOptions = [
-    '선택안함',
-    '컴퓨터 공학과',
-    '통계학과',
-    '소프트웨어공학과',
-    '정보통신학과',
-    '산업공학과',
-    '비전공',
-    '그외 IT전공',
+    { id: 1, title: '선택안함' },
+    { id: 2, title: '컴퓨터공학과' },
+    { id: 3, title: '통계학과' },
+    { id: 4, title: '소프트웨어공학과' },
+    { id: 5, title: '정보통신학과' },
+    { id: 6, title: '산업공학과' },
+    { id: 7, title: '비전공' },
+    { id: 8, title: '그외 IT 전공' },
   ];
 
   return (
@@ -89,23 +127,24 @@ function EditProfile() {
               학력:
               <select
                 value={academicAbility}
-                onChange={(e) => setAcademicAbility(e.target.value)}
+                onChange={(e) => setAcademicAbility(parseInt(e.target.value))}
               >
-                <option value="선택안함">선택안함</option>
-                <option value="고졸">고졸</option>
-                <option value="대졸">대졸</option>
-                <option value="석사">석사</option>
+                {academicAbilityOptions.map((option) => (
+                  <option key={option.id} value={option.id}>
+                    {option.title}
+                  </option>
+                ))}
               </select>
             </label>
             <label>
               학과:
               <select
                 value={department}
-                onChange={(e) => setDepartment(e.target.value)}
+                onChange={(e) => setDepartment(parseInt(e.target.value))}
               >
                 {departmentOptions.map((option) => (
-                  <option key={option} value={option}>
-                    {option}
+                  <option key={option.id} value={option.id}>
+                    {option.title}
                   </option>
                 ))}
               </select>

@@ -10,8 +10,6 @@ function MyIntroductions() {
   const accessToken = localStorage.getItem('Authorization');
 
   useEffect(() => {
-    console.log(accessToken); // 토큰 값 출력
-
     const fetchData = async () => {
       try {
         const config = {
