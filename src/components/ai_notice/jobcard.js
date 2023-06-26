@@ -77,7 +77,7 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
           {title}
       </Card.Header>
       <Card.Body>
-        <Card.Text className="position-company">
+        <div className="position-company">
           <span className="inner-company">{inner_company}</span>
           <br />
           <span className="position">{position}</span>
@@ -85,7 +85,7 @@ function JobCard({ title, position, inner_company, address, stack, site, career,
           {address}
           <br />
           <RecruitStackImg stack={formatStack(stack)} />
-        </Card.Text>
+        </div>
       </Card.Body>
       <Card.Footer>
         <div className="apply-button">
