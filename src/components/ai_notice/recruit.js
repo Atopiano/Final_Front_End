@@ -155,6 +155,7 @@ function Recruit() {
     return visibleRecruits.map((recruit) => (
       <JobCard
         key={recruit.id}
+        id={recruit.id}
         title={recruit.title}
         position={recruit.position}
         inner_company={recruit.inner_company}
