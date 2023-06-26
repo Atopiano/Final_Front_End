@@ -2,19 +2,23 @@
   position: relative;
   width: auto;
   height: 36px;
-  display: inline-flex; /* 'display' 속성을 'inline-flex'로 변경 */
+  display: inline-flex;
   align-items: center;
   padding: 0 10px;
-  background: #FFFFFF;
+  background: #ffffff;
   border-radius: 50px;
   cursor: pointer;
   transition: background-color 0.3s;
-  margin-left : 10px;
-  margin-top : 10px;
+  margin-left: 10px;
+  margin-top: 10px;
 }
 
 .stack-box:hover {
   background-color: #f0f0f0;
+}
+
+.stack-box.selected {
+  background-color: #bb44e4;
 }
 
 .stack-img {
@@ -31,4 +35,8 @@
   font-size: 20px;
   line-height: 22px;
   color: #000000;
+}
+
+.stack-title.selected {
+  color: #ffffff;
 }

@@ -32,8 +32,9 @@ function MySidebar() {
   };
 
   useEffect(() => {
-    setIsOpenResume(isMenuActive('/mypage/mystack') || isMenuActive('/mypage/myintroductions') || isMenuActive('/mypage/writeintroduction'));
-    setIsOpenSkills(isMenuActive('/mypage/myliked'));
+    setIsOpenResume(isMenuActive('/mypage/mystack') || isMenuActive('/mypage/editmystacks') || isMenuActive('/mypage/myintroductions') || 
+    isMenuActive('/mypage/writeintroduction'));
+    setIsOpenSkills(isMenuActive('/mypage/myliked') || isMenuActive('/mypage/editskills'));
     setIsOpenIntroductions(isMenuActive('/mypage/myprofile') || isMenuActive('/mypage/editprofile') || isMenuActive('/mypage/changepassword'));
   }, [location.pathname]);
 
@@ -51,6 +52,9 @@ function MySidebar() {
         <div className="submenu">
           <div className={`submenu-item ${isMenuActive('/mypage/mystack') ? 'active' : ''}`}>
             <Link to="/mypage/mystack">- {isMenuActive('/mypage/mystack') ? <span className="highlight">나의 기술 스택</span> : '나의 기술 스택'}</Link>
+          </div>
+          <div className={`submenu-item ${isMenuActive('/mypage/editmystacks') ? 'active' : ''}`}>
+            <Link to="/mypage/editmystacks">- {isMenuActive('/mypage/editmystacks') ? <span className="highlight">스택 수정하기</span> : '스택 수정하기'}</Link>
           </div>
           <div className={`submenu-item ${isMenuActive('/mypage/myintroductions') ? 'active' : ''}`}>
             <Link to="/mypage/myintroductions">- {isMenuActive('/mypage/myintroductions') ? <span className="highlight">자기소개서 목록</span> : '자기소개서 목록'}</Link>

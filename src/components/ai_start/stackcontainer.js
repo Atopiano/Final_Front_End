@@ -35,15 +35,31 @@ function StackContainer() {
   };
 
   useEffect(() => {
-    const apiUrl = 'https://api.ohmystack.co/api/total_stack';
+    const totalStackApiUrl = 'https://api.ohmystack.co/api/total_stack';
 
     axios
-      .get(apiUrl)
+      .get(totalStackApiUrl)
       .then((response) => {
         setAllStacks(response.data);
       })
       .catch((error) => {
-        console.error('Error fetching stack data:', error);
+        console.error('Error fetching total stack data:', error);
+      });
+
+    const userStacksApiUrl = 'https://api.ohmystack.co/api/user/stacks';
+    const token = localStorage.getItem('Authorization');
+
+    axios
+      .get(userStacksApiUrl, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((response) => {
+        setSelectedStacks(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching user stacks data:', error);
       });
   }, []);
 
@@ -56,6 +72,34 @@ function StackContainer() {
 
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
+  };
+
+  const handleUpdateStacks = () => {
+    const stackIds = selectedStacks.map((stack) => stack.id);
+    const data = JSON.stringify(stackIds);
+
+    const apiUrl = 'https://api.ohmystack.co/api/user/update-stacks';
+    const token = localStorage.getItem('Authorization');
+
+    const config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: apiUrl,
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    };
+
+    axios
+      .request(config)
+      .then((response) => {
+        console.log(JSON.stringify(response.data));
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -78,6 +122,7 @@ function StackContainer() {
             key={index}
             stack={stack}
             handleStackSelection={handleStackSelection}
+            isSelected={true} // 선택 여부에 따라 isSelected 값 전달
           />
         ))}
       </div>
@@ -86,11 +131,25 @@ function StackContainer() {
         <StackList
           stacks={filteredStacks}
           handleStackSelection={handleStackSelection}
+          selectedStackIds={selectedStacks.map((stack) => stack.id)} // 선택된 스택들의 id 배열을 전달
         />
+        <div className="custom-box">
+          <StackList
+            stacks={filteredStacks}
+            handleStackSelection={handleStackSelection}
+            selectedStackIds={selectedStacks.map((stack) => stack.id)} // 선택된 스택들의 id 배열을 전달
+          />
+        </div>
       </div>
       <div className="button-container">
-        <Button variant="light" as={Link} to="/introduce" className="next-button">
-          다음
+        <Button
+          variant="light"
+          onClick={handleUpdateStacks}
+          as={Link}
+          to="/mypage/mystack"
+          className="next-button"
+        >
+          완료
         </Button>
       </div>
     </div>

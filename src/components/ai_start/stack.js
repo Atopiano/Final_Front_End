@@ -38,15 +38,21 @@ function Stack() {
   };
 
   useEffect(() => {
-    const apiUrl = 'https://api.ohmystack.co/api/total_stack';
+    const totalStackApiUrl = 'https://api.ohmystack.co/api/total_stack';
 
-    axios.get(apiUrl)
-      .then(response => {
+    axios
+      .get(totalStackApiUrl)
+      .then((response) => {
         setAllStacks(response.data);
       })
-      .catch(error => {
-        console.error('Error fetching stack data:', error);
+      .catch((error) => {
+        console.error('Error fetching total stack data:', error);
       });
+
+    const storedSelectedStacks = localStorage.getItem('selectedStacks');
+    if (storedSelectedStacks) {
+      setSelectedStacks(JSON.parse(storedSelectedStacks));
+    }
   }, []);
 
   useEffect(() => {
@@ -56,56 +62,62 @@ function Stack() {
     setFilteredStacks(newFilteredStacks);
   }, [inputValue, allStacks]);
 
+  useEffect(() => {
+    localStorage.setItem('selectedStacks', JSON.stringify(selectedStacks));
+  }, [selectedStacks]);
+
   const handleInputChange = (e) => {
     setInputValue(e.target.value);
   };
 
   return (
     <>
-      <Header />
-      <div className="default-container">
-        <div className="stack-container">
-          <br />
-          <p style={{ marginBottom: '0px' }}>
-            <strong style={{ color: 'red' }}>*필수</strong>
-          </p>
-          <h3 className="stack-heading">보유하신 기술 스택을 입력해주세요.</h3>
-          <input
-            type="text"
-            className="input-box"
-            placeholder="입력해주세요"
-            value={inputValue}
-            onChange={handleInputChange}
+    <Header />
+    <div className='default-container'>
+    <div className="stack-container">
+      <br />
+      <p style={{ marginBottom: '0px' }}>
+        <strong style={{ color: 'red' }}>*필수</strong>
+      </p>
+      <h3 className="stack-heading">보유하신 기술 스택을 입력해주세요.</h3>
+      <input
+        type="text"
+        className="input-box"
+        placeholder="입력해주세요"
+        value={inputValue}
+        onChange={handleInputChange}
+      />
+      <div className="selected-stack-box">
+        {selectedStacks.map((stack, index) => (
+          <StackBox
+            key={index}
+            stack={stack}
+            handleStackSelection={handleStackSelection}
+            isSelected={true} // 선택 여부에 따라 isSelected 값 전달
           />
-          <div className="selected-stack-box">
-            {selectedStacks.map((stack, index) => (
-              <StackBox
-                key={index}
-                stack={stack}
-                handleStackSelection={handleStackSelection}
-              />
-            ))}
-          </div>
-          <br />
-          <div className="custom-box">
-            <StackList
-              stacks={filteredStacks}
-              handleStackSelection={handleStackSelection}
-            />
-          </div>
-          <div className="button-container">
-            <Button
-              variant="light"
-              as={Link}
-              to="/introduce"
-              className="next-button"
-            >
-              다음
-            </Button>
-          </div>
-        </div>
+        ))}
       </div>
-      <Footer />
+      <br />
+      <div className="custom-box">
+        <StackList
+          stacks={filteredStacks}
+          handleStackSelection={handleStackSelection}
+          selectedStackIds={selectedStacks.map((stack) => stack.id)} // 선택된 스택들의 id 배열을 전달
+        />
+      </div>
+      <div className="button-container">
+        <Button
+          variant="light"
+          as={Link}
+          to="/introduce"
+          className="next-button"
+        >
+          다음
+        </Button>
+      </div>
+    </div>
+    </div>
+    <Footer />
     </>
   );
 }
