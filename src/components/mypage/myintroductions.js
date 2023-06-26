@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../base/header';
 import Footer from '../base/footer';
 import MySidebar from './mysidebar';
-import '../../components/style/mystack.css';
+import '../../components/style/myintroductions.css';
 
 function MyIntroductions() {
   const [introductions, setIntroductions] = useState([]);
@@ -44,13 +44,15 @@ function MyIntroductions() {
         <MySidebar />
         <div className="content">
           <h1>자기소개서 목록</h1>
-          {introductions.map((introduction) => (
-            <div key={introduction.id}>
-              <h2>{introduction.title}</h2>
-              <p>{introduction.introduce}</p>
-              <p>작성일: {introduction.created_at}</p>
-            </div>
-          ))}
+          <div className="introduction-container">
+            {introductions.map((introduction) => (
+              <div key={introduction.id} className="introduction-box">
+                <h2>{introduction.title}</h2>
+                <p>{introduction.introduce}</p>
+                <p>작성일: {introduction.created_at}</p>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
       <Footer />

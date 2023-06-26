@@ -133,13 +133,6 @@ function StackContainer() {
           handleStackSelection={handleStackSelection}
           selectedStackIds={selectedStacks.map((stack) => stack.id)} // 선택된 스택들의 id 배열을 전달
         />
-        <div className="custom-box">
-          <StackList
-            stacks={filteredStacks}
-            handleStackSelection={handleStackSelection}
-            selectedStackIds={selectedStacks.map((stack) => stack.id)} // 선택된 스택들의 id 배열을 전달
-          />
-        </div>
       </div>
       <div className="button-container">
         <Button

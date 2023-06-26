@@ -21,6 +21,10 @@
   background-color: #bb44e4;
 }
 
+.stack-box.hovered-selected:hover {
+  background-color: #aa33d4;
+}
+
 .stack-img {
   width: 26.35px;
   height: 26.02px;
