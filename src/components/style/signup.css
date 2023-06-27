@@ -61,7 +61,7 @@
 }
 
 .ebtn_up:hover,
-.ebtn_up:hover {
+.vbtn_up:hover {
   background-color: white;
   color: #bb44e3;
   border: none;
@@ -108,4 +108,14 @@
 .updown::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.spn {
+  color: #bb44e3;
+
+}
+
+.lodingg {
+  font-size: 10px;
+  color: #bb44e3;
 }

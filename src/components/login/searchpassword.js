@@ -11,6 +11,7 @@ function SearchPassword() {
   const [token, setToken] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [validatedToken, setValidatedToken] = useState('');
+  const [sendingEmail, setSendingEmail] = useState(false);
   const navigate = useNavigate();
 
   const sendEmail = () => {
@@ -18,6 +19,8 @@ function SearchPassword() {
       phoneNumber: userNumber,
       email: userId
     };
+
+    setSendingEmail(true);
 
     axios
       .post('https://api.ohmystack.co/api/find-password', data)
@@ -27,6 +30,9 @@ function SearchPassword() {
       })
       .catch((error) => {
         console.error(error);
+      })
+      .finally(() => {
+        setSendingEmail(false);
       });
   };
 
@@ -40,7 +46,7 @@ function SearchPassword() {
       .then((response) => {
         console.log('토큰 인증이 완료되었습니다: ', response.data);
         alert('토큰인증 완료. 이제 비밀번호를 변경해주세요.');
-        setValidatedToken(token); 
+        setValidatedToken(token);
       })
       .catch((error) => {
         console.error(error);
@@ -151,9 +157,19 @@ function SearchPassword() {
                 />
               </FloatingLabel>
             </div>
-            <Button className="sendemail-button" onClick={sendEmail}>
-              인증
-            </Button> 
+            {
+              sendingEmail ? (
+                <div className="loading-con">
+                  <Spinner animation="border" role="status" className="spin">
+                  </Spinner>
+                  <span className="loading-text">로딩 중...</span>
+                </div>
+              ) : (
+                <Button variant="primary" onClick={sendEmail} className="sendemail-button">
+                  인증
+                </Button>
+              )
+            }
           </Form.Group>
 
 
