@@ -162,7 +162,7 @@ function SearchPassword() {
                 <div className="loading-con">
                   <Spinner animation="border" role="status" className="spin">
                   </Spinner>
-                  <span className="loading-text">로딩 중...</span>
+                  <span className="loading-text">로딩중...</span>
                 </div>
               ) : (
                 <Button variant="primary" onClick={sendEmail} className="sendemail-button">

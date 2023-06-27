@@ -64,7 +64,7 @@ function Signup() {
     setUserPassword(password);
 
     if (!validatePassword(password)) {
-      setPasswordError('최소 8자 이상, 소문자, 숫자, 특수 문자(@$!%*?&#)');
+      setPasswordError('최소 8자, 소문자, 숫자, 특수문자(@$!%*?&#)');
     } else {
       setPasswordError('');
     }
@@ -165,7 +165,7 @@ function Signup() {
     } catch (error) {
       console.log(error);
       setSubmitLoading(false);
-      setSignupError('죄송합니다. 회원가입에 실패했습니다.');
+      setSignupError('회원가입에 실패했습니다.');
     }
   };
 
@@ -184,8 +184,10 @@ function Signup() {
               justifyContent: 'flex-start',
               fontWeight: 'bold',
               textAlign: 'left'
-            }}>
-            회원가입</p>
+            }}
+          >
+            회원가입
+          </p>
           <Form onSubmit={submitHandler}>
             <Form.Group className="n_up" controlId="UserName">
               <FloatingLabel label="UserName" className="name_up">
@@ -209,7 +211,7 @@ function Signup() {
             </Form.Group>
             {userEmailError && <p className="text-danger">{userEmailError}</p>}
             <Form.Group className="i_up" controlId="Id">
-              <div className="email-verification-container">
+              <div className="ver-container">
                 <FloatingLabel label="Email" className="id_up">
                   <Form.Control
                     type="email"
@@ -229,13 +231,11 @@ function Signup() {
                 </FloatingLabel>
                 {verificationLoading ? (
                   <div className="verification-spinner-container">
-                    <Spinner animation="border" role="status" variant="primary" className="verification-spinner">
-                      <span className="visually-hidden">로딩 중...</span>
-                    </Spinner>
-                    <p>로딩 중...</p>
+                    <Spinner animation="border" role="status" className="verification-spinner" />
+                    <span className="veriloading">로딩중...</span>
                   </div>
-                ) : !verificationSent && (
-                  <Button variant="primary" onClick={sendVerificationCode} className='ebtn_up'>
+                ) : (
+                  <Button variant="primary" onClick={sendVerificationCode} className="emailbtn_up">
                     인증
                   </Button>
                 )}
@@ -261,8 +261,8 @@ function Signup() {
                       onChange={(e) => setVerificationCode(e.target.value)}
                     />
                   </FloatingLabel>
-                  <Button variant="primary" onClick={verifyEmailCode} className='vbtn_up'>
-                    인증확인
+                  <Button variant="primary" onClick={verifyEmailCode} className="vbtn_up">
+                    확인
                   </Button>
                 </div>
               </Form.Group>
@@ -327,16 +327,16 @@ function Signup() {
               </FloatingLabel>
             </Form.Group>
             {signupError && <Alert variant="danger">{signupError}</Alert>}
-            <Button variant="primary" type="submit" className='b_up' disabled={submitLoading}>
-              {submitLoading ? (
-                <>
-                  <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" />
-                  <span className="visually-hidden">로딩 중...</span>
-                </>
-              ) : (
-                '계정생성'
-              )}
-            </Button>
+            {submitLoading ? (
+              <div className="signcon">
+                <Spinner as="span" animation="border" size="sm" role="status" aria-hidden="true" className="lospin" />
+                <span className="spanloading">로딩중...</span>
+              </div>
+            ) : (
+              <Button variant="primary" type="submit" className="b_up" disabled={submitLoading}>
+                계정생성
+              </Button>
+            )}
           </Form>
         </div>
       </div>
