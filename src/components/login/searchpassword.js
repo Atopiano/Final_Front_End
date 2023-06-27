@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button, FloatingLabel, Form } from 'react-bootstrap';
+import { Button, FloatingLabel, Form, Spinner } from 'react-bootstrap';
 import '../../components/style/searchpassword.css';
 import Header from '../../components/base/header';
 import axios from 'axios';
@@ -40,7 +40,7 @@ function SearchPassword() {
       .then((response) => {
         console.log('토큰 인증이 완료되었습니다: ', response.data);
         alert('토큰인증 완료. 이제 비밀번호를 변경해주세요.');
-        setValidatedToken(token); // Store the validated token
+        setValidatedToken(token); 
       })
       .catch((error) => {
         console.error(error);
@@ -54,7 +54,7 @@ function SearchPassword() {
     }
 
     const data = {
-      token: validatedToken, // Use the validated token when resetting the password
+      token: validatedToken,
       newPassword: newPassword
     };
 
