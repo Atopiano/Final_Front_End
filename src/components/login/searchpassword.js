@@ -103,8 +103,8 @@ function SearchPassword() {
             style={{
               fontSize: '30px',
               marginTop: '20px',
-              marginBottom: '40px',
-              marginRight: '155px',
+              marginBottom: '35px',
+              marginRight: '100px',
               display: 'flex',
               justifyContent: 'flex-start',
               fontWeight: 'bold',
@@ -113,48 +113,51 @@ function SearchPassword() {
           >
             비밀번호 찾기
           </p>
-          <React.Fragment>
-            <FloatingLabel controlId="numpass" label="PhoneNumber" className="numpass">
-              <Form.Control
-                type="number"
-                className="pass_number"
-                placeholder="010-1234-5678"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.89)',
-                  border: '2px solid #FFFFFF',
-                  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                  width: '280px',
-                  height: '50px',
-                  marginBottom: '20px',
-                  borderRadius: '40px'
-                }}
-                value={userNumber}
-                onChange={(e) => setUserNumber(e.target.value)}
-              />
-            </FloatingLabel>
-            <FloatingLabel controlId="spass" label="Email" className="emailpass">
-              <Form.Control
-                className="pass_email"
-                type="email"
-                placeholder="name@example.com"
-                style={{
-                  background: 'rgba(255, 255, 255, 0.89)',
-                  border: '2px solid #FFFFFF',
-                  boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-                  width: '280px',
-                  height: '50px',
-                  marginBottom: '20px',
-                  borderRadius: '40px'
-                }}
-                onChange={(e) => setUserId(e.target.value)}
-              />
-            </FloatingLabel>
+          <Form.Group className="num_p" controlId="num">
+            <div style={{ display: 'flex', flexDirection: 'column', width: '200px' }}>
+              <FloatingLabel controlId="numpass" label="PhoneNumber" className="numpass">
+                <Form.Control
+                  type="number"
+                  className="pass_number"
+                  placeholder="010-1234-5678"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.89)',
+                    border: '2px solid #FFFFFF',
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    width: '195px',
+                    height: '50px',
+                    marginBottom: '5px',
+                    borderRadius: '40px'
+                  }}
+                  value={userNumber}
+                  onChange={(e) => setUserNumber(e.target.value)}
+                />
+              </FloatingLabel>
+              <FloatingLabel controlId="spass" label="Email" className="emailpass">
+                <Form.Control
+                  className="pass_email"
+                  type="email"
+                  placeholder="name@example.com"
+                  style={{
+                    background: 'rgba(255, 255, 255, 0.89)',
+                    border: '2px solid #FFFFFF',
+                    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+                    width: '195px',
+                    height: '50px',
+                    marginBottom: '20px',
+                    borderRadius: '40px'
+                  }}
+                  onChange={(e) => setUserId(e.target.value)}
+                />
+              </FloatingLabel>
+            </div>
             <Button className="sendemail-button" onClick={sendEmail}>
               인증
-            </Button>
-          </React.Fragment>
+            </Button> 
+          </Form.Group>
 
-          <React.Fragment>
+
+          <Form.Group>
             <FloatingLabel controlId="token" label="인증 코드" className="passtoken">
               <Form.Control
                 type="text"
@@ -166,16 +169,19 @@ function SearchPassword() {
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
                   width: '280px',
                   height: '50px',
-                  marginBottom: '20px',
+                  marginBottom: '5px',
                   borderRadius: '40px'
                 }}
                 value={token}
                 onChange={handleCodeChange}
               />
             </FloatingLabel>
-            <Button className="passtokencon" onClick={handleTokenVerification}>
-              인증확인
-            </Button>
+          </Form.Group>
+          <Button className="passtokencon" onClick={handleTokenVerification}>
+            인증확인
+          </Button>
+
+          <Form.Group>
             <FloatingLabel controlId="newPassword" label="새 비밀번호" className="passnew">
               <Form.Control
                 type="password"
@@ -187,20 +193,20 @@ function SearchPassword() {
                   boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
                   width: '280px',
                   height: '50px',
-                  marginBottom: '20px',
+                  marginBottom: '5px',
                   borderRadius: '40px'
                 }}
                 value={newPassword}
                 onChange={handlePasswordChange}
               />
             </FloatingLabel>
-          </React.Fragment>
+          </Form.Group>
           <Button className="psword_gotochange" onClick={handlePasswordReset}>
             비밀번호 변경
           </Button>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 
