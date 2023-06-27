@@ -259,9 +259,9 @@ function MyLiked() {
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
             />
-            <button className="search-button" onClick={handleSearch}>
+            {/* <button className="search-button" onClick={handleSearch}>
               검색
-            </button>
+            </button> */}
           </div>
           <MySidebar />
         </div>
