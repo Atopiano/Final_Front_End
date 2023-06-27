@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
@@ -13,20 +14,57 @@ function Introduce() {
   const [value, setValue] = useState('');
   const maxCharacters = 1500;
 
+  useEffect(() => {
+    const introduction = localStorage.getItem('introduction');
+    if (introduction) {
+      setValue(introduction);
+    }
+  }, []);
+
   const handleChange = (event) => {
     const inputValue = event.target.value;
     if (inputValue.length <= maxCharacters) {
       setValue(inputValue);
+      localStorage.setItem('introduction', inputValue);
     }
   };
 
   const handleSaveButtonClick = () => {
     setLoading(true);
-
+  
     setTimeout(() => {
-      localStorage.setItem('introduction', value);
+      const selectedStacks = localStorage.getItem('selectedStacks');
+      const stacksArray = JSON.parse(selectedStacks);
+      const modifiedStacks = stacksArray.map(stack => stack.title).join(", "); // 스택의 제목만 가져옵니다.
+  
+      const introduction = (modifiedStacks ? modifiedStacks + ", " : '') + value; // 수정된 스택과 자기소개를 결합합니다.
+      localStorage.setItem('self_intr', introduction);
       setLoading(false);
-      window.location.href = '/result';
+
+      // API 호출
+      let data = JSON.stringify({ "self_intr": introduction });
+      let config = {
+        method: 'post',
+        maxBodyLength: Infinity,
+        url: 'https://fastapi.ohmystack.co/job_recommendation',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        data: data
+      };
+
+      axios.request(config)
+        .then((response) => {
+          const recommendedIds = JSON.parse(response.data).job_recommendations;
+          localStorage.setItem('recommended_id', JSON.stringify(recommendedIds));
+          localStorage.removeItem('self_intr');
+          localStorage.removeItem('selectedStacks');
+          localStorage.removeItem('introduction');
+          window.location.href = '/result';
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     }, 3000);
   };
 
@@ -39,7 +77,7 @@ function Introduce() {
             <div className="loading-overlay"></div>
             <div className="loading-content">
               <img src={Spinner} alt="로딩중" />
-              <span style={{fontSize: '25px'}}>로딩 중입니다.</span>
+              <span style={{ fontSize: '25px' }}>로딩 중입니다.</span>
             </div>
           </div>
         )}
@@ -62,7 +100,7 @@ function Introduce() {
               >
                 <Form.Control
                   as="textarea"
-                  placeholder="Introduce yourself"
+                  placeholder="자기소개서를 입력해주세요"
                   style={{
                     resize: 'none',
                     backgroundColor: 'rgba(187, 68, 228, 0.16)',

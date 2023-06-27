@@ -19,7 +19,7 @@ function Stack() {
       (selectedStack) =>
         selectedStack.title === stack.title && selectedStack.url === stack.url
     );
-
+  
     if (isAlreadySelected) {
       setSelectedStacks(
         selectedStacks.filter(
@@ -39,7 +39,7 @@ function Stack() {
 
   useEffect(() => {
     const totalStackApiUrl = 'https://api.ohmystack.co/api/total_stack';
-
+  
     axios
       .get(totalStackApiUrl)
       .then((response) => {
@@ -48,7 +48,7 @@ function Stack() {
       .catch((error) => {
         console.error('Error fetching total stack data:', error);
       });
-
+  
     const storedSelectedStacks = localStorage.getItem('selectedStacks');
     if (storedSelectedStacks) {
       setSelectedStacks(JSON.parse(storedSelectedStacks));
