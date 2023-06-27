@@ -174,7 +174,18 @@ function Signup() {
       <Header />
       <div className="sign_up">
         <div className="form-box">
-          <p style={{ fontSize: '30px', marginTop: '-10px', marginRight: '155px', display: 'flex', justifyContent: 'flex-start', fontWeight: 'bold', textAlign: 'left' }}>회원가입</p>
+          <p
+            style={{
+              fontSize: '30px',
+              marginTop: '-10px',
+              marginBottom: '',
+              marginRight: '155px',
+              display: 'flex',
+              justifyContent: 'flex-start',
+              fontWeight: 'bold',
+              textAlign: 'left'
+            }}>
+            회원가입</p>
           <Form onSubmit={submitHandler}>
             <Form.Group className="n_up" controlId="UserName">
               <FloatingLabel label="UserName" className="name_up">

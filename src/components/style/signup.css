@@ -45,22 +45,23 @@
 .ebtn_up,
 .vbtn_up {
   border-radius: 40px;
-  width: 80px;
-  height: 40px;
+  width: 75px;
+  height: 50px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   text-align: center;
   justify-content: center;
-  font-size: 13px;
+  font-size: 14px;
   font-weight: bold;
   text-decoration: none;
   transition: background-color 0.3s, color 0.3s;
   border: none;
   background-color: black;
   margin-bottom: 20px;
+  margin-left: 5px;
 }
 
 .ebtn_up:hover,
-.ebtn_up:hover {
+.vbtn_up:hover {
   background-color: white;
   color: #bb44e3;
   border: none;
@@ -107,4 +108,14 @@
 .updown::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+.spn {
+  color: #bb44e3;
+
+}
+
+.lodingg {
+  font-size: 10px;
+  color: #bb44e3;
 }
