@@ -7,21 +7,42 @@ import '../../components/style/result.css';
 import { Link } from 'react-router-dom';
 
 export default class Result extends PureComponent {
+  state = {
+    activeIndex: 0,
+    recommendedRecruits: [],
+    positionsCount: {},
+  };
+
   componentDidMount() {
     const recommended_id = JSON.parse(localStorage.getItem('recommended_id'));
     if (recommended_id) {
-      const recommendedRecruits = this.filterRecruitsById(allRecruits, recommended_id);
+      const recommendedRecruits = this.filterRecruitsById(allRecruits, recommended_id).slice(0, 100); //공고수 100개
+      this.setState({ 
+        recommendedRecruits,
+        positionsCount: this.countPositions(recommendedRecruits) 
+      });
       localStorage.setItem('recommendedRecruits', JSON.stringify(recommendedRecruits));
-      this.setState({ recommendedRecruits });
-      console.log(recommendedRecruits);
     }
   }
 
   filterRecruitsById = (data, ids) => {
     let index = 1;
-
     return ids.map(id => data.find(recruit => recruit.id === id))
       .map(item => ({ ...item, index: index++ }));
+  };
+
+  countPositions = (data) => {
+    const positionsCount = {};
+
+    data.forEach(item => {
+      const { position } = item;
+      if (!positionsCount[position]) {
+        positionsCount[position] = 0;
+      }
+      positionsCount[position]++;
+    });
+
+    return positionsCount;
   };
 
   calculateJobRanking = (data) => {
@@ -46,7 +67,7 @@ export default class Result extends PureComponent {
   };
 
   createChartData = (data) => {
-    const chartData = data.slice(0, 3).map((position) => {
+    const chartData = data.slice(0, 5).map((position) => {
       const indexSum = this.state.recommendedRecruits
         .filter((item) => item.position === position)
         .reduce((sum, item) => sum + item.index, 0);
@@ -55,11 +76,6 @@ export default class Result extends PureComponent {
     });
 
     return chartData;
-  };
-
-  state = {
-    activeIndex: 0,
-    recommendedRecruits: JSON.parse(localStorage.getItem('recommendedRecruits')) || [],
   };
 
   onPieEnter = (_, index) => {
@@ -122,7 +138,10 @@ export default class Result extends PureComponent {
         <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333" style={{ fontSize: '20px', fontWeight: 'bold' }}>
           {`${(percent * 100).toFixed(2)}%`}
         </text>
-      </g>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: '16px', fontWeight: 'bold' }}>
+          {`${this.state.positionsCount[payload.name] || 0}개 공고`}
+        </text>      
+        </g>
     );
   };
 
@@ -139,7 +158,7 @@ export default class Result extends PureComponent {
           <div className="chart-container">
             <div className="result-header">AI 추천 결과</div>
             <div className="chart-header">
-              스택 기반 직무 추천 Top3
+              스택 기반 직무 추천 Top5
             </div>
             <div className="chart-wrapper">
               <PieChart width={850} height={500}>
@@ -172,13 +191,13 @@ export default class Result extends PureComponent {
               </PieChart>
             </div>
             <div className="rank-container">
-              {topJobs.slice(0, 3).map((position, index) => (
+              {topJobs.slice(0, 5).map((position, index) => (
                 <div
                   key={index}
                   className="rank-item"
                   onMouseEnter={() => this.onRankItemEnter(index)}
                   style={{
-                    color: index === this.state.activeIndex ? COLORS[index % COLORS.length] : '#000000',
+                    color: index === this.state.activeIndex ? COLORS[index % COLORS.length] : '#333',
                   }}
                 >
                   {`${index + 1}. ${position}`}

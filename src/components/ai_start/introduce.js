@@ -35,9 +35,9 @@ function Introduce() {
     setTimeout(() => {
       const selectedStacks = localStorage.getItem('selectedStacks');
       const stacksArray = JSON.parse(selectedStacks);
-      const modifiedStacks = stacksArray.map(stack => stack.title).join(", "); // 스택의 제목만 가져옵니다.
+      const modifiedStacks = stacksArray.map(stack => stack.title).join(" "); // 스택의 제목만 가져옵니다.
   
-      const introduction = (modifiedStacks ? modifiedStacks + ", " : '') + value; // 수정된 스택과 자기소개를 결합합니다.
+      const introduction = (modifiedStacks ? modifiedStacks + " " : '') + value; // 수정된 스택과 자기소개를 결합합니다.
       localStorage.setItem('self_intr', introduction);
       setLoading(false);
 

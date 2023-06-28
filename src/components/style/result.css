@@ -3,7 +3,7 @@
   font-weight: bold;
   color: rgb(249, 153, 169);
   text-align: center;
-  margin-top: 100px;
+  margin-top: 180px;
   position: absolute;
   top: 0; /* 이 부분을 수정했습니다 */
   left: 50%; 
@@ -19,7 +19,6 @@
     border-radius: 30px; 
   padding: 60px 20px 20px 20px; /* 상단 패딩을 늘렸습니다 */
 }
-
 
 .chart-wrapper {
   width: 50%;
@@ -84,6 +83,7 @@
   text-align: center;
   margin-top: 20px;
   margin-bottom: 30px;
+  margin-top: 100px;
   position: absolute;
   top: 0;
   left: 50%; 

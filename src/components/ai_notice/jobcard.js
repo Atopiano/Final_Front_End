@@ -4,7 +4,7 @@ import RecruitStackImg from './recruit_stack_img';
 import axios from 'axios';
 import '../../components/style/jobcard.css';
 
-function JobCard({ id, title, position, inner_company, address, stack, site, career, main_business, preferences, qualification, index, apiIdList }) {
+function JobCard({ id, title, position, inner_company, address, stack, site, career, main_business, preferences, qualification, index }) {
   const [isLiked, setIsLiked] = useState(false);
   const [lgShow, setLgShow] = useState(false);
   const [isTitleHovered, setIsTitleHovered] = useState(false);

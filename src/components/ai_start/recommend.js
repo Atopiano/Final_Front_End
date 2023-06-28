@@ -158,7 +158,6 @@ function Recommend() {
   const startIndex = Math.max((currentPage - 1) * itemsPerPage, 0) + 1;
   const endIndex = Math.min(startIndex + itemsPerPage - 1, filteredRecruits.length);
   const visibleRecruits = filteredRecruits.slice(startIndex - 1, endIndex);
-
   const renderJobCards = () => {
     return visibleRecruits.map((recruit, index) => (
       <JobCard
@@ -174,7 +173,7 @@ function Recommend() {
         main_business={recruit.main_business}
         preferences={recruit.preferences}
         qualification={recruit.qualification}
-        index={startIndex + index}
+        index={recruit.index}
       />
     ));
   };
