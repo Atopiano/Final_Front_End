@@ -107,7 +107,7 @@ function SearchPassword() {
         <div className="search_password-box">
           <p
             style={{
-              fontSize: '30px',
+              fontSize: '28px',
               marginTop: '20px',
               marginBottom: '35px',
               marginRight: '100px',
