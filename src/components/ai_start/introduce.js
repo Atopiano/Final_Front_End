@@ -89,10 +89,10 @@ function Introduce() {
               </p>
               <h3 style={{ textAlign: 'center', fontWeight: 'bold' }}>자기소개서를 입력해 주세요</h3>
               <p style={{ textAlign: 'center', fontSize: '15px', fontWeight: 'bold' }}>
-                (협업 경험, 대회 및 공모전, 개인 경험 등)
+                개조식으로 직무 관련 경험 위주로 작성해주세요.
               </p>
               <p style={{ textAlign: 'center', fontSize: '15px' }}>
-                자기소개서를 입력하시면 추천 정확도가 올라갑니다
+                ex) AWS EC2를 활용한 백엔드 배포, Figma를 사용한 UI/UX 설계 등
               </p>
               <FloatingLabel
                 controlId="floatingTextarea2"

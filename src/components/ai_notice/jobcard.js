@@ -9,6 +9,7 @@ function JobCard({ id, title, position, inner_company, address, stack, site, car
   const [lgShow, setLgShow] = useState(false);
   const [isTitleHovered, setIsTitleHovered] = useState(false);
   const [isRecruitTitleHovered, setIsRecruitTitleHovered] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Add isLoggedIn state
 
   function formatStack(stack) {
     const stackItems = stack.split(',');
@@ -29,17 +30,23 @@ function JobCard({ id, title, position, inner_company, address, stack, site, car
         id: id
       }
     };
-  
-    axios.get(apiUrl, config)
-      .then((response) => {
-        const liked = response.data.some((item) => item.id === id);
-        setIsLiked(liked);
-      })
-      .catch((error) => {
-        console.error('Error while checking if job is liked:', error);
-      });
+
+    // Check if user is logged in
+    const isLoggedIn = !!token;
+    setIsLoggedIn(isLoggedIn);
+
+    if (isLoggedIn) {
+      axios.get(apiUrl, config)
+        .then((response) => {
+          const liked = response.data.some((item) => item.id === id);
+          setIsLiked(liked);
+        })
+        .catch((error) => {
+          console.error('Error while checking if job is liked:', error);
+        });
+    }
   }, [id]);
-  
+
   const handleCopyUrl = () => {
     navigator.clipboard
       .writeText(site)
@@ -72,6 +79,11 @@ function JobCard({ id, title, position, inner_company, address, stack, site, car
   };
 
   const handleLikeButtonClick = () => {
+    if (!isLoggedIn) {
+      alert('좋아요는 회원만 가능합니다.'); // Show message for non-logged in users
+      return;
+    }
+
     setIsLiked(!isLiked);
 
     const apiUrl = 'https://api.ohmystack.co/api/user/recruit';
