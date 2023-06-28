@@ -31,7 +31,7 @@ function Mystack() {
   return (
     <>
       <Header />
-      <div className="default-container">
+      <div className="mypage-container">
         <MySidebar />
         <div className="content">
           <h1>나의 기술 스택</h1>

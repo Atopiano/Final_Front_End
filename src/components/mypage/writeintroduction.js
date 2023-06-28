@@ -50,13 +50,13 @@ function WriteIntroduction() {
   return (
     <>
       <Header />
-      <div className='default-container'>
+      <div className='mypage-container'>
         <MySidebar />
-        <div className="custom-sidebar">
+        <div>
         </div>
-        <div className="custom-content">
-          <h1 className="custom-title">자기소개서 작성하기</h1>
-          <div className="form-container"> {/* Wrap form in a div for styling */}
+        <div>
+          <h1>자기소개서 작성하기</h1>
+          <div> {/* Wrap form in a div for styling */}
             <form onSubmit={handleSubmit}>
               <label>
                 제목:

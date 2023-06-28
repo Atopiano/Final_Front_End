@@ -102,7 +102,7 @@ function EditProfile() {
   return (
     <>
       <Header />
-      <div className="default-container">
+      <div className="mypage-container">
         <MySidebar />
         <div className="content">
           <h1>회원 정보 수정</h1>

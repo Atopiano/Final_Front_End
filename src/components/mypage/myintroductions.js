@@ -72,7 +72,7 @@ function MyIntroductions() {
   return (
     <>
       <Header />
-      <div className="default-container">
+      <div className="mypage-container">
         <MySidebar />
         <div className="content">
           <h1>자기소개서 목록</h1>

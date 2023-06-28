@@ -64,6 +64,7 @@ function Stack() {
   }, [inputValue, allStacks]);
 
   useEffect(() => {
+    localStorage.setItem('selectedStacks', JSON.stringify(selectedStacks));
     setIsError(selectedStacks.length < 3);
   }, [selectedStacks]);
 

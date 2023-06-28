@@ -29,7 +29,7 @@ function MyProfile() {
   return (
     <>
       <Header />
-      <div className="default-container">
+      <div className="mypage-container">
         <MySidebar />
         <div className="content">
           <h1>나의 회원 정보</h1>

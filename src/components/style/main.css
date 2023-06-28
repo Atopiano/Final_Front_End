@@ -24,6 +24,18 @@
     box-sizing: border-box; /* 이 부분을 추가했습니다 */
 }
 
+.mypage-container {
+    background-size: cover;
+    background-position: center;
+    background-color: rgb(253, 253, 253);
+    width: 100%; /* 이 부분을 변경했습니다 */
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    z-index: 0;
+    overflow:auto;
+    box-sizing: border-box; /* 이 부분을 추가했습니다 */
+}
 
 .text-container {
     display: grid;
