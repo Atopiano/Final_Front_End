@@ -207,7 +207,7 @@ export default class Result extends PureComponent {
             <Link
               to={{
                 pathname: "/recommend",
-                search: `?positions=${topJobs.slice(0, 3).join(",")}`,
+                // search: `?positions=${topJobs.slice(0, 3).join(",")}`,
               }}
               className="recommand-button"
             >
