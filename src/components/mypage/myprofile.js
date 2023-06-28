@@ -4,6 +4,8 @@ import Header from '../base/header';
 import Footer from '../base/footer';
 import MySidebar from './mysidebar';
 import '../../components/style/mystack.css';
+import '../../components/style/myprofile.css';
+
 
 function MyProfile() {
   const [userInfo, setUserInfo] = useState(null);
@@ -32,14 +34,16 @@ function MyProfile() {
       <div className="mypage-container">
         <MySidebar />
         <div className="content">
-          <h1>나의 회원 정보</h1>
+          <h3 className='userinfo'>회원 정보</h3>
           {userInfo && (
-            <div>
-              <p>Nick Name: {userInfo.nickName}</p>
-              <p>Phone Number: {userInfo.phoneNumber}</p>
-              <p>Academic Ability: {userInfo.academicAbility.title}</p>
-              <p>Department: {userInfo.department.title}</p>
-              <p>Address: {userInfo.userAddress}</p>
+            <div className='p_pofile'>
+              <div className='text-profile'>
+                <p>Nick Name : {userInfo.nickName}</p>
+                <p>Phone Number : {userInfo.phoneNumber}</p>
+                <p>Academic Ability : {userInfo.academicAbility.title}</p>
+                <p>Department : {userInfo.department.title}</p>
+                <p>Address : {userInfo.userAddress}</p>
+              </div>
             </div>
           )}
         </div>
