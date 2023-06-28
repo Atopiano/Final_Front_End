@@ -1,12 +1,29 @@
 import React, { PureComponent } from 'react';
 import { PieChart, Pie, Sector, Cell, Label } from 'recharts';
-import allRecruits from '../../json_data/ai_recruit.json';
+import allRecruits from '../../json_data/recruit.json';
 import Header from '../../components/base/header';
 import Footer from '../base/footer';
 import '../../components/style/result.css';
 import { Link } from 'react-router-dom';
 
 export default class Result extends PureComponent {
+  componentDidMount() {
+    const recommended_id = JSON.parse(localStorage.getItem('recommended_id'));
+    if (recommended_id) {
+      const recommendedRecruits = this.filterRecruitsById(allRecruits, recommended_id);
+      localStorage.setItem('recommendedRecruits', JSON.stringify(recommendedRecruits));
+      this.setState({ recommendedRecruits });
+      console.log(recommendedRecruits);
+    }
+  }
+
+  filterRecruitsById = (data, ids) => {
+    let index = 1;
+
+    return ids.map(id => data.find(recruit => recruit.id === id))
+      .map(item => ({ ...item, index: index++ }));
+  };
+
   calculateJobRanking = (data) => {
     const jobRanking = {};
 
@@ -30,7 +47,7 @@ export default class Result extends PureComponent {
 
   createChartData = (data) => {
     const chartData = data.slice(0, 3).map((position) => {
-      const indexSum = allRecruits
+      const indexSum = this.state.recommendedRecruits
         .filter((item) => item.position === position)
         .reduce((sum, item) => sum + item.index, 0);
 
@@ -42,6 +59,7 @@ export default class Result extends PureComponent {
 
   state = {
     activeIndex: 0,
+    recommendedRecruits: JSON.parse(localStorage.getItem('recommendedRecruits')) || [],
   };
 
   onPieEnter = (_, index) => {
@@ -109,7 +127,7 @@ export default class Result extends PureComponent {
   };
 
   render() {
-    const topJobs = this.calculateJobRanking(allRecruits);
+    const topJobs = this.calculateJobRanking(this.state.recommendedRecruits);
     const chartData = this.createChartData(topJobs);
 
     const COLORS = ['#bb44e4', '#FF6384', '#36A2EB', '#FFCE56', '#8E44AD'];
@@ -119,7 +137,7 @@ export default class Result extends PureComponent {
         <Header />
         <div className="default-container">
           <div className="chart-container">
-          <div className="result-header">AI 추천 결과</div>
+            <div className="result-header">AI 추천 결과</div>
             <div className="chart-header">
               스택 기반 직무 추천 Top3
             </div>
@@ -159,7 +177,7 @@ export default class Result extends PureComponent {
                   key={index}
                   className="rank-item"
                   onMouseEnter={() => this.onRankItemEnter(index)}
-                    style={{
+                  style={{
                     color: index === this.state.activeIndex ? COLORS[index % COLORS.length] : '#000000',
                   }}
                 >

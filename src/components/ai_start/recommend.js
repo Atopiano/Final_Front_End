@@ -6,7 +6,6 @@ import Sidebar from '../ai_notice/sidebar';
 import JobCard from '../ai_notice/jobcard';
 import Legend from '../ai_start/legend';
 import '../../components/style/recruit.css';
-import allRecruits from '../../json_data/ai_recruit.json';
 
 const gridTemplateColumns = 'repeat(2, 1fr)';
 
@@ -20,16 +19,20 @@ function Recommend() {
     const urlParams = new URLSearchParams(window.location.search);
     const positions = urlParams.get("positions");
     return positions ? positions.split(",") : [];
-  });  
+  });
   const [selectedCareer, setSelectedCareer] = useState("");
   const searchInputRef = useRef(null);
   const pageInputRef = useRef(null);
-
   const itemsPerPage = 4;
-  const allRecruitsRef = useRef(allRecruits);
+  const recommendedRecruitsRef = useRef([]);
 
   useEffect(() => {
-    const newFilteredRecruits = allRecruitsRef.current.filter((recruit) => {
+    const recommendedRecruits = JSON.parse(localStorage.getItem('recommendedRecruits'));
+    if (recommendedRecruits) {
+      recommendedRecruitsRef.current = recommendedRecruits;
+    }
+
+    const newFilteredRecruits = recommendedRecruitsRef.current.filter((recruit) => {
       const recruitTitle = recruit.title.toLowerCase();
       const recruitPosition = recruit.position.toLowerCase();
       const recruitAddress = recruit.address ? recruit.address.toLowerCase() : '';
@@ -42,10 +45,10 @@ function Recommend() {
         (selectedCareer === "" || recruit.career === selectedCareer)
       );
     });
-  
+
     setFilteredRecruits(newFilteredRecruits);
     setCurrentPage(1);
-  
+
     if (newFilteredRecruits.length === 0) {
       setSearchResultMessage(true);
     } else {
@@ -71,7 +74,7 @@ function Recommend() {
 
   const handleSearch = () => {
     setSearchResultMessage(false);
-    const newFilteredRecruits = allRecruitsRef.current.filter((recruit) => {
+    const newFilteredRecruits = recommendedRecruitsRef.current.filter((recruit) => {
       const recruitTitle = recruit.title.toLowerCase();
       const recruitPosition = recruit.position.toLowerCase();
       const recruitAddress = recruit.address ? recruit.address.toLowerCase() : '';
@@ -138,7 +141,7 @@ function Recommend() {
   }, []);
 
   useEffect(() => {
-    setFilteredRecruits(allRecruitsRef.current);
+    setFilteredRecruits(recommendedRecruitsRef.current);
   }, []);
 
   const handlePageChange = (pageNumber) => {
@@ -152,9 +155,9 @@ function Recommend() {
     setSelectedPositions(selectedPositions);
   };
 
-  const startIndex = Math.max((currentPage - 1) * itemsPerPage + 1, 0);
+  const startIndex = Math.max((currentPage - 1) * itemsPerPage, 0) + 1;
   const endIndex = Math.min(startIndex + itemsPerPage - 1, filteredRecruits.length);
-  const visibleRecruits = filteredRecruits.slice(startIndex, endIndex + 1);
+  const visibleRecruits = filteredRecruits.slice(startIndex - 1, endIndex);
 
   const renderJobCards = () => {
     return visibleRecruits.map((recruit, index) => (
@@ -236,35 +239,35 @@ function Recommend() {
           <h1 style={{ marginTop: '20px', marginLeft: '20px' }}>AI 추천 결과</h1>
           <select value={selectedCareer} onChange={(e) => setSelectedCareer(e.target.value)}>
             <option value="">경력 선택</option>
-            {Array.from(new Set(allRecruits.map((recruit) => recruit.career)))
+            {Array.from(new Set(recommendedRecruitsRef.current.map((recruit) => recruit.career)))
               .sort((a, b) => {
                 if (a === "신입 이상") return -1;
                 if (b === "신입 이상") return 1;
-                
+
                 const numRegex = /(\d+)/;
                 const numA = a.match(numRegex);
                 const numB = b.match(numRegex);
-                
+
                 if (!numA) return 1;
                 if (!numB) return -1;
-                
+
                 return parseInt(numA[0]) - parseInt(numB[0]);
               })
               .map(career => (
                 <option key={career} value={career}>{career}</option>
               ))}
           </select>
-          <div className="search-container">            
+          <div className="search-container">
             <input
               type="text"
               placeholder="검색"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
-            />            
+            />
           </div>
           <Sidebar
-            allPositions={Array.from(new Set(allRecruits.map((recruit) => recruit.position)))}
+            allPositions={Array.from(new Set(recommendedRecruitsRef.current.map((recruit) => recruit.position)))}
             selectedPositions={selectedPositions}
             handleFilterChange={handleFilterChange}
           />
