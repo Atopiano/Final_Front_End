@@ -84,7 +84,6 @@ function MyIntroductions() {
                 className={`introduction-box${introduction.represent ? ' represent' : ''}`}
               >
                 <h2 onClick={() => handleIntroductionClick(introduction.id)}>{introduction.title}</h2>
-                <p>{introduction.introduce}</p>
                 <p>작성일: {introduction.created_at}</p>
                 <button onClick={() => handleRepresentClick(introduction.id)}>
                   {introduction.represent ? '대표 자기소개서 해제' : '대표 자기소개서로 지정'}

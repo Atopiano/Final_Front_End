@@ -83,7 +83,7 @@ function MySidebar() {
         className={`menu ${isOpenIntroductions ? 'active' : ''}`}
         onClick={handleIntroductionsClick}
       >
-        {isOpenIntroductions ? '▼ 자기소개서 목록' : '▶ 자기소개서 목록'}
+        {isOpenIntroductions ? '▼ 회원 정보' : '▶ 회원 정보'}
       </div>
       {isOpenIntroductions && (
         <div className="submenu">
