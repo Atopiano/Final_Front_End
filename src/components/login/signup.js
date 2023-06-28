@@ -178,7 +178,6 @@ function Signup() {
             style={{
               fontSize: '30px',
               marginTop: '-10px',
-              marginBottom: '',
               marginRight: '155px',
               display: 'flex',
               justifyContent: 'flex-start',

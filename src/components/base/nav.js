@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Nav, Navbar, Container, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import '../../components/style/nav.css';
+import '../../components/style/nav.css'
 import logo from '../../components/img/ohmystack_logo1.jpg';
 
 function NavComponent() {
