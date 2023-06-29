@@ -58,8 +58,6 @@ function Introduce() {
           const recommendedIds = JSON.parse(response.data).job_recommendations;
           localStorage.setItem('recommended_id', JSON.stringify(recommendedIds));
           localStorage.removeItem('self_intr');
-          localStorage.removeItem('selectedStacks');
-          localStorage.removeItem('introduction');
           window.location.href = '/result';
         })
         .catch((error) => {

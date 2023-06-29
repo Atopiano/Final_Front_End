@@ -5,7 +5,7 @@ import Footer from '../base/footer';
 import MyJobCard from './myjobcard';
 import '../../components/style/recruit.css';
 import allRecruits from '../../json_data/recruit.json';
-import MySidebar from './mysidebar';
+import LikeMySidebar from './likemysidebar';
 import axios from 'axios';
 
 const gridTemplateColumns = 'repeat(2, 1fr)';
@@ -263,7 +263,7 @@ function MyLiked() {
               검색
             </button> */}
           </div>
-          <MySidebar />
+          <LikeMySidebar />
         </div>
         <div className="content-container">
           <div className={`search-result-message ${searchResultMessage ? 'show' : ''}`}>

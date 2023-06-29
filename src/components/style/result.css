@@ -70,6 +70,15 @@
   margin-bottom: 30px;
 }
 
+.chart-footer {
+  position: absolute;
+  bottom: 0;
+  margin-bottom: 100px;
+  margin-right: 480px;
+  font-size: 18px;
+  color: gray;
+}
+
 .next-button:hover{
   background-color: #bb44e4;
   color: white;
