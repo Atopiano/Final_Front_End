@@ -31,6 +31,9 @@ header {
     flex-direction: row;
 }
 
+.navbar .ml-auto .my-link2:not(:last-child) {
+    margin-right: 20px; /* 이 값을 조절하여 간격을 변경 */
+}
 
 .navbar .my-link1,
 .navbar .my-link2 {
