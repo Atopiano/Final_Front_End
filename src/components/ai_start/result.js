@@ -15,14 +15,20 @@ export default class Result extends PureComponent {
 
   componentDidMount() {
     const recommended_id = JSON.parse(localStorage.getItem('recommended_id'));
+    let recommendedRecruits = [];
+  
     if (recommended_id) {
-      const recommendedRecruits = this.filterRecruitsById(allRecruits, recommended_id).slice(0, 100); //공고수 100개
-      this.setState({ 
-        recommendedRecruits,
-        positionsCount: this.countPositions(recommendedRecruits) 
-      });
+      recommendedRecruits = this.filterRecruitsById(allRecruits, recommended_id);
       localStorage.setItem('recommendedRecruits', JSON.stringify(recommendedRecruits));
+      console.log(recommendedRecruits);
     }
+  
+    const positionsCount = this.countPositions(recommendedRecruits.slice(0, 100)); // recommendedRecruits를 전달하여 positionsCount 생성
+    this.setState({
+      activeIndex: 0,
+      recommendedRecruits: recommendedRecruits.slice(0, 100),
+      positionsCount: positionsCount, // positionsCount를 상태에 설정
+    });
   }
 
   filterRecruitsById = (data, ids) => {
@@ -138,10 +144,12 @@ export default class Result extends PureComponent {
         <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333" style={{ fontSize: '20px', fontWeight: 'bold' }}>
           {`${(percent * 100).toFixed(2)}%`}
         </text>
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: '16px', fontWeight: 'bold' }}>
-          {`${this.state.positionsCount[payload.name] || 0}개 공고`}
-        </text>      
-        </g>
+        {this.state.positionsCount && (
+          <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: '16px', fontWeight: 'bold' }}>
+            {`${this.state.positionsCount[payload.name] || 0}개 공고`}
+          </text>
+        )}
+      </g>
     );
   };
 
