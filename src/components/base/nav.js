@@ -68,7 +68,7 @@ function NavComponent() {
                                         <Nav className="ml-auto">
                                             {isLoggedIn ? (
                                                 <>
-                                                    <Nav.Link as={Link} to="/mypage/mystack" className="my-link2">마이페이지</Nav.Link>
+                                                    <Nav.Link as={Link} to="/mypage/mystack" className="my-link2" style={{ marginRight: '23px' }}>마이페이지</Nav.Link>
                                                     <Nav.Link as={Link} to="/" className="my-link2" onClick={handleLogout}>로그아웃</Nav.Link>
                                                 </>
                                             ) : (
