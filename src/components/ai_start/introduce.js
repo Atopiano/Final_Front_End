@@ -31,6 +31,7 @@ function Introduce() {
   };
 
   const handleSaveButtonClick = () => {
+    setLoading(true);
 
     setTimeout(() => {
       const selectedStacks = localStorage.getItem('selectedStacks');
@@ -40,8 +41,6 @@ function Introduce() {
         setLoading(false);
         return;
       }
-
-      setLoading(true);
 
       const stacksArray = JSON.parse(selectedStacks);
       const modifiedStacks = stacksArray.map((stack) => stack.title).join(' '); // 스택의 제목만 가져옵니다.
