@@ -1,0 +1,43 @@
+.infomodify {
+    font-weight: bold;
+    text-align: right;
+    margin-right: 30px;
+}
+
+.edit_profile {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 480px;
+    width: 800px;
+    border-radius: 20px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-bottom: 25px;
+    margin-left: 40px;
+}
+
+.edit_field {
+    align-items: center;
+    text-align: left;
+    font-size: 20px;
+    display: inline-block;
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.edit_field>* {
+    margin-bottom: 20px;
+}
+
+.modifybtn{
+    background-color: #000;
+    color: #fff;
+
+}
+
+.modifybtn:hover {
+    background-color: #fff;
+    color: #bb44e4;
+}

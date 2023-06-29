@@ -4,7 +4,15 @@ import Header from '../base/header';
 import Footer from '../base/footer';
 import MySidebar from './mysidebar';
 import axios from 'axios';
+import Box from '@mui/material/Box';
+import MenuItem from '@mui/material/MenuItem';
+import TextField from '@mui/material/TextField';
+import Grid from '@mui/material/Grid';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import '../../components/style/editprofile.css';
 import '../../components/style/mystack.css';
+import { width } from '@mui/system';
 
 function EditProfile() {
   const [nickName, setNickName] = useState('');
@@ -105,73 +113,103 @@ function EditProfile() {
       <div className="mypage-container">
         <MySidebar />
         <div className="content">
-          <h1>회원 정보 수정</h1>
-          <form onSubmit={handleFormSubmit}>
-            <label>
-              닉네임:
-              <input
-                type="text"
-                value={nickName}
-                onChange={(e) => setNickName(e.target.value)}
-              />
-            </label>
-            <label>
-              전화번호:
-              <input
-                type="text"
-                value={phoneNumber}
-                onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/, ''))}
-              />
-            </label>
-            <label>
-              학력:
-              <select
-                value={academicAbility}
-                onChange={(e) => setAcademicAbility(parseInt(e.target.value))}
-              >
-                {academicAbilityOptions.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              학과:
-              <select
-                value={department}
-                onChange={(e) => setDepartment(parseInt(e.target.value))}
-              >
-                {departmentOptions.map((option) => (
-                  <option key={option.id} value={option.id}>
-                    {option.title}
-                  </option>
-                ))}
-              </select>
-            </label>
-            <label>
-              학점:
-              <input
-                type="text"
+          <h3 className='infomodify'>정보 수정</h3>
+          <div className='edit_profile'>
+            <form className="edit_field" onSubmit={handleFormSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <TextField
+                    id="nickName"
+                    label="닉네임"
+                    variant="standard"
+                    style={{ marginRight: "30px", marginBottom: "20px" }}
+                    value={nickName}
+                    onChange={(e) => setNickName(e.target.value)}
+                  />
+                </Grid>
+                <Grid item xs={6}>
+                  <TextField
+                    id="phoneNumber"
+                    label="전화번호"
+                    variant="standard"
+                    style={{ marginBottom: "20px" }}
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value.replace(/\D/, ''))}
+                  />
+                </Grid>
+              </Grid>
+              <Grid container spacing={2}>
+                <Grid item xs={6}>
+                  <Box width={200}>
+                    <TextField
+                      id="academicAbility"
+                      label="학력"
+                      variant="standard"
+                      style={{ marginRight: "30px", marginBottom: "20px", width: '120px' }}
+                      select
+                      value={academicAbility}
+                      onChange={(e) => setAcademicAbility(parseInt(e.target.value))}
+                    >
+                      {academicAbilityOptions.map((option) => (
+                        <MenuItem key={option.id} value={option.id}>
+                          {option.title}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Box>
+                </Grid>
+                <Grid item xs={6}>
+                  <Box width={200}>
+                    <TextField
+                      id="department"
+                      label="학과"
+                      variant="standard"
+                      style={{ marginBottom: "20px", width: "145px" }}
+                      select
+                      value={department}
+                      onChange={(e) => setDepartment(parseInt(e.target.value))}
+                    >
+                      {departmentOptions.map((option) => (
+                        <MenuItem key={option.id} value={option.id}>
+                          {option.title}
+                        </MenuItem>
+                      ))}
+                    </TextField>
+                  </Box>
+                </Grid>
+              </Grid>
+              <TextField
+                id="credit"
+                label="학점"
+                variant="standard"
+                style={{ marginBottom: "20px" }}
                 value={credit}
                 onChange={(e) => setCredit(e.target.value)}
                 placeholder="만점은 4.5입니다." // 학점 입력 안내 문구 추가
               />
-            </label>
-            <label>
-              주소:
-              <input
-                type="text"
-                value={userAddress}
-                disabled={true}
-                placeholder="주소찾기 버튼을 누르세요."
-              />
-              <button type="button" onClick={handleFindAddress}>
-                주소찾기
-              </button>
-            </label>
-            <button type="submit">수정하기</button>
-          </form>
+              <div style={{ display: 'flex', alignItems: 'center' }}>
+                <TextField
+                  id="userAddress"
+                  label="주소"
+                  variant="standard"
+                  style={{ marginRight: "30px", marginBottom: "20px", width: "300px" }}
+                  value={userAddress}
+                  disabled={true}
+                  placeholder="주소찾기 버튼을 누르세요."
+                />
+                <Stack spacing={2} direction="row">
+                  <Button variant="text" style={{ color: '#bb44e4' }} onClick={handleFindAddress}>
+                    찾기
+                  </Button>
+                </Stack>
+              </div>
+              <Stack spacing={2} direction="row" style={{ display:'flex', justifyContent: 'flex-end' }}>
+                <Button variant="light" className='modifybtn' style={{ backgroundColor: '#000000', color: '#ffffff' }}onClick={handleFormSubmit}>
+                  수정하기
+                </Button>
+              </Stack>
+            </form>
+          </div>
         </div>
       </div>
       <Footer />
