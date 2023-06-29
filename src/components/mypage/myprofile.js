@@ -36,13 +36,13 @@ function MyProfile() {
         <div className="content">
           <h3 className='userinfo'>회원 정보</h3>
           {userInfo && (
-            <div className='p_pofile'>
+            <div className='p_profile'>
               <div className='text-profile'>
-                <p>Nick Name : {userInfo.nickName}</p>
-                <p>Phone Number : {userInfo.phoneNumber}</p>
-                <p>Academic Ability : {userInfo.academicAbility.title}</p>
-                <p>Department : {userInfo.department.title}</p>
-                <p>Address : {userInfo.userAddress}</p>
+                <p><strong>Nick Name :</strong> <span style={{ fontStyle: "italic" }}>{userInfo.nickName}</span></p>
+                <p><strong>Phone Number :</strong> <span style={{ fontStyle: "italic" }}>{userInfo.phoneNumber}</span></p>
+                <p><strong>Academic Ability :</strong> <span style={{ fontStyle: "italic" }}>{userInfo.academicAbility.title}</span></p>
+                <p><strong>Department :</strong> <span style={{ fontStyle: "italic" }}>{userInfo.department.title}</span></p>
+                <p><strong>Address :</strong> <span style={{ fontStyle: "italic" }}>{userInfo.userAddress}</span></p>
               </div>
             </div>
           )}
