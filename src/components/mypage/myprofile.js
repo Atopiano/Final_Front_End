@@ -33,7 +33,7 @@ function MyProfile() {
       <Header />
       <div className="mypage-container">
         <MySidebar />
-        <div className="content">
+        <div className="myedit_content">
           <h3 className='userinfo'>회원 정보</h3>
           {userInfo && (
             <div className='p_profile'>

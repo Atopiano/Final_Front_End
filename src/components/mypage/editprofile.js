@@ -112,7 +112,7 @@ function EditProfile() {
       <Header />
       <div className="mypage-container">
         <MySidebar />
-        <div className="content">
+        <div className="myedit_content">
           <h3 className='infomodify'>정보 수정</h3>
           <div className='edit_profile'>
             <form className="edit_field" onSubmit={handleFormSubmit}>
@@ -203,8 +203,8 @@ function EditProfile() {
                   </Button>
                 </Stack>
               </div>
-              <Stack spacing={2} direction="row" style={{ display:'flex', justifyContent: 'flex-end' }}>
-                <Button variant="light" className='modifybtn' style={{ backgroundColor: '#000000', color: '#ffffff' }}onClick={handleFormSubmit}>
+              <Stack spacing={2} direction="row" style={{ display: 'flex', justifyContent: 'flex-end' }}>
+                <Button variant="light" className='modifybtn' style={{ backgroundColor: '#000000', color: '#ffffff' }} onClick={handleFormSubmit}>
                   수정하기
                 </Button>
               </Stack>
