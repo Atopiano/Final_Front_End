@@ -1,4 +1,3 @@
-
 .userinfo {
     font-weight: bold;
     text-align: right;
@@ -29,5 +28,8 @@
 
 .text-profile p {
     margin-bottom: 40px;
-  }
-  
+}
+
+.text-profile strong {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
