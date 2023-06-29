@@ -3,7 +3,7 @@ import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Header from '../../components/base/header';
 import Footer from '../base/footer';
 import '../../components/style/introduce.css';
@@ -13,6 +13,7 @@ function Introduce() {
   const [isLoading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const maxCharacters = 1500;
+  const navigate = useNavigate();
 
   useEffect(() => {
     const introduction = localStorage.getItem('introduction');
@@ -30,35 +31,44 @@ function Introduce() {
   };
 
   const handleSaveButtonClick = () => {
-    setLoading(true);
-  
+
     setTimeout(() => {
       const selectedStacks = localStorage.getItem('selectedStacks');
+      if (!selectedStacks || selectedStacks === '[]') {
+        alert('스택이 입력되지 않았습니다. 기술 스택 입력 화면으로 이동합니다.');
+        navigate('/stack');
+        setLoading(false);
+        return;
+      }
+
+      setLoading(true);
+
       const stacksArray = JSON.parse(selectedStacks);
-      const modifiedStacks = stacksArray.map(stack => stack.title).join(" "); // 스택의 제목만 가져옵니다.
-  
-      const introduction = (modifiedStacks ? modifiedStacks + " " : '') + value; // 수정된 스택과 자기소개를 결합합니다.
+      const modifiedStacks = stacksArray.map((stack) => stack.title).join(' '); // 스택의 제목만 가져옵니다.
+
+      const introduction = (modifiedStacks ? modifiedStacks + ' ' : '') + value; // 수정된 스택과 자기소개를 결합합니다.
       localStorage.setItem('self_intr', introduction);
       setLoading(false);
 
       // API 호출
-      let data = JSON.stringify({ "self_intr": introduction });
+      let data = JSON.stringify({ self_intr: introduction });
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
         url: 'https://fastapi.ohmystack.co/job_recommendation',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
-        data: data
+        data: data,
       };
 
-      axios.request(config)
+      axios
+        .request(config)
         .then((response) => {
           const recommendedIds = JSON.parse(response.data).job_recommendations;
           localStorage.setItem('recommended_id', JSON.stringify(recommendedIds));
           localStorage.removeItem('self_intr');
-          window.location.href = '/result';
+          navigate('/result');
         })
         .catch((error) => {
           console.log(error);
@@ -89,9 +99,7 @@ function Introduce() {
               <p style={{ textAlign: 'center', fontSize: '15px', fontWeight: 'bold' }}>
                 개조식으로 직무 관련 경험 위주로 작성해주세요.
               </p>
-              <p style={{ textAlign: 'center', fontSize: '15px' }}>
-                ex) AWS EC2를 활용한 백엔드 배포, Figma를 사용한 UI/UX 설계 등
-              </p>
+              <p style={{ textAlign: 'center', fontSize: '15px' }}>ex) AWS EC2를 활용한 백엔드 배포, Figma를 사용한 UI/UX 설계 등</p>
               <FloatingLabel
                 controlId="floatingTextarea2"
                 style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
@@ -104,7 +112,7 @@ function Introduce() {
                     backgroundColor: 'rgba(187, 68, 228, 0.16)',
                     width: '566.07px',
                     height: '275.87px',
-                    color: 'black'
+                    color: 'black',
                   }}
                   maxLength={maxCharacters}
                   value={value}
@@ -123,12 +131,7 @@ function Introduce() {
                 <Button className="previous-button" variant="light" as={Link} to="/stack">
                   이전
                 </Button>
-                <Button
-                  className="result-button"
-                  variant="light"
-                  disabled={isLoading}
-                  onClick={handleSaveButtonClick}
-                >
+                <Button className="result-button" variant="light" disabled={isLoading} onClick={handleSaveButtonClick}>
                   {isLoading ? '로딩 중...' : '결과 보러 가기'}
                 </Button>
               </div>
