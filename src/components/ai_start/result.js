@@ -160,6 +160,7 @@ export default class Result extends PureComponent {
             <div className="chart-header">
               스택 기반 직무 추천 Top5
             </div>
+            <div className="chart-footer">순위 계산 방식: 상위 100개 공고 순위 합의 내림차순</div>
             <div className="chart-wrapper">
               <PieChart width={850} height={500}>
                 <Pie

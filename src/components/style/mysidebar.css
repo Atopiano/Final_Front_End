@@ -10,6 +10,17 @@
   margin-left: 60px;
 }
 
+.likemysidebar {
+  background-color: #ffffff;
+  border: 1px solid #bb44e4;
+  border-radius: 20px;
+  width: 300px;
+  height: 500px;
+  padding: 25px;
+  margin-top: 10px;
+  position: relative;
+}
+
 .menu {
   cursor: pointer;
   margin-top: 20px;
