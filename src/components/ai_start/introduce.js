@@ -35,7 +35,7 @@ function Introduce() {
     setTimeout(() => {
       const selectedStacks = localStorage.getItem('selectedStacks');
       if (!selectedStacks || selectedStacks === '[]') {
-        alert('스택이 입력되지 않았습니다. 기술 스택 입력 화면으로 이동합니다.');
+        alert('스택이 입력되지 않았습니다. \n기술 스택 입력 화면으로 이동합니다.');
         navigate('/stack');
         setLoading(false);
         return;
