@@ -243,6 +243,13 @@ function JobCard({ id, title, position, inner_company, address, stack, site, car
             >
               {address}
             </ListGroup.Item>
+            <strong>기술 스택:</strong>
+            <ListGroup.Item
+              className="my-2"
+              style={{ backgroundColor: 'rgba(187, 68, 228, 0.16)' }}
+            >
+              {formatStack(stack).join(', ')}
+            </ListGroup.Item>
             <strong>주요 업무:</strong>
             <ListGroup.Item
               className="my-2"
@@ -254,14 +261,7 @@ function JobCard({ id, title, position, inner_company, address, stack, site, car
                   <br />
                 </React.Fragment>
               ))}
-            </ListGroup.Item>
-            <strong>기술 스택:</strong>
-            <ListGroup.Item
-              className="my-2"
-              style={{ backgroundColor: 'rgba(187, 68, 228, 0.16)' }}
-            >
-              {formatStack(stack).join(', ')}
-            </ListGroup.Item>
+            </ListGroup.Item>            
             <strong>선호 사항:</strong>
             <ListGroup.Item
               className="my-2"
