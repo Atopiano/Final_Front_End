@@ -1,6 +1,7 @@
 .introduce-container {
   box-sizing: border-box;
-  width: 665px;
+  width: 90%;
+  max-width: 665px;  
   height: 600px;
   background: #ffffff;
   border: 1px solid #000000;

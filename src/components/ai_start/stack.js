@@ -126,7 +126,7 @@ function Stack() {
               )}
           </div><br></br>
           {selectedStacks.length < 3 && (
-            <p style={{ color: 'red', marginBottom: '5%'}}>3개 이상의 스택을 선택해야 합니다.</p>
+            <p style={{ color: 'red', marginTop: '2%'}}>3개 이상의 스택을 선택해야 합니다.</p>
           )}
         </div>
       </div>
