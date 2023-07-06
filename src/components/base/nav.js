@@ -27,7 +27,7 @@ function NavComponent() {
             <div className="navbar-fixed">
                 <Navbar collapseOnSelect expand="lg" bg="light" variant="dark" className="navbar bg-white">
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" onClick={toggleMobileMenu} style={{marginLeft: '3%'}}/>
-                    <Navbar.Collapse id="responsive-navbar-nav">
+                    <Navbar.Collapse id="responsive-navbar-nav" style={{ transitionDuration: '0s' }}>
                         <Container fluid>
                             {showMobileMenu ? (
                                 <Row className="w-100 justify-content-center mt-3">
