@@ -44,8 +44,8 @@
     align-items: start;
     justify-items: start;
     padding: 0 50px;
-    padding-bottom: 250px;
     padding-left: 100px;
+    margin-bottom: 20%;
 }
 
 @media screen and (max-width: 1024px) {
@@ -95,3 +95,16 @@
     color: white;
     border: none;
 }
+
+  
+  @media (max-width: 768px) {
+    .adjustable-font-size {
+      font-size: 1.5em; /* 작은 화면에 대한 폰트 크기 */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .adjustable-font-size {
+      font-size: 1.5em; /* 더 작은 화면에 대한 폰트 크기 */
+    }
+  }

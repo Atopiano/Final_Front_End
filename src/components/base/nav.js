@@ -73,8 +73,8 @@ function NavComponent() {
                                                 </>
                                             ) : (
                                                 <>
-                                                    <Nav.Link as={Link} to="/signup" className="my-link2">회원가입</Nav.Link>
-                                                    <Nav.Link as={Link} to="/signin" className="my-link2">로그인</Nav.Link>
+                                                    {/* <Nav.Link as={Link} to="/signup" className="my-link2">회원가입</Nav.Link> */}
+                                                    {/* <Nav.Link as={Link} to="/signin" className="my-link2">로그인</Nav.Link> */}
                                                 </>
                                             )}
                                         </Nav>
