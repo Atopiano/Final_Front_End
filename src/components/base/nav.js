@@ -19,15 +19,29 @@ function NavComponent() {
     };
 
     const toggleMobileMenu = () => {
-        setShowMobileMenu(!showMobileMenu);
+        setShowMobileMenu(prevState => !prevState);
     };
+    
+    const handleWindowResize = () => {
+        if (window.innerWidth > 1024) {
+            setShowMobileMenu(false);
+        } 
+    };
+    
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowResize);
+    
+        return () => {
+            window.removeEventListener('resize', handleWindowResize);
+        };
+    }, []);
 
     return (
         <header>
             <div className="navbar-fixed">
                 <Navbar collapseOnSelect expand="lg" bg="light" variant="dark" className="navbar bg-white">
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" onClick={toggleMobileMenu} style={{marginLeft: '3%'}}/>
-                    <Navbar.Collapse id="responsive-navbar-nav" style={{ transitionDuration: '0s' }}>
+                    <Navbar.Collapse id="responsive-navbar-nav" in={showMobileMenu} style={{ transitionDuration: '0s' }}>
                         <Container fluid>
                             {showMobileMenu ? (
                                 <Row className="w-100 justify-content-center mt-3">
