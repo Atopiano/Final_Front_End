@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import { Link } from 'react-router-dom';
@@ -7,12 +6,12 @@ import '../../components/style/stack.css';
 import Footer from '../base/footer';
 import StackList from '../base/stacklist';
 import StackBox from '../base/stackbox';
+import allStacks from '../../json_data/total_stack.json';
 
 function Stack() {
   const [selectedStacks, setSelectedStacks] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [filteredStacks, setFilteredStacks] = useState([]);
-  const [allStacks, setAllStacks] = useState([]);
   const [isError, setIsError] = useState(false);
 
   const handleStackSelection = (stack) => {
@@ -39,17 +38,6 @@ function Stack() {
   };
 
   useEffect(() => {
-    const totalStackApiUrl = 'https://api.ohmystack.co/api/total_stack';
-
-    axios
-      .get(totalStackApiUrl)
-      .then((response) => {
-        setAllStacks(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching total stack data:', error);
-      });
-
     const storedSelectedStacks = localStorage.getItem('selectedStacks');
     if (storedSelectedStacks) {
       setSelectedStacks(JSON.parse(storedSelectedStacks));
@@ -61,7 +49,7 @@ function Stack() {
       stack.title.toLowerCase().includes(inputValue.toLowerCase())
     );
     setFilteredStacks(newFilteredStacks);
-  }, [inputValue, allStacks]);
+  }, [inputValue]);
 
   useEffect(() => {
     localStorage.setItem('selectedStacks', JSON.stringify(selectedStacks));
@@ -113,32 +101,32 @@ function Stack() {
             <StackList
               stacks={filteredStacks}
               handleStackSelection={handleStackSelection}
-              selectedStackIds={selectedStacks.map((stack) => stack.id)}
+              selectedStackIds={selectedStacks.map((stack) => stack.id)}  
             />
           </div>
-          <div className="button-container">
-            {selectedStacks.length < 3 ? (
-              <Button
-                variant="light"
-                className="next-button"
-                disabled={true}
-              >
-                다음
-              </Button>
-            ) : (
-              <Link to="/introduce">
+            <div className="button-container">
+              {selectedStacks.length < 3 ? (
                 <Button
                   variant="light"
                   className="next-button"
-                  onClick={handleNextButtonClick}
+                  disabled={true}
                 >
                   다음
                 </Button>
-              </Link>
-            )}
+              ) : (
+                <Link to="/introduce">
+                  <Button
+                    variant="light"
+                    className="next-button"
+                    onClick={handleNextButtonClick}
+                  >
+                    다음
+                  </Button>
+                </Link>
+              )}
           </div><br></br>
           {selectedStacks.length < 3 && (
-            <p style={{ color: 'red' }}>3개 이상의 스택을 선택해야 합니다.</p>
+            <p style={{ color: 'red', marginBottom: '5%'}}>3개 이상의 스택을 선택해야 합니다.</p>
           )}
         </div>
       </div>
