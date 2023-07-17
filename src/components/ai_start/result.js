@@ -5,35 +5,62 @@ import Header from '../../components/base/header';
 import Footer from '../base/footer';
 import '../../components/style/result.css';
 import { Link } from 'react-router-dom';
+import { ResponsiveContainer } from 'recharts';
 
 export default class Result extends PureComponent {
   state = {
     activeIndex: 0,
     recommendedRecruits: [],
     positionsCount: {},
+    innerRadius: 108 * 0.7, // 초기 innerRadius 설정
+    outerRadius: 144 * 0.7, // 초기 outerRadius 설정
   };
 
   componentDidMount() {
     const recommended_id = JSON.parse(localStorage.getItem('recommended_id'));
     let recommendedRecruits = [];
-  
+
     if (recommended_id) {
       recommendedRecruits = this.filterRecruitsById(allRecruits, recommended_id);
       localStorage.setItem('recommendedRecruits', JSON.stringify(recommendedRecruits));
       console.log(recommendedRecruits);
     }
-  
+
     const positionsCount = this.countPositions(recommendedRecruits.slice(0, 100)); // recommendedRecruits를 전달하여 positionsCount 생성
     this.setState({
       activeIndex: 0,
       recommendedRecruits: recommendedRecruits.slice(0, 100),
       positionsCount: positionsCount, // positionsCount를 상태에 설정
     });
+
+    // 화면 크기에 따라 innerRadius와 outerRadius 조정
+    this.updateChartSize();
+    window.addEventListener('resize', this.updateChartSize);
   }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateChartSize);
+  }
+
+  updateChartSize = () => {
+    const screenWidth = window.innerWidth;
+    if (screenWidth <= 768) {
+      this.setState({
+        innerRadius: 108 * 0.6,
+        outerRadius: 144 * 0.6,
+      });
+    } else {
+      this.setState({
+        innerRadius: 108 * 0.7,
+        outerRadius: 144 * 0.7,
+      });
+    }
+  };
 
   filterRecruitsById = (data, ids) => {
     let index = 1;
-    return ids.map(id => data.find(recruit => recruit.id === id))
+    return ids
+      .map(id => data.find(recruit => recruit.id === id))
       .map(item => ({ ...item, index: index++ }));
   };
 
@@ -154,6 +181,7 @@ export default class Result extends PureComponent {
   };
 
   render() {
+    const { innerRadius, outerRadius } = this.state; // innerRadius와 outerRadius를 state에서 가져옴
     const topJobs = this.calculateJobRanking(this.state.recommendedRecruits);
     const chartData = this.createChartData(topJobs);
 
@@ -162,7 +190,7 @@ export default class Result extends PureComponent {
     return (
       <>
         <Header />
-        <div className="default-container">
+        <div className="result-default-container">
           <div className="chart-container">
             <div className="result-header">AI 추천 결과</div>
             <div className="chart-header">
@@ -170,34 +198,34 @@ export default class Result extends PureComponent {
             </div>
             <div className="chart-footer">순위 계산 방식: 상위 100개 공고 순위 합의 내림차순</div>
             <div className="chart-wrapper">
-              <PieChart width={850} height={500}>
-                <Pie
-                  activeIndex={this.state.activeIndex}
-                  activeShape={this.renderActiveShape}
-                  data={chartData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={108 * 0.7}
-                  outerRadius={144 * 0.7}
-                  fill="#8884d8"
-                  dataKey="value"
-                  onMouseEnter={this.onPieEnter}
-                  onMouseLeave={this.onRankItemLeave}
-                >
-                  {chartData.map((entry, index) => (
-                    <Cell
-                      key={index}
-                      fill={COLORS[index % COLORS.length]}
+            <PieChart width={850} height={500}>
+                  <Pie
+                    activeIndex={this.state.activeIndex}
+                    activeShape={this.renderActiveShape}
+                    data={chartData}
+                    cx="50%"
+                    cy="50%"
+                    innerRadius={innerRadius} // 변경된 innerRadius 적용
+                    outerRadius={outerRadius} // 변경된 outerRadius 적용
+                    fill="#8884d8"
+                    dataKey="value"
+                    onMouseEnter={this.onPieEnter}
+                    onMouseLeave={this.onRankItemLeave}
+                  >
+                    {chartData.map((entry, index) => (
+                      <Cell
+                        key={index}
+                        fill={COLORS[index % COLORS.length]}
+                      />
+                    ))}
+                    <Label
+                      position="center"
+                      fill="#333"
+                      fontSize={18}
+                      fontWeight="bold" 
                     />
-                  ))}
-                  <Label
-                    position="center"
-                    fill="#333"
-                    fontSize={18}
-                    fontWeight="bold" 
-                  />
-                </Pie>
-              </PieChart>
+                  </Pie>
+                </PieChart>
             </div>
             <div className="rank-container">
               {topJobs.slice(0, 5).map((position, index) => (
