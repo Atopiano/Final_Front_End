@@ -44,17 +44,13 @@ export default class Result extends PureComponent {
 
   updateChartSize = () => {
     const screenWidth = window.innerWidth;
-    if (screenWidth <= 768) {
-      this.setState({
-        innerRadius: 108 * 0.6,
-        outerRadius: 144 * 0.6,
-      });
-    } else {
-      this.setState({
-        innerRadius: 108 * 0.7,
-        outerRadius: 144 * 0.7,
-      });
-    }
+    const isMobile = screenWidth <= 768;
+    const sizeRatio = isMobile ? 0.55 : 0.8;
+
+    this.setState({
+      innerRadius: 108 * sizeRatio,
+      outerRadius: 144 * sizeRatio,
+    });
   };
 
   filterRecruitsById = (data, ids) => {
@@ -168,11 +164,11 @@ export default class Result extends PureComponent {
         />
         <path d={`M${sx},${sy}L${mx},${my}L${ex},${ey}`} stroke={fill} fill="none" />
         <circle cx={ex} cy={ey} r={2} fill={fill} stroke="none" />
-        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333" style={{ fontSize: '20px', fontWeight: 'bold' }}>
+        <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333" style={{ fontSize: 20 }}>
           {`${(percent * 100).toFixed(2)}%`}
         </text>
         {this.state.positionsCount && (
-          <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: '16px', fontWeight: 'bold' }}>
+          <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: 16 }}>
             {`${this.state.positionsCount[payload.name] || 0}개 공고`}
           </text>
         )}
@@ -181,7 +177,7 @@ export default class Result extends PureComponent {
   };
 
   render() {
-    const { innerRadius, outerRadius } = this.state; // innerRadius와 outerRadius를 state에서 가져옴
+    const { innerRadius, outerRadius } = this.state;
     const topJobs = this.calculateJobRanking(this.state.recommendedRecruits);
     const chartData = this.createChartData(topJobs);
 
@@ -198,34 +194,34 @@ export default class Result extends PureComponent {
             </div>
             <div className="chart-footer">순위 계산 방식: 상위 100개 공고 순위 합의 내림차순</div>
             <div className="chart-wrapper">
-            <PieChart width={850} height={500}>
-                  <Pie
-                    activeIndex={this.state.activeIndex}
-                    activeShape={this.renderActiveShape}
-                    data={chartData}
-                    cx="50%"
-                    cy="50%"
-                    innerRadius={innerRadius} // 변경된 innerRadius 적용
-                    outerRadius={outerRadius} // 변경된 outerRadius 적용
-                    fill="#8884d8"
-                    dataKey="value"
-                    onMouseEnter={this.onPieEnter}
-                    onMouseLeave={this.onRankItemLeave}
-                  >
-                    {chartData.map((entry, index) => (
-                      <Cell
-                        key={index}
-                        fill={COLORS[index % COLORS.length]}
-                      />
-                    ))}
-                    <Label
-                      position="center"
-                      fill="#333"
-                      fontSize={18}
-                      fontWeight="bold" 
+              <PieChart width={850} height={500}>
+                <Pie
+                  activeIndex={this.state.activeIndex}
+                  activeShape={this.renderActiveShape}
+                  data={chartData}
+                  cx="50%"
+                  cy="50%"
+                  innerRadius={innerRadius}
+                  outerRadius={outerRadius}
+                  fill="#8884d8"
+                  dataKey="value"
+                  onMouseEnter={this.onPieEnter}
+                  onMouseLeave={this.onRankItemLeave}
+                >
+                  {chartData.map((entry, index) => (
+                    <Cell
+                      key={index}
+                      fill={COLORS[index % COLORS.length]}
                     />
-                  </Pie>
-                </PieChart>
+                  ))}
+                  <Label
+                    position="center"
+                    fill="#333"
+                    fontSize={18}
+                    fontWeight="bold"
+                  />
+                </Pie>
+              </PieChart>
             </div>
             <div className="rank-container">
               {topJobs.slice(0, 5).map((position, index) => (
@@ -244,7 +240,6 @@ export default class Result extends PureComponent {
             <Link
               to={{
                 pathname: "/recommend",
-                // search: `?positions=${topJobs.slice(0, 3).join(",")}`,
               }}
               className="recommand-button"
             >

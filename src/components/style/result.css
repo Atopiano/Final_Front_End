@@ -117,10 +117,18 @@
 @media (max-width: 768px) {
   .result-header {
     font-size: 30px;
+    left: 25%;
+    margin-bottom: 0px;
+    position: relative;
+    top: 5%;
   }
 
   .chart-header {
     font-size: 20px;
+    left: 32%;
+    margin-top: 0px;
+    position: relative;
+    top: 6%;
   }
 
   .chart-wrapper {
@@ -136,13 +144,14 @@
   }
 
   .rank-container {
-    font-size: 15px;
-    padding: 40px;
+    font-size: 18px;
+    padding-left: 50px;
+    padding-top: 60px;
     width: 370px;
     height: 250px;
   }
 
-  .rank-item {
+  .rank-item {  
     margin-bottom: 15px;
   }
 
@@ -152,10 +161,21 @@
     line-height: 37.5px;
     font-size: 15px;
     margin-top: 20px;
+    position: relative;
     transform: none;
+    left: 0%;
+    top: 10%;
+    margin-bottom: 20px;
   }
 
   .chart-footer {
+    margin-bottom: 0px;
+    font-size: 15px;
+    position: relative;
+    top: 180%;
+  }
+
+  .result-default-container{
     margin-bottom: 20px;
   }
 }
