@@ -23,7 +23,7 @@ function NavComponent() {
     };
     
     const handleWindowResize = () => {
-        if (window.innerWidth > 1024) {
+        if (window.innerWidth > 768) {
             setShowMobileMenu(false);
         } 
     };
@@ -40,7 +40,16 @@ function NavComponent() {
         <header>
             <div className="navbar-fixed">
                 <Navbar collapseOnSelect expand="lg" bg="light" variant="dark" className="navbar bg-white">
-                    <Navbar.Toggle aria-controls="responsive-navbar-nav" className="navbar-toggler" onClick={toggleMobileMenu} style={{marginLeft: '3%'}}/>
+                    <Navbar.Brand as={Link} to="/">
+                        <img src={logo} alt="Oh My Stack!_m" className="logo mobile-logo" />
+                        <span className="sr-only">Oh My Stack!</span>
+                    </Navbar.Brand>
+                    <Navbar.Toggle
+                        aria-controls="responsive-navbar-nav"
+                        className="navbar-toggler"
+                        onClick={toggleMobileMenu}
+                        style={{ marginRight: '3%' }}
+                    />
                     <Navbar.Collapse id="responsive-navbar-nav" in={showMobileMenu} style={{ transitionDuration: '0s' }}>
                         <Container fluid>
                             {showMobileMenu ? (
@@ -56,17 +65,8 @@ function NavComponent() {
                                                 </>
                                             ) : (
                                                 <>
-                                                    {/* <Nav.Link as={Link} to="/signup" className="my-link2">회원가입</Nav.Link> */}
-                                                    {/* <Nav.Link as={Link} to="/signin" className="my-link2">로그인</Nav.Link> */}
-                                                    <Col xs={4} md={4} className="d-flex justify-content-center align-items-center">
-                                                        <Navbar.Brand as={Link} to="/">
-                                                            <img src={logo} alt="Oh My Stack!" className="logo" />
-                                                            <span className="sr-only">Oh My Stack!</span>
-                                                        </Navbar.Brand>
-                                                    </Col>
                                                     <Nav.Link as={Link} to="/recruit" className="my-link2">채용공고</Nav.Link>
                                                     <Nav.Link as={Link} to="/stack" className="my-link2">AI 추천</Nav.Link>
-                                                    
                                                 </>
                                             )}
                                         </Nav>
@@ -81,10 +81,12 @@ function NavComponent() {
                                         </Nav>
                                     </Col>
                                     <Col xs={2} md={4} className="d-flex justify-content-center">
-                                        <Navbar.Brand as={Link} to="/">
-                                            <img src={logo} alt="Oh My Stack!" className="logo" />
-                                            <span className="sr-only">Oh My Stack!</span>
-                                        </Navbar.Brand>
+                                        {!showMobileMenu ? (
+                                            <Navbar.Brand as={Link} to="/">
+                                                <img src={logo} alt="Oh My Stack!" className="logo" />
+                                                <span className="sr-only">Oh My Stack!</span>
+                                            </Navbar.Brand>
+                                        ) : null}
                                     </Col>
                                     <Col xs={5} md={4} className="d-flex justify-content-end">
                                         <Nav className="ml-auto">
