@@ -96,3 +96,27 @@
   width: 225px;
   height: 225px;
 }
+
+.max-length {
+  display: inline-block;
+  text-align: right;
+  margin-left: 190px;
+  margin-top: 10px;
+}
+
+@media (max-width: 768px) {
+  .max-length {
+    margin-left: 240px;
+    margin-top: 0px;
+  }
+
+  .previous-button {
+    right: 210px;
+    margin-top: 0px;
+  }
+
+  .result-button {
+    right: 70px;
+    margin-top: 0px;
+  }
+}

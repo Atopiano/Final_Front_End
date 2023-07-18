@@ -118,11 +118,11 @@ function Introduce() {
                   onChange={handleChange}
                 />
               </FloatingLabel>
-              <div style={{ textAlign: 'center', marginTop: '10px' }}>
+              <div style={{ textAlign: 'center' }}>
                 <p style={{ display: 'inline-block', marginRight: '300px', textAlign: 'left' }}>
                   {/* 최소 500자 이상 입력해주세요. */}
                 </p>
-                <p style={{ display: 'inline-block', textAlign: 'right', marginLeft: '140px' }}>
+                <p className='max-length'>
                   {value.length}/{maxCharacters}
                 </p>
               </div>
