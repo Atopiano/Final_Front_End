@@ -222,7 +222,7 @@ function JobCard({ id, title, position, inner_company, address, stack, site, car
                 href={site}
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#000', textDecoration: 'none' }}
+                style={{ color: 'blue', textDecoration: 'underline' }}
                 onMouseEnter={(e) => (e.target.style.textDecoration = 'underline')}
                 onMouseLeave={(e) => (e.target.style.textDecoration = 'none')}
               >

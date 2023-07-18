@@ -25,6 +25,7 @@ function Recommend() {
   const pageInputRef = useRef(null);
   const itemsPerPage = 4;
   const recommendedRecruitsRef = useRef([]);
+  const recruitContainerRef = useRef(null);
 
   useEffect(() => {
     const recommendedRecruits = JSON.parse(localStorage.getItem('recommendedRecruits'));
@@ -142,6 +143,7 @@ function Recommend() {
 
   useEffect(() => {
     setFilteredRecruits(recommendedRecruitsRef.current);
+    recruitContainerRef.current.scrollLeft = recruitContainerRef.current.scrollWidth; // 우측 끝으로 스크롤 이동
   }, []);
 
   const handlePageChange = (pageNumber) => {
@@ -233,7 +235,7 @@ function Recommend() {
   return (
     <>
       <Header />
-      <div className="recruit-container">
+      <div className="recruit-container" style={{ overflowX: 'auto' }} ref={recruitContainerRef}>
         <div className="sidebar-container">
           <h1 style={{ marginTop: '20px', marginLeft: '20px' }}>AI 추천 결과</h1>
           <select value={selectedCareer} onChange={(e) => setSelectedCareer(e.target.value)}>

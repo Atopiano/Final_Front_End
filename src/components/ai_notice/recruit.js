@@ -16,12 +16,12 @@ function Recruit() {
   const [inputPage, setInputPage] = useState('1');
   const [searchResultMessage, setSearchResultMessage] = useState(false);
   const [selectedPositions, setSelectedPositions] = useState([]);
-  const [selectedCareer, setSelectedCareer] = useState("");  // 추가된 부분
+  const [selectedCareer, setSelectedCareer] = useState("");
   const searchInputRef = useRef(null);
   const pageInputRef = useRef(null);
-
   const itemsPerPage = 4;
   const allRecruitsRef = useRef(allRecruits);
+  const recruitContainerRef = useRef(null);
 
   useEffect(() => {
     const newFilteredRecruits = allRecruitsRef.current.filter((recruit) => {
@@ -34,19 +34,19 @@ function Recruit() {
           recruitAddress.includes(searchQuery.toLowerCase()) ||
           recruitInnerCompany.includes(searchQuery.toLowerCase())) &&
         (selectedPositions.length === 0 || selectedPositions.includes(recruit.position)) &&
-        (selectedCareer === "" || recruit.career === selectedCareer)  // 이 부분 추가
+        (selectedCareer === "" || recruit.career === selectedCareer)
       );
     });
-  
+
     setFilteredRecruits(newFilteredRecruits);
     setCurrentPage(1);
-  
+
     if (newFilteredRecruits.length === 0) {
       setSearchResultMessage(true);
     } else {
       setSearchResultMessage(false);
     }
-  }, [searchQuery, selectedPositions, selectedCareer]); // selectedCareer 추가
+  }, [searchQuery, selectedPositions, selectedCareer]);
 
   const handlePreviousPage = () => {
     if (currentPage > 1) {
@@ -134,6 +134,7 @@ function Recruit() {
 
   useEffect(() => {
     setFilteredRecruits(allRecruitsRef.current);
+    recruitContainerRef.current.scrollLeft = recruitContainerRef.current.scrollWidth;
   }, []);
 
   const handlePageChange = (pageNumber) => {
@@ -147,10 +148,9 @@ function Recruit() {
     setSelectedPositions(selectedPositions);
   };
 
-  const startIndex = Math.max((currentPage - 1) * itemsPerPage + 1, 0);
+  const startIndex = Math.max((currentPage - 1) * itemsPerPage, 0) + 1;
   const endIndex = Math.min(startIndex + itemsPerPage - 1, filteredRecruits.length);
-  const visibleRecruits = filteredRecruits.slice(startIndex, endIndex + 1);
-
+  const visibleRecruits = filteredRecruits.slice(startIndex - 1, endIndex);
   const renderJobCards = () => {
     return visibleRecruits.map((recruit) => (
       <JobCard
@@ -225,43 +225,34 @@ function Recruit() {
   return (
     <>
       <Header />
-      <div className="recruit-container">
+      <div className="recruit-container" style={{ overflowX: 'auto' }} ref={recruitContainerRef}>
         <div className="sidebar-container">
-        <h1 style={{ marginTop: '20px', marginLeft: '50px', marginBottom: '25px'}}>채용 공고</h1>
+          <h1 style={{ marginTop: '20px', marginLeft: '50px', marginBottom: '25px' }}>채용 공고</h1>
           <select value={selectedCareer} onChange={(e) => setSelectedCareer(e.target.value)}>
             <option value="">경력 선택</option>
             {Array.from(new Set(allRecruits.map((recruit) => recruit.career)))
               .sort((a, b) => {
-                // 신입 이상을 맨 앞으로 이동시키기
                 if (a === "신입 이상") return -1;
                 if (b === "신입 이상") return 1;
-                
-                // 숫자 추출을 위한 정규식
                 const numRegex = /(\d+)/;
-                
-                // 경력 요구사항에서 숫자만 추출
                 const numA = a.match(numRegex);
                 const numB = b.match(numRegex);
-                
-                // 숫자가 없는 요구사항을 마지막으로 이동시키기
                 if (!numA) return 1;
                 if (!numB) return -1;
-                
-                // 숫자를 이용한 오름차순 정렬
                 return parseInt(numA[0]) - parseInt(numB[0]);
               })
               .map(career => (
                 <option key={career} value={career}>{career}</option>
               ))}
-            </select>
-          <div className="search-container">            
+          </select>
+          <div className="search-container">
             <input
               type="text"
               placeholder="검색"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               ref={searchInputRef}
-            />            
+            />
           </div>
           <Sidebar
             allPositions={Array.from(new Set(allRecruits.map((recruit) => recruit.position)))}
