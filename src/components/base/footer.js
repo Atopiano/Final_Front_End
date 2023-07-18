@@ -10,8 +10,9 @@ const Footer = () => {
                 <div className="footer-left">
 
                     <div className="footer-logo">Oh My Stack!</div>
+                    <p></p>
 
-                    <p className="footer-links">
+                    {/* <p className="footer-links">
                         <a href="#" className="link-1">Home</a>
 
                         <a href="#">Blog</a>
@@ -23,7 +24,7 @@ const Footer = () => {
                         <a href="#">Faq</a>
 
                         <a href="#">Contact</a>
-                    </p>
+                    </p> */}
 
                     <p className="footer-company-name">Copyright©2023 Stackful All rights reserved.</p>
                 </div>
@@ -35,11 +36,15 @@ const Footer = () => {
                         <p><span>G밸리캠퍼스</span>가산디지털1로 25 대륭테크노타운 17차 18층 플레이데이터</p>
                     </div>
 
+                    <p></p>
+
                     <div>
                         <i className="fa fa-phone"></i>
                         <p>Tel : 010-1234-5678</p>
                     </div>
 
+                    <p></p>
+                    
                     <div>
                         <i className="fa fa-envelope"></i>
                         <p><a href="https://github.com/Atopiano/Final_Front_End">OhMyStack@github.io</a></p>
