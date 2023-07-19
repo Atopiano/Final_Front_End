@@ -120,7 +120,7 @@
     left: 25%;
     margin-bottom: 0px;
     position: relative;
-    top: 25%;
+    top: 30%;
   }
 
   .chart-header {
@@ -128,8 +128,8 @@
     left: 32%;
     margin-top: 0px;
     position: relative;
-    top: 26%;
-    margin-bottom: 80px;
+    top: 31%;
+    margin-bottom: 100px;
   }
 
   .chart-wrapper {
