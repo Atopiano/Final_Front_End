@@ -33,22 +33,45 @@ const Footer = () => {
 
                     <div>
                         <i className="fa fa-map-marker"></i>
-                        <p><span>G밸리캠퍼스</span>가산디지털1로 25 대륭테크노타운 17차 18층 플레이데이터</p>
+                        <p><span>G밸리캠퍼스</span>서울 금천구 가산디지털1로 25, 대륭테크노타운 17차 18층 플레이데이터</p>
                     </div>
 
                     <p></p>
 
                     <div>
                         <i className="fa fa-phone"></i>
-                        <p>Tel : 010-1234-5678</p>
+                        <p>Tel : 010-8976-2226</p>
+                    </div>
+
+                    <p></p>
+
+                    <div>
+                        <i className="fa fa-envelope"></i>
+                        <p>wkddlghwls@gmail.com</p>
                     </div>
 
                     <p></p>
                     
                     <div>
-                        <i className="fa fa-envelope"></i>
-                        <p><a href="https://github.com/Atopiano/Final_Front_End">OhMyStack@github.io</a></p>
+                        <i className="fa fa-github"></i>
+                        <p><a href="https://github.com/Atopiano/Oh_My_Stack">OhMyStack@github.io</a></p>
                     </div>
+
+                    {/* <p></p>
+
+                    <div>
+                        <i className="fa fa-blog"></i>
+                        <p><a href="https://festive-yard-28c.notion.site/Project-Oh-My-Stack-65ffc7d88cee4a1188a972b22f1ba399">OhMyStack@notion.so</a></p>
+                    </div> */}
+
+                    {/* <p></p>
+
+                    <div>
+                        <i className="fa fa-youtube"></i>
+                        <p><a href="https://youtu.be/urb2sGPst1o">OhMyStack@youtube.com</a></p>
+                    </div>
+
+                    <p></p> */}
 
                 </div>
 
@@ -61,10 +84,9 @@ const Footer = () => {
 
                     <div className="footer-icons">
 
-                        <a href="#"><i className="fa fa-facebook"></i></a>
-                        <a href="#"><i className="fa fa-twitter"></i></a>
-                        <a href="#"><i className="fa fa-linkedin"></i></a>
-                        <a href="https://github.com/Atopiano/Final_Front_End"><i className="fa fa-github"></i></a>
+                        <a href="https://youtu.be/urb2sGPst1o"><i className="fa fa-youtube"></i></a>
+                        <a href="https://festive-yard-28c.notion.site/Project-Oh-My-Stack-65ffc7d88cee4a1188a972b22f1ba399"><i className="fa fa-blog"></i></a>
+                        <a href="https://github.com/Atopiano/Oh_My_Stack"><i className="fa fa-github"></i></a>
 
                     </div>
 
