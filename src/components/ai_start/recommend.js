@@ -237,7 +237,7 @@ function Recommend() {
       <Header />
       <div className="recruit-container" style={{ overflowX: 'auto' }} ref={recruitContainerRef}>
         <div className="sidebar-container">
-          <h1 style={{ marginTop: '20px', marginLeft: '20px' }}>AI 추천 결과</h1>
+          <h1 className='recommend-label'>AI 추천 결과</h1>
           <select value={selectedCareer} onChange={(e) => setSelectedCareer(e.target.value)}>
             <option value="">경력 선택</option>
             {Array.from(new Set(recommendedRecruitsRef.current.map((recruit) => recruit.career)))

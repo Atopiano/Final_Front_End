@@ -227,7 +227,7 @@ function Recruit() {
       <Header />
       <div className="recruit-container" style={{ overflowX: 'auto' }} ref={recruitContainerRef}>
         <div className="sidebar-container">
-          <h1 style={{ marginTop: '20px', marginLeft: '50px', marginBottom: '25px' }}>채용 공고</h1>
+          <h1 className='recruit-label'>채용 공고</h1>
           <select value={selectedCareer} onChange={(e) => setSelectedCareer(e.target.value)}>
             <option value="">경력 선택</option>
             {Array.from(new Set(allRecruits.map((recruit) => recruit.career)))
