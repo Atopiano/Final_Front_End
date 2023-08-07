@@ -144,6 +144,11 @@ export default class Result extends PureComponent {
         <text x={cx} y={cy} dy={8} textAnchor="middle" fill={fill} fontWeight="bold">
           {payload.name}
         </text>
+        {this.state.positionsCount && (
+          <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: 16 }}>
+            {`${this.state.positionsCount[payload.name] || 0}개 공고`}
+          </text>
+        )}
         <Sector
           cx={cx}
           cy={cy}
@@ -167,11 +172,7 @@ export default class Result extends PureComponent {
         <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey} textAnchor={textAnchor} fill="#333" style={{ fontSize: 20 }}>
           {`${(percent * 100).toFixed(2)}%`}
         </text>
-        {this.state.positionsCount && (
-          <text x={ex + (cos >= 0 ? 1 : -1) * 12} y={ey + 20} textAnchor={textAnchor} fill="#333" style={{ fontSize: 16 }}>
-            {`${this.state.positionsCount[payload.name] || 0}개 공고`}
-          </text>
-        )}
+        
       </g>
     );
   };
