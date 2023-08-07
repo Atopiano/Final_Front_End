@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios'; // axios 사용을 중단했으므로 주석 처리
+import allRecruits from '../../json_data/recruit.json'; // recruit.json 추가
 import Button from 'react-bootstrap/Button';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
 import Form from 'react-bootstrap/Form';
@@ -43,13 +44,20 @@ function Introduce() {
       }
 
       const stacksArray = JSON.parse(selectedStacks);
-      const modifiedStacks = stacksArray.map((stack) => stack.title).join(' '); // 스택의 제목만 가져옵니다.
+      const modifiedStacks = stacksArray.map((stack) => stack.title).join(' ');
 
-      const introduction = (modifiedStacks ? modifiedStacks + ' ' : '') + value; // 수정된 스택과 자기소개를 결합합니다.
+      const introduction = (modifiedStacks ? modifiedStacks + ' ' : '') + value;
       localStorage.setItem('self_intr', introduction);
       setLoading(false);
 
-      // API 호출
+      // ID 추출 및 무작위로 섞기
+      const allIds = allRecruits.map(recruit => recruit.id);
+      const shuffledIds = allIds.sort(() => 0.5 - Math.random());
+      localStorage.setItem('recommended_id', JSON.stringify(shuffledIds));
+      localStorage.removeItem('self_intr');
+      navigate('/result');
+
+      /* FastAPI 호출 부분은 주석 처리
       let data = JSON.stringify({ self_intr: introduction });
       let config = {
         method: 'post',
@@ -72,6 +80,7 @@ function Introduce() {
         .catch((error) => {
           console.log(error);
         });
+      */
     }, 3000);
   };
 
